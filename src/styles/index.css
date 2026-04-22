@@ -1,0 +1,54 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar - ultra subtle */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #040812;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(28, 23, 255, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(28, 23, 255, 0.3);
+}
+
+/* Prevent overflow */
+body {
+  overflow-x: hidden;
+  background: #040812;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+}
+
+a, button {
+  cursor: none;
+}
+
+/* Selection */
+::selection {
+  background: rgba(249, 179, 54, 0.25);
+  color: #fff;
+}
+
+/* Hyper-Glassmorphism utility */
+.glass-card {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  border-image: linear-gradient(to bottom right, rgba(255,255,255,0.15), transparent) 1;
+}
