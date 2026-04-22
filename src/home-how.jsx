@@ -21,7 +21,7 @@ function WorkflowSVG() {
   const steps = [
     { k:"01", t:"Intake",      d:"E-mail, PDF, API — a WIR aceita o formato que você já usa.", c:"#1C17FF" },
     { k:"02", t:"Enrich",      d:"Cruza com 40+ fontes: CNPJ, histórico, exposure map, crédito.", c:"#4D38C0" },
-    { k:"03", t:"Score",       d:"Motor ML com 300+ fatores calibrados ao seu apetite.", c:"#A44F98" },
+    { k:"03", t:"Score",       d:"Motor ML multi-fator calibrado ao seu apetite.", c:"#A44F98" },
     { k:"04", t:"Decide",      d:"Cotação, decisão ou escalada para humano — com explicação.", c:"#EE7D48" },
     { k:"05", t:"Write",       d:"Escreve no seu core: Guidewire, Duck Creek, Majesco, Sapiens.", c:"#F9B336" },
   ];
@@ -30,8 +30,8 @@ function WorkflowSVG() {
     <section className="wf" data-reveal ref={ref}>
       <div className="wrap wf__head">
         <div className="eyebrow">· 05 — Como funciona</div>
-        <h2 className="wf__title display">Cinco passos.<br/><em>Trinta segundos.</em></h2>
-        <p className="wf__sub">Cada decisão deixa uma trilha auditável — modelo, versão, confiança, inputs, timestamp. Nada é caixa-preta.</p>
+        <h2 className="wf__title display">Cinco passos.<br/><em>Um fluxo auditável.</em></h2>
+        <p className="wf__sub">Cada decisão deixa uma trilha — modelo, versão, confiança, inputs, timestamp. Nada é caixa-preta.</p>
       </div>
       <div className="wf__canvas">
         <svg viewBox="0 0 1400 280" className="wf__svg" preserveAspectRatio="none">
@@ -81,38 +81,30 @@ function WorkflowSVG() {
 
 function Trust() {
   const stats = [
-    { v:"40%",    l:"Tempo do UW em tarefas admin.", src:"Deloitte" },
-    { v:"70%",    l:"Seguradoras travadas em TI legada.", src:"BCG" },
-    { v:"60%+",   l:"Brokers escolhem por velocidade.", src:"Capgemini" },
-    { v:"30%",    l:"Tempo perdido organizando dados.", src:"Gartner" },
+    { v:"40%",  l:"Tempo do UW em tarefas administrativas.", src:"Deloitte" },
+    { v:"70%",  l:"Seguradoras travadas em TI legada.",      src:"BCG" },
+    { v:"60%+", l:"Brokers escolhem por velocidade.",        src:"Capgemini" },
+    { v:"30%",  l:"Tempo perdido organizando dados.",        src:"Gartner" },
   ];
-  const logos = ["Lockton","Aon","Gallagher","JLT","Ezze","Pátria","Hapvida","Zurich"];
   return (
     <section className="trust" data-reveal>
       <div className="wrap">
-        <div className="eyebrow eyebrow--onDark">· 06 — Por que nós</div>
+        <div className="eyebrow eyebrow--onDark">· 06 — Por que agora</div>
         <div className="trust__top">
           <blockquote className="trust__quote display">
             "O mercado de Seguros e Danos cresce <em>dois dígitos ao ano</em> — mas a estrutura das seguradoras não acompanha. Essa é a fricção que a WIR resolve."
           </blockquote>
           <div className="trust__attrib">
-            <div className="trust__avatar">NW</div>
+            <div className="trust__avatar trust__avatar--photo" style={{backgroundImage:"url(assets/team/nicholas.jpg)"}}/>
             <div>
               <b>Nicholas Weiser</b>
-              <span>CEO & Co-Founder · ex-Aon · ex-Lockton</span>
+              <span>CEO · Co-Founder · WIR Innovation</span>
             </div>
           </div>
         </div>
         <div className="trust__divider"/>
-        <div className="trust__mid">
-          <div className="trust__mid-k">Construído por quem já liderou o mercado</div>
-          <div className="trust__logos">
-            {logos.map((n,i) => <div key={i} className="trust__logo">{n}</div>)}
-          </div>
-        </div>
-        <div className="trust__divider"/>
         <div className="trust__bot">
-          <div className="trust__bot-k">O custo do manual — por que agora</div>
+          <div className="trust__bot-k">O custo do manual — dados do setor</div>
           <div className="trust__stats">
             {stats.map((s,i) => (
               <div key={i} className="trust__stat">
@@ -182,7 +174,7 @@ function Closing({ go }) {
                   <b className="num">R$ {annualSave.toLocaleString("pt-BR")}k</b>
                 </div>
               </div>
-              <div className="closing__calc-foot">*Estimativa ilustrativa · números reais variam por seguradora e produto.</div>
+              <div className="closing__calc-foot">* Estimativa ilustrativa. Resultados reais dependem de apetite, mix de produto e stack atual — calibramos contigo no escopo do piloto.</div>
             </div>
           </div>
         </div>

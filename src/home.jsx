@@ -1,34 +1,4 @@
-/* ───────── Home · assembler + shared hooks ───────── */
-
-function AnimatedNum({ to, duration=1400 }) {
-  const [n, setN] = React.useState(0);
-  const ref = React.useRef(null);
-  const started = React.useRef(false);
-  React.useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const raf = (now) => {
-            const t = Math.min(1, (now - start) / duration);
-            const eased = 1 - Math.pow(1 - t, 3);
-            setN(to * eased);
-            if (t < 1) requestAnimationFrame(raf);
-          };
-          requestAnimationFrame(raf);
-        }
-      });
-    }, { threshold: 0.4 });
-    if (ref.current) io.observe(ref.current);
-    return () => io.disconnect();
-  }, [to, duration]);
-  const isFloat = to % 1 !== 0;
-  const txt = isFloat ? n.toFixed(1) : Math.round(n).toString();
-  return <span ref={ref}>{txt}</span>;
-}
-
-Object.assign(window, { AnimatedNum });
+/* ───────── Home · assembler ───────── */
 
 // Trust bar — real partners & founders' background
 function TrustBar() {
@@ -75,10 +45,10 @@ function TrustBar() {
 // Compliance badges
 function ComplianceBadges() {
   const badges = [
-    { k: "SOC 2", v: "Type II", desc: "Segurança operacional auditada" },
-    { k: "HIPAA", v: "Compliant", desc: "Privacidade em saúde (US)" },
-    { k: "LGPD",  v: "Conforme",  desc: "Proteção de dados (BR)" },
-    { k: "ISO",   v: "27001",     desc: "Gestão de segurança" },
+    { k: "LGPD",  v: "Conforme",    desc: "Proteção de dados pessoais (BR)" },
+    { k: "SOC 2", v: "Em processo", desc: "Arquitetura e controles prontos" },
+    { k: "HIPAA", v: "Alinhado",    desc: "Privacidade em saúde (US)" },
+    { k: "ISO",   v: "27001 ready", desc: "Base de gestão de segurança" },
   ];
   const Shield = ({ color }) => (
     <svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden>

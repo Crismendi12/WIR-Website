@@ -15,10 +15,10 @@ function Wordmark({ small, variant }) {
 
 function Ticker() {
   const items = [
-    { d: "a", t: "Cotação média: <2 min" },
-    { d: "p", t: "STP rate: 97%" },
+    { d: "a", t: "Decisão em minutos · auditável · explicável" },
+    { d: "p", t: "Straight-through processing como padrão" },
     { d: "b", t: "Infraestrutura de IA para seguros" },
-    { d: "o", t: "SOC 2 Type II · HIPAA · LGPD" },
+    { d: "o", t: "Em conformidade com LGPD · arquitetura pronta para SOC 2" },
   ];
   const dotClass = (d) => "ticker__dot" + (d === "b" ? " ticker__dot--b" : d === "p" ? " ticker__dot--p" : d === "o" ? " ticker__dot--o" : "");
   return (

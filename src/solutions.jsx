@@ -17,15 +17,15 @@ const SOLS = [
         d: "Todo lead traz canal de origem, pontuação inicial, handoffs e resultado. Auditoria fechada." },
     ],
     metrics: [
-      { v: "+73%", l: "Taxa de conversão" },
-      { v: "<4s", l: "Tempo de scoring" },
-      { v: "24/7", l: "Pipeline ativo" },
-      { v: "100%", l: "Trilha auditável" },
+      { v: "Real-time", l: "Scoring" },
+      { v: "Calibrado", l: "Ao apetite" },
+      { v: "Always-on", l: "Pipeline ativo" },
+      { v: "Auditável", l: "Cada handoff" },
     ],
     cases: [
-      "Seguradora Tier-1 no Brasil · +42% leads qualificados em 90 dias",
-      "MGA US · redução de 6h para 4min no handoff broker → UW",
-      "Broker corporativo LatAm · triplicou capacidade sem contratar",
+      "Seguradora Tier-1 · LatAm · ampliação do volume qualificado",
+      "MGA · US · redução do handoff broker → underwriter em ordens de grandeza",
+      "Broker corporativo · LatAm · capacidade ampliada sem novo headcount",
     ],
   },
   {
@@ -35,8 +35,8 @@ const SOLS = [
     full: "O UCP é o assistente que acompanha o underwriter em cada submissão. Lê PDFs, e-mails e formulários estruturados, cruza com fontes externas, aplica o motor de regras da casa e devolve uma cotação com explicação em linguagem natural e trilha de decisão. O humano continua no comando — só que com o trabalho chato já feito.",
     capabilities: [
       { t: "Intake multi-formato",
-        d: "OCR + parsing semântico para PDF, e-mail, XLSX, JSON e APIs. 97% de precisão média em extração de entidades." },
-      { t: "Motor de 300+ fatores",
+        d: "OCR + parsing semântico para PDF, e-mail, XLSX, JSON e APIs. Extração de entidades calibrada por ramo." },
+      { t: "Motor multi-fator",
         d: "Configurado ao seu apetite: exposure, limites, histórico, setor, geografia, compliance. Versionado e auditável." },
       { t: "Explicabilidade escrita",
         d: "Cada decisão vem com justificativa em linguagem natural: por que aprovou, por que escalou, quais riscos residuais." },
@@ -44,15 +44,15 @@ const SOLS = [
         d: "Casos fora do apetite ou de baixa confiança vão automaticamente para revisão humana, com todo o contexto pré-carregado." },
     ],
     metrics: [
-      { v: "2.4min", l: "Tempo de decisão" },
-      { v: "300+", l: "Fatores aplicados" },
-      { v: "91.7%", l: "Precisão média" },
-      { v: "97%", l: "STP rate" },
+      { v: "Minutos",     l: "Decisão" },
+      { v: "Multi-fator", l: "Motor" },
+      { v: "Explicável",  l: "Saída" },
+      { v: "Straight-through", l: "Padrão" },
     ],
     cases: [
-      "Seguradora comercial · 47 dias → 2,4 min em sinistros P&C",
-      "Programa MGA · 4× capacidade de subscrição por UW",
-      "Resseguradora · redução de 68% em re-work de cotação",
+      "Seguradora comercial · ciclos de cotação reduzidos de semanas para minutos",
+      "Programa MGA · capacidade de subscrição ampliada por underwriter",
+      "Resseguradora · redução significativa de re-work em cotação",
     ],
   },
   {
@@ -77,9 +77,9 @@ const SOLS = [
       { v: "ROI fechado", l: "Atribuição" },
     ],
     cases: [
-      "Corretora nacional · +28% penetração em 6 meses",
-      "Seguradora vida · redução de 15% em churn de carteira",
-      "MGA especializada · playbook automático de renovação com +41% taxa",
+      "Corretora nacional · expansão de penetração em carteira instalada",
+      "Seguradora vida · redução de churn via retenção preditiva",
+      "MGA especializada · playbook automático de renovação ativa",
     ],
   },
   {
@@ -104,9 +104,9 @@ const SOLS = [
       { v: "Always-on", l: "Operação" },
     ],
     cases: [
-      "MGA commercial · 320% pipeline coverage em 2 trimestres",
-      "Insurtech early stage · 40 reuniões qualificadas/mês sem SDR",
-      "Seguradora corporate · outbound escalado para 5 países",
+      "MGA commercial · pipeline coverage ampliado sem contratar SDR",
+      "InsurTech early stage · reuniões qualificadas como output contínuo",
+      "Seguradora corporate · outbound escalado entre múltiplos mercados",
     ],
   },
 ];
@@ -118,8 +118,8 @@ function SolHero({ go }) {
       <div className="wrap">
         <div className="solhero__meta">
           <span>· Plataforma · 04 módulos</span>
-          <span>· v26.2</span>
-          <span>· SOC 2 · LGPD · HIPAA</span>
+          <span>· Arquitetura modular</span>
+          <span>· LGPD · SOC 2 (em processo)</span>
         </div>
         <div className="solhero__top">
           <div className="eyebrow">· Soluções</div>

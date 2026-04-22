@@ -161,7 +161,7 @@ function Opening({ go }) {
           <div className="opening__hero-L">
             <div className="opening__kicker">
               <span className="opening__kicker-dot"/>
-              <span>Em produção com seguradoras Tier-1</span>
+              <span>Em piloto com seguradora global · Brasil</span>
             </div>
             <h1 className="display opening__title">
               A camada<br/>
@@ -217,28 +217,24 @@ function Opening({ go }) {
 
 function Proof() {
   const m = [
-    { v:2,   s:"min", pre:"<", l:"Cotação média",  c:"vs. 47 dias de média do setor." },
-    { v:97,  s:"%",   l:"STP Rate",        c:"Straight-through processing em sinistros." },
-    { v:47,  s:"",    l:"Mercados ativos", c:"América Latina, EUA e Europa." },
-    { v:4.2, s:"×",   l:"Capacidade",      c:"Mais negócios por corretor, sem equipe extra." },
+    { w:"Minutos",    l:"Decisão",       c:"Não semanas. Não comitês intermináveis." },
+    { w:"Contínuo",   l:"Processamento", c:"Straight-through como padrão, exceção como exceção." },
+    { w:"Auditável",  l:"Cada saída",    c:"Modelo, versão, confiança e inputs — exportáveis." },
+    { w:"Ampliada",   l:"Capacidade",    c:"Mesmo time. Mais negócio. Sem contratar." },
   ];
   return (
     <section className="proof" data-reveal>
       <div className="wrap">
         <div className="proof__head">
           <div className="eyebrow">· 02 — Prova</div>
-          <div className="proof__note">Métricas agregadas · Q1 2026 · 4 clientes Tier-1</div>
+          <div className="proof__note">Resultados observados em piloto · sujeitos a NDA</div>
         </div>
         <div className="proof__grid">
           {m.map((x,i) => (
             <div key={i} className="proof__cell">
               <div className="proof__idx">/0{i+1}</div>
               <div className="proof__label">{x.l}</div>
-              <div className="proof__value num">
-                {x.pre && <i className="proof__pre">{x.pre}</i>}
-                <AnimatedNum to={x.v}/>
-                <small>{x.s}</small>
-              </div>
+              <div className="proof__word display">{x.w}.</div>
               <div className="proof__caption">{x.c}</div>
             </div>
           ))}

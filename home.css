@@ -431,17 +431,17 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   text-transform: uppercase; letter-spacing: .08em;
   color: var(--ink-2); margin-bottom: 24px;
 }
-.proof__value {
-  font-family: var(--f-display); font-size: clamp(64px, 7vw, 108px);
-  line-height: .9; letter-spacing: -0.03em; color: var(--ink);
-  display: flex; align-items: baseline; gap: 4px;
-  margin-bottom: 20px;
+.proof__word {
+  font-family: var(--f-display); font-size: clamp(48px, 5.2vw, 82px);
+  line-height: .95; letter-spacing: -0.025em; color: var(--ink);
+  margin-bottom: 20px; font-weight: 400;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--wir-purple) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.proof__pre { font-style: italic; color: var(--ink-3); font-size: .55em; }
-.proof__value small {
-  font-size: .42em; font-style: italic; color: var(--ink-3);
-  margin-left: 2px;
-}
+.proof__cell:nth-child(2) .proof__word { background: linear-gradient(135deg, var(--ink) 0%, var(--wir-blue) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.proof__cell:nth-child(3) .proof__word { background: linear-gradient(135deg, var(--ink) 0%, var(--wir-coral) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.proof__cell:nth-child(4) .proof__word { background: linear-gradient(135deg, var(--ink) 0%, var(--wir-amber) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .proof__caption {
   font-size: 14px; line-height: 1.5; color: var(--ink-3);
   max-width: 240px;
@@ -801,6 +801,10 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   color: var(--paper); display: grid; place-items: center;
   font-family: var(--f-display); font-size: 22px;
   flex-shrink: 0;
+}
+.trust__avatar--photo {
+  background-size: cover; background-position: center top;
+  border: 1px solid rgba(255,255,255,.15);
 }
 .trust__attrib b {
   display: block; font-family: var(--f-sans); font-weight: 500;

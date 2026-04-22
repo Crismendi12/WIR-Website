@@ -75,12 +75,12 @@ function AboutEssay() {
 
 function AboutTimeline() {
   const events = [
-    { y: "2005", t: "Primeiros passos", d: "Fundadores começam carreiras em seguradoras globais — Aon, Lockton, Gallagher — liderando projetos de transformação digital." },
+    { y: "2005", t: "Primeiros passos", d: "Fundadores começam carreiras em seguradoras e corretoras globais, liderando projetos de transformação digital em mercados maduros." },
     { y: "2015", t: "O encontro", d: "Os futuros co-founders se cruzam em um projeto de automação de subscrição comercial em NY — e descobrem que compartilham a mesma frustração." },
-    { y: "2020", t: "A hipótese", d: "COVID acelera digitalização forçada. Seguradoras aceitam automação como sobrevivência. O cenário regulatório começa a se abrir." },
-    { y: "2024", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a empresa entre São Paulo e a Bay Area. Primeiros 4 engineering hires vêm de Nubank, Stripe e Palantir." },
-    { y: "2025", t: "v1.0 em produção", d: "Primeira seguradora Tier-1 entra em produção com o UCP. 47 dias de cotação viram 2,4 minutos." },
-    { y: "2026", t: "Hoje · v26.2", d: "Quatro módulos em produção, operação em 47 mercados, 4 seguradoras Tier-1 ativas. Próximo passo: expansão europeia." },
+    { y: "2020", t: "A hipótese", d: "COVID acelera a digitalização forçada. Seguradoras aceitam automação como sobrevivência. O cenário regulatório começa a se abrir." },
+    { y: "2024", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a empresa entre São Paulo e a Bay Area. Primeiros engineering hires vêm de fintech, logística e ML aplicado." },
+    { y: "2025", t: "Primeiro piloto", d: "Primeira seguradora entra em produção com o UCP. Ciclos de cotação que viviam em semanas passam a viver em minutos." },
+    { y: "2026", t: "Hoje", d: "Plataforma em produção entre Brasil e LatAm, com ampliação do catálogo de agentes e expansão em avaliação para mercados de língua inglesa." },
   ];
   return (
     <section className="abtime" data-reveal>
@@ -109,27 +109,28 @@ function AboutTimeline() {
 
 function AboutTeam() {
   const folks = [
-    { name:"Nicholas Weiser", initials:"NW", role:"CEO · Co-Founder", bio:"Operou 15+ anos em seguradoras e corretoras Tier-1 liderando transformação de subscrição comercial. Construiu equipes entre LatAm e US.", loc:"São Paulo", email:"nicholas@wirinnovation.ai", photo:"assets/team/nicholas.jpg", color:"var(--wir-blue)" },
-    { name:"José Carlos de Paula", initials:"JC", role:"CSO / COO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora o resolve do lado da infraestrutura.", loc:"São Paulo", email:"jcdepaula@wirinnovation.ai", photo:"assets/team/jose-carlos.jpg", color:"var(--wir-purple)" },
-    { name:"Head of AI", initials:"AI", role:"Liderança técnica", bio:"PhD. Publicações em fairness e explainability para modelos regulados. Experiência em fintech e decisão automatizada.", loc:"Bay Area", email:"ai@wirinnovation.ai", photo:null, color:"var(--wir-coral)" },
-    { name:"Head of Delivery", initials:"CS", role:"Customer Success", bio:"Lidera os deploys dentro das seguradoras — do kickoff ao primeiro quote em produção. Experiência em consultoria estratégica e InsurTech.", loc:"São Paulo", email:"delivery@wirinnovation.ai", photo:null, color:"var(--wir-gold)" },
+    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Carreira construída em seguradoras e corretoras Tier-1, liderando transformação de subscrição comercial entre LatAm e US. Apaixonado pela intersecção entre ofício do underwriter e decisão algorítmica.", loc:"São Paulo · Bay Area", photo:"assets/team/nicholas.jpg" },
+    { name:"José Carlos de Paula", role:"CSO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora resolve o problema do lado certo: o da infraestrutura.", loc:"São Paulo", photo:"assets/team/jose-carlos.jpg" },
+  ];
+  const roles = [
+    { k:"AI", t:"Head of AI",         d:"ML para decisão regulada · fairness · explainability." },
+    { k:"CS", t:"Head of Delivery",   d:"Deploys em seguradoras · do kickoff ao primeiro quote em produção." },
+    { k:"UW", t:"Sr. Underwriter",    d:"Tradução de apetite em regras e fatores — dentro do motor WIR." },
+    { k:"SE", t:"Staff Engineer",     d:"Arquitetura de infra regulada · Guidewire · Duck Creek · event-driven." },
   ];
   return (
     <section className="abteam" data-reveal>
       <div className="wrap">
         <div className="abteam__head">
           <div className="eyebrow">· Time fundador</div>
-          <h2 className="display abteam__title">57 anos combinados <em>no setor.</em></h2>
+          <h2 className="display abteam__title">Construído <em>por dentro</em><br/>do setor.</h2>
         </div>
-        <div className="abteam__grid">
+        <div className="abteam__grid abteam__grid--2">
           {folks.map((f,i) => (
             <div key={i} className="abteam__card">
               <div className="abteam__photo"
-                style={f.photo
-                  ? { backgroundImage: `url(${f.photo})`, backgroundSize: "cover", backgroundPosition: "center" }
-                  : { background: `linear-gradient(135deg, ${f.color}, var(--ink))` }}>
-                {!f.photo && <span className="abteam__initials display">{f.initials || f.name.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>}
-                {f.photo && <span className="abteam__photo-overlay"/>}
+                style={{ backgroundImage: `url(${f.photo})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+                <span className="abteam__photo-overlay"/>
               </div>
               <div className="abteam__body">
                 <div className="abteam__name display">{f.name}</div>
@@ -139,6 +140,22 @@ function AboutTeam() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="abteam__open">
+          <div className="abteam__open-head">
+            <span className="eyebrow">· Posições em aberto</span>
+            <span className="abteam__open-note">Estamos contratando · envie currículo para <b>jobs@wir.innovation</b></span>
+          </div>
+          <div className="abteam__open-grid">
+            {roles.map((r,i) => (
+              <div key={i} className="abteam__open-cell">
+                <div className="abteam__open-k">/{r.k}</div>
+                <div className="abteam__open-t">{r.t}</div>
+                <div className="abteam__open-d">{r.d}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
