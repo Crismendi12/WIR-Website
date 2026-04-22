@@ -49,16 +49,36 @@ function LiveTerminal() {
 }
 
 function Opening({ go }) {
+  const index = [
+    { n:"01", k:"O CENÁRIO",      stat:<><b>R$230</b> por cotação · <b>10%</b> de conversão</>,
+      cap:"Como o custo operacional corrói margem." },
+    { n:"02", k:"A SOLUÇÃO",      stat:<><b>4</b> camadas · <b>&lt;3s</b> por decisão</>,
+      cap:"Motor de IA que aprende com cada ciclo." },
+    { n:"03", k:"A EVIDÊNCIA",    stat:<><b>625 → 1.800</b> cotações/mês · <b>−62%</b> custo</>,
+      cap:"Mesma equipe. Tríplice capacidade." },
+    { n:"04", k:"A CLASSIFICAÇÃO", stat:<><b>65 / 25 / 10</b> · auto · assistido · senior</>,
+      cap:"Foco humano onde realmente importa." },
+    { n:"05", k:"O IMPACTO",      stat:<><b>3×</b> capacidade · <b>STP 97%</b></>,
+      cap:"Decisão auditável em cada camada." },
+  ];
   return (
     <section className="opening">
       <div className="wrap">
-        <div className="opening__meta">
-          <span>· Edição 04 / Abr 2026</span>
-          <span>· São Paulo — Bay Area</span>
-          <span>· Pt · En · Es</span>
+        {/* Edition masthead */}
+        <div className="opening__mast">
+          <div className="opening__mast-L">
+            <span className="opening__vol">VOL. 01</span>
+            <span>ED. 04 · ABR 2026</span>
+          </div>
+          <div className="opening__mast-R">
+            <span>SÃO PAULO ⟶ BAY AREA</span>
+            <span className="opening__mast-lang"><em>PT</em> · EN · ES</span>
+          </div>
         </div>
-        <div className="opening__grid">
-          <div className="opening__left">
+
+        {/* Hero grid */}
+        <div className="opening__hero">
+          <div className="opening__hero-L">
             <div className="opening__kicker">
               <span className="opening__kicker-v">v26.2</span>
               <span>Em produção com 4 seguradoras Tier-1</span>
@@ -69,7 +89,7 @@ function Opening({ go }) {
               do seguro.
             </h1>
             <p className="opening__lede">
-              Operações ao ritmo do cliente. Semanas de trabalho manual viram decisões auditáveis em segundos — dentro dos sistemas que você já tem.
+              Automatize subscrição, sinistros, pricing e compliance com agentes de IA — sem substituir seus sistemas atuais.
             </p>
             <div className="opening__actions">
               <button className="btn btn--solid" onClick={()=>go("contact")}>
@@ -80,15 +100,36 @@ function Opening({ go }) {
               </button>
             </div>
           </div>
-          <div className="opening__right">
+          <div className="opening__hero-R">
             <div className="opening__caption">· Decisão #AXZ-8472 · live feed</div>
             <LiveTerminal/>
           </div>
         </div>
-      </div>
-      <div className="opening__scroll">
-        <span>· Role para ler</span>
-        <span className="opening__scroll-line"/>
+
+        {/* Editorial index */}
+        <div className="opening__index">
+          <div className="opening__index-head">
+            <div className="eyebrow">Nesta edição</div>
+            <span className="opening__index-meta">
+              Estudo de caso AXA Transportes · Q1 2026
+            </span>
+          </div>
+          <div className="opening__index-grid">
+            {index.map((item) => (
+              <button key={item.n} className="opening__index-item"
+                onClick={()=>go(item.n === "02" || item.n === "04" ? "solutions" : "home")}>
+                <span className="opening__index-num">/{item.n}</span>
+                <div className="opening__index-body">
+                  <div className="opening__index-title">{item.k}</div>
+                  <div className="opening__index-stat">{item.stat}</div>
+                  <div className="opening__index-caption">{item.cap}</div>
+                </div>
+                <span className="opening__index-arrow" aria-hidden>↓</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

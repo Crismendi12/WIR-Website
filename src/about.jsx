@@ -73,7 +73,7 @@ function AboutTimeline() {
     { y: "2005", t: "Primeiros passos", d: "Fundadores começam carreiras em seguradoras globais — Aon, Lockton, Gallagher — liderando projetos de transformação digital." },
     { y: "2015", t: "O encontro", d: "Os futuros co-founders se cruzam em um projeto de automação de subscrição comercial em NY — e descobrem que compartilham a mesma frustração." },
     { y: "2020", t: "A hipótese", d: "COVID acelera digitalização forçada. Seguradoras aceitam automação como sobrevivência. O cenário regulatório começa a se abrir." },
-    { y: "2024", t: "WIR é fundada", d: "Nicholas Weiser e co-founder abrem a empresa entre São Paulo e a Bay Area. Primeiros 4 engineering hires vêm de Nubank, Stripe e Palantir." },
+    { y: "2024", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a empresa entre São Paulo e a Bay Area. Primeiros 4 engineering hires vêm de Nubank, Stripe e Palantir." },
     { y: "2025", t: "v1.0 em produção", d: "Primeira seguradora Tier-1 entra em produção com o UCP. 47 dias de cotação viram 2,4 minutos." },
     { y: "2026", t: "Hoje · v26.2", d: "Quatro módulos em produção, operação em 47 mercados, 4 seguradoras Tier-1 ativas. Próximo passo: expansão europeia." },
   ];
@@ -104,10 +104,10 @@ function AboutTimeline() {
 
 function AboutTeam() {
   const folks = [
-    { name:"Nicholas Weiser", role:"CEO · Co-founder", bio:"15+ anos em Aon e Lockton liderando transformação de subscrição comercial em LatAm e US.", loc:"São Paulo", color:"var(--wir-blue)" },
-    { name:"Co-founder", role:"CTO · Co-founder", bio:"Ex-Palantir e ex-Stripe. Construiu motores de decisão para companhias regulated em fintech e logística.", loc:"Bay Area", color:"var(--wir-purple)" },
-    { name:"Head of AI", role:"Liderança técnica", bio:"PhD Stanford. Publicações em fairness e explainability para modelos regulados.", loc:"Remote · US", color:"var(--wir-orange)" },
-    { name:"Head of Delivery", role:"Customer success", bio:"Ex-McKinsey e ex-Guidewire. Lidera os deploys dentro das Tier-1.", loc:"São Paulo", color:"var(--wir-amber)" },
+    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Operou 15+ anos em seguradoras e corretoras Tier-1 liderando transformação de subscrição comercial. Construiu equipes entre LatAm e US.", loc:"São Paulo", email:"nicholas@wirinnovation.ai", color:"var(--wir-blue)" },
+    { name:"José Carlos de Paula", role:"CSO / COO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora o resolve do lado da infraestrutura.", loc:"São Paulo", email:"jcdepaula@wirinnovation.ai", color:"var(--wir-purple)" },
+    { name:"Head of AI", role:"Liderança técnica", bio:"PhD Stanford. Publicações em fairness e explainability para modelos regulados. Ex-Palantir em fintech.", loc:"Bay Area", email:"ai@wirinnovation.ai", color:"var(--wir-coral)" },
+    { name:"Head of Delivery", role:"Customer Success", bio:"Ex-McKinsey e ex-Guidewire. Lidera os deploys dentro das Tier-1 — do kickoff ao primeiro quote em produção.", loc:"São Paulo", email:"delivery@wirinnovation.ai", color:"var(--wir-gold)" },
   ];
   return (
     <section className="abteam" data-reveal>
