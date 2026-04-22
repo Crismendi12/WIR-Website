@@ -653,6 +653,7 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
    04 · STACK (product tabs)
    ───────────────────────────────────────── */
 .stack { padding: 140px 0 120px; background: var(--paper); }
+.stack > .wrap { width: 100%; }
 .stack__head { max-width: 1000px; margin: 0 auto 72px; text-align: center; }
 .stack__title {
   font-family: var(--f-display);
@@ -674,7 +675,8 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 
 /* Horizontal tab strip */
 .stack__tabs--row {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  width: 100%;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0;
   border: 1px solid rgba(11,10,8,.08); border-radius: 12px;
   overflow: hidden; background: var(--paper);
 }
@@ -715,12 +717,14 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 
 /* Right panel — breathing, full-content layout */
 .stack__panel {
+  width: 100%;
   display: flex; flex-direction: column; gap: 0;
   padding: 56px 56px 44px;
   background: var(--paper-2); border-radius: 16px;
   border: 1px solid rgba(11,10,8,.08);
   animation: panelIn .5s cubic-bezier(.6,.2,.1,1) both;
   position: relative; min-width: 0;
+  box-sizing: border-box;
 }
 .stack__panel::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
