@@ -104,10 +104,10 @@ function AboutTimeline() {
 
 function AboutTeam() {
   const folks = [
-    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Operou 15+ anos em seguradoras e corretoras Tier-1 liderando transformação de subscrição comercial. Construiu equipes entre LatAm e US.", loc:"São Paulo", email:"nicholas@wirinnovation.ai", photo:"assets/team/nicholas.jpg", color:"var(--wir-blue)" },
-    { name:"José Carlos de Paula", role:"CSO / COO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora o resolve do lado da infraestrutura.", loc:"São Paulo", email:"jcdepaula@wirinnovation.ai", photo:"assets/team/jc.jpg", color:"var(--wir-purple)" },
-    { name:"Head of AI", role:"Liderança técnica", bio:"PhD. Publicações em fairness e explainability para modelos regulados. Experiência em fintech e decisão automatizada.", loc:"Bay Area", email:"ai@wirinnovation.ai", photo:null, color:"var(--wir-coral)" },
-    { name:"Head of Delivery", role:"Customer Success", bio:"Lidera os deploys dentro das seguradoras — do kickoff ao primeiro quote em produção. Experiência em consultoria estratégica e InsurTech.", loc:"São Paulo", email:"delivery@wirinnovation.ai", photo:null, color:"var(--wir-gold)" },
+    { name:"Nicholas Weiser", initials:"NW", role:"CEO · Co-Founder", bio:"Operou 15+ anos em seguradoras e corretoras Tier-1 liderando transformação de subscrição comercial. Construiu equipes entre LatAm e US.", loc:"São Paulo", email:"nicholas@wirinnovation.ai", photo:null, color:"var(--wir-blue)" },
+    { name:"José Carlos de Paula", initials:"JC", role:"CSO / COO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora o resolve do lado da infraestrutura.", loc:"São Paulo", email:"jcdepaula@wirinnovation.ai", photo:null, color:"var(--wir-purple)" },
+    { name:"Head of AI", initials:"AI", role:"Liderança técnica", bio:"PhD. Publicações em fairness e explainability para modelos regulados. Experiência em fintech e decisão automatizada.", loc:"Bay Area", email:"ai@wirinnovation.ai", photo:null, color:"var(--wir-coral)" },
+    { name:"Head of Delivery", initials:"CS", role:"Customer Success", bio:"Lidera os deploys dentro das seguradoras — do kickoff ao primeiro quote em produção. Experiência em consultoria estratégica e InsurTech.", loc:"São Paulo", email:"delivery@wirinnovation.ai", photo:null, color:"var(--wir-gold)" },
   ];
   return (
     <section className="abteam" data-reveal>
@@ -123,7 +123,7 @@ function AboutTeam() {
                 style={f.photo
                   ? { backgroundImage: `url(${f.photo})`, backgroundSize: "cover", backgroundPosition: "center" }
                   : { background: `linear-gradient(135deg, ${f.color}, var(--ink))` }}>
-                {!f.photo && <span className="abteam__initials display">{f.name.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>}
+                {!f.photo && <span className="abteam__initials display">{f.initials || f.name.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>}
                 {f.photo && <span className="abteam__photo-overlay"/>}
               </div>
               <div className="abteam__body">
