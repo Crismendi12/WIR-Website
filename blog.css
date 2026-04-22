@@ -3,7 +3,14 @@
    ═══════════════════════════════════════════════════ */
 
 /* ── HERO ── */
-.blhero { padding: 72px 0 96px; background: var(--paper); border-bottom: 1px solid rgba(11,10,8,.08); }
+.blhero { padding: 72px 0 96px; background: var(--paper); border-bottom: 1px solid rgba(11,10,8,.08); position: relative; overflow: hidden; }
+.blhero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(11,10,8,.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(11,10,8,.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 100%); }
+.blhero > .wrap { position: relative; z-index: 1; }
 .blhero__meta { display: flex; gap: 28px; flex-wrap: wrap; padding-bottom: 36px; margin-bottom: 56px; border-bottom: 1px solid rgba(11,10,8,.08); font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); }
 .blhero__top { max-width: 780px; margin-bottom: 80px; }
 .blhero__mast { font-size: clamp(64px, 8.5vw, 128px); line-height: .92; letter-spacing: -0.028em; margin: 20px 0 0; color: var(--ink); }

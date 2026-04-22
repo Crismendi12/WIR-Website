@@ -42,6 +42,38 @@ function TrustBar() {
   );
 }
 
+// Six strategic outcome indicators — from AXA proposal language
+function Outcomes() {
+  const items = [
+    { k:"+ Eficiência",    c:"#10B981", t:"Escalar volume de cotações",                  d:"Processar múltiplos de cotação sem multiplicar headcount." },
+    { k:"+ Faturamento",   c:"#F8AD39", t:"Mais cotações geram mais negócio fechado",    d:"Retorno mais rápido ao corretor abre mais ciclos de venda." },
+    { k:"− DA / Custos",   c:"#FE8B77", t:"Margem e lucratividade ampliadas",            d:"Ampliar volume sem crescer despesa administrativa na mesma proporção." },
+    { k:"+ Inteligência",  c:"#3B82F6", t:"Dashboards e analytics em tempo real",        d:"Gestão decide sobre pipeline vivo, não sobre relatório de ontem." },
+    { k:"+ AI First",      c:"#7540AC", t:"Pioneirismo em automação regulada",           d:"Quem sai na frente lidera e atrai os melhores resultados de risco." },
+    { k:"Escalar +",       c:"#06B6D4", t:"Preparada para o futuro da seguradora",       d:"Plataforma que evolui com o setor — não um SaaS a mais." },
+  ];
+  return (
+    <section className="outcomes" data-reveal>
+      <div className="wrap">
+        <div className="outcomes__head">
+          <div className="eyebrow">· 04.5 — Indicadores estratégicos</div>
+          <h2 className="display outcomes__title">Seis sinais de <em>onde o retorno aparece.</em></h2>
+          <p className="outcomes__sub">O que seguradoras que adotam a WIR conseguem observar nos primeiros trimestres — não promessas de número, mas direções de resultado.</p>
+        </div>
+        <div className="outcomes__grid">
+          {items.map((x,i) => (
+            <div key={i} className="outcomes__cell" style={{"--c": x.c}}>
+              <div className="outcomes__k">{x.k}</div>
+              <div className="outcomes__t">{x.t}</div>
+              <div className="outcomes__d">{x.d}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Compliance badges
 function ComplianceBadges() {
   const badges = [
@@ -86,6 +118,7 @@ function HomePage({ go }) {
       <Proof/>
       <Shift/>
       <ProductTabs go={go}/>
+      <Outcomes/>
       <WorkflowSVG/>
       <Trust/>
       <ComplianceBadges/>

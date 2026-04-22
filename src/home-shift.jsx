@@ -1,48 +1,51 @@
 /* ───────── Movement 03 · The Shift + 04 · The Stack ───────── */
 
 function Shift() {
-  const before = [
-    "E-mail recebido · encaminhado várias vezes",
-    "PDF impresso, anexado, re-digitado",
-    "Ligações para validar CNPJ",
-    "Planilha manual de scoring",
-    "Reunião de comitê · aprovação",
-    "Apólice redigida e emitida",
-  ];
-  const after = [
-    "intake automático",
-    "enrich multi-fonte",
-    "score ML · apetite · compliance",
-    "decisão auditável",
-    "escrita no core da seguradora",
-    "trilha imutável · learning loop",
+  const gargalos = [
+    { c:"var(--wir-blue)",   k:"Intake sem triagem",
+      hoje:"Cotações chegam por e-mail sem priorização — fila por ordem de chegada.",
+      impacto:"Oportunidades de alto valor ficam enterradas." },
+    { c:"var(--wir-purple)", k:"Análise 100% manual",
+      hoje:"Underwriter extrai dados de e-mails, PDFs e planilhas — horas por cotação.",
+      impacto:"Maior parte do tempo gasto em operação, não em decisão." },
+    { c:"var(--wir-amber)",  k:"Pricing sem padronização",
+      hoje:"Manual de subscrição em PDF, fórmulas em Excel — sem trilha de auditoria.",
+      impacto:"Inconsistência de decisão entre subscritores." },
+    { c:"var(--wir-coral)",  k:"Aprovação por e-mail",
+      hoje:"Cadeia de alçadas via e-mail — sem rastreamento de SLA.",
+      impacto:"Propostas expiram antes da decisão final." },
+    { c:"#10B981",           k:"Zero visibilidade",
+      hoje:"Sem dashboard, sem analytics, sem pipeline em tempo real.",
+      impacto:"Gestão opera no escuro — decisões sem dados." },
   ];
   return (
     <section className="shift" data-reveal>
       <div className="wrap shift__head">
-        <div className="eyebrow">· 03 — A mudança</div>
+        <div className="eyebrow">· 03 — Diagnóstico</div>
         <h2 className="shift__title display">
-          O mesmo caso.<br/><em>Duas realidades.</em>
+          Cinco gargalos que<br/><em>limitam o crescimento.</em>
         </h2>
-        <p className="shift__sub">O fluxo tradicional de subscrição comercial, lado a lado com o mesmo caso processado pela plataforma WIR.</p>
+        <p className="shift__sub">O que observamos dentro das operações de subscrição hoje — e onde a WIR se encaixa como camada de decisão sem substituir o core.</p>
       </div>
       <div className="wrap">
-        <div className="ba ba--static">
-          <div className="ba__side ba__side--before">
-            <div className="ba__label">Antes · fluxo manual</div>
-            <div className="ba__stat display">Ciclo<em>em semanas</em></div>
-            <ol className="ba__list">
-              {before.map((t,i) => <li key={i}><span className="ba__step">· 0{i+1}</span>{t}</li>)}
-            </ol>
-            <div className="ba__foot">Broker aguarda · cliente migra para concorrente</div>
+        <div className="gargalos">
+          <div className="gargalos__head">
+            <div>Gargalo</div>
+            <div>Como funciona hoje</div>
+            <div>Impacto no negócio</div>
           </div>
-          <div className="ba__side ba__side--after">
-            <div className="ba__label">Depois · WIR Agents</div>
-            <div className="ba__stat display">Ciclo<em>automatizado</em></div>
-            <ol className="ba__list ba__list--mono">
-              {after.map((t,i) => <li key={i}><span className="ba__step">· 0{i+1}</span>{t}</li>)}
-            </ol>
-            <div className="ba__foot">Decisão auditável · apólice emitida · broker notificado</div>
+          {gargalos.map((g,i) => (
+            <div key={i} className="gargalos__row" style={{"--c": g.c}}>
+              <div className="gargalos__k">
+                <span className="gargalos__num">/0{i+1}</span>
+                <span>{g.k}</span>
+              </div>
+              <div className="gargalos__hoje">{g.hoje}</div>
+              <div className="gargalos__impacto">{g.impacto}</div>
+            </div>
+          ))}
+          <div className="gargalos__foot">
+            <span>· Fonte: entrevistas com times de subscrição em seguradoras e corretoras LatAm</span>
           </div>
         </div>
       </div>

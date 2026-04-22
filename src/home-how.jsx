@@ -132,12 +132,12 @@ function Closing({ go }) {
           <div className="closing__l">
             <div className="eyebrow">· 07 — Próximo passo</div>
             <h2 className="display closing__title">
-              Vamos refazer<br/>
-              a infra<br/>
-              do <em>seguro.</em>
+              Sua equipe tem<br/>
+              o <em>conhecimento.</em><br/>
+              A WIR dá a infra.
             </h2>
             <p className="closing__lede">
-              Marque uma conversa de 30 minutos. Em duas semanas, entregamos um piloto funcional dentro do seu ambiente — sem tocar no seu core.
+              Subscrição é ofício. A WIR não substitui quem decide — entrega os trilhos para que sua equipe escale decisão, capacidade e margem, sem tocar no seu core.
             </p>
             <div className="closing__actions">
               <button className="btn btn--solid" onClick={()=>go("contact")}>
