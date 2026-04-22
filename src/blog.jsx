@@ -2,23 +2,32 @@
 
 const POSTS = [
   { id:1, cat:"Ensaio", hero:true, title:"O underwriter não morre. O modelo operacional dele, sim.", sub:"Por que a próxima década do seguro vai ser definida pela divisão entre quem tem infra de decisão e quem ainda mora em planilha.",
-    author:"Nicholas Weiser", role:"CEO · WIR", time:"12 min", date:"18 · Abr · 2026", grad:"linear-gradient(135deg,#1C17FF,#A44F98)" },
+    author:"Nicholas Weiser", role:"CEO · WIR", time:"12 min", date:"18 · Abr · 2026",
+    img:"assets/blog/post-03130.jpg", grad:"linear-gradient(135deg,#3222E9,#7540AC)" },
   { id:2, cat:"Técnico", title:"Explicabilidade que vai além do SHAP: como a WIR audita decisões em produção", sub:"Um deep-dive nas camadas de logging, versionamento e retrieval que tornam uma decisão auditável em Q&A.",
-    author:"Head of AI", role:"ML · WIR", time:"8 min", date:"12 · Abr · 2026", grad:"linear-gradient(135deg,#A44F98,#EE7D48)" },
-  { id:3, cat:"Caso", title:"Como a Mahway reduziu 47 dias de cotação a 2 minutos", sub:"Estudo de caso detalhado com o processo de implementação, KPIs e aprendizados.",
-    author:"Head of Delivery", role:"Delivery · WIR", time:"6 min", date:"05 · Abr · 2026", grad:"linear-gradient(135deg,#EE7D48,#F9B336)" },
+    author:"Head of AI", role:"ML · WIR", time:"8 min", date:"12 · Abr · 2026",
+    img:"assets/blog/post-03135.jpg", grad:"linear-gradient(135deg,#7540AC,#FE8B77)" },
+  { id:3, cat:"Caso", title:"Como a Mahway reduziu seu ciclo de cotação em ordens de grandeza", sub:"Estudo de caso detalhado com o processo de implementação, KPIs e aprendizados.",
+    author:"Head of Delivery", role:"Delivery · WIR", time:"6 min", date:"05 · Abr · 2026",
+    img:"assets/blog/post-03138.jpg", grad:"linear-gradient(135deg,#FE8B77,#F8AD39)" },
   { id:4, cat:"Mercado", title:"Por que MGAs são a ponta da lança da IA em seguro", sub:"Estrutura enxuta, apetite próprio e necessidade de capacidade — a combinação ideal para adoção rápida.",
-    author:"Co-founder", role:"WIR", time:"5 min", date:"28 · Mar · 2026", grad:"linear-gradient(135deg,#F9B336,#1C17FF)" },
+    author:"José Carlos de Paula", role:"CSO · WIR", time:"5 min", date:"28 · Mar · 2026",
+    img:"assets/blog/post-03142.jpg", grad:"linear-gradient(135deg,#F8AD39,#3222E9)" },
   { id:5, cat:"Técnico", title:"LLMs não substituem motores de regras — eles os complementam", sub:"A arquitetura híbrida que a WIR usa para decisões críticas: quando deixar o modelo decidir e quando aplicar regra hard-coded.",
-    author:"Head of AI", role:"ML · WIR", time:"9 min", date:"22 · Mar · 2026", grad:"linear-gradient(135deg,#1C17FF,#4D38C0)" },
+    author:"Head of AI", role:"ML · WIR", time:"9 min", date:"22 · Mar · 2026",
+    img:"assets/blog/post-03131.jpg", grad:"linear-gradient(135deg,#3222E9,#7540AC)" },
   { id:6, cat:"Ensaio", title:"A falsa dicotomia entre velocidade e compliance", sub:"Como o debate do setor precisa mudar: não é velocidade OU compliance — é arquitetura certa.",
-    author:"Nicholas Weiser", role:"CEO · WIR", time:"7 min", date:"15 · Mar · 2026", grad:"linear-gradient(135deg,#C25F7E,#F9B336)" },
+    author:"Nicholas Weiser", role:"CEO · WIR", time:"7 min", date:"15 · Mar · 2026",
+    img:"assets/blog/post-03143.jpg", grad:"linear-gradient(135deg,#AE46C0,#F8AD39)" },
   { id:7, cat:"Mercado", title:"O custo invisível do straight-through processing mal feito", sub:"STP sem auditabilidade cria risco reputacional, regulatório e de carteira. Checklist do que medir antes de escalar.",
-    author:"Co-founder", role:"WIR", time:"6 min", date:"08 · Mar · 2026", grad:"linear-gradient(135deg,#A44F98,#1C17FF)" },
-  { id:8, cat:"Caso", title:"Três formatos de PDF que quebravam 40% das submissões — e como resolvemos", sub:"Do OCR comum ao parsing semântico: o caminho técnico para elevar extração de 60% para 97%.",
-    author:"Head of AI", role:"ML · WIR", time:"7 min", date:"01 · Mar · 2026", grad:"linear-gradient(135deg,#F9B336,#EE7D48)" },
+    author:"José Carlos de Paula", role:"CSO · WIR", time:"6 min", date:"08 · Mar · 2026",
+    grad:"linear-gradient(135deg,#7540AC,#3222E9)" },
+  { id:8, cat:"Caso", title:"Três formatos de PDF que quebravam submissões — e como resolvemos", sub:"Do OCR comum ao parsing semântico: o caminho técnico para elevar extração significativamente.",
+    author:"Head of AI", role:"ML · WIR", time:"7 min", date:"01 · Mar · 2026",
+    grad:"linear-gradient(135deg,#F8AD39,#FE8B77)" },
   { id:9, cat:"Técnico", title:"Observabilidade de agentes: o que monitorar em produção", sub:"Latência, precisão, drift, custo por decisão — o dashboard mínimo que toda seguradora deveria exigir.",
-    author:"Head of AI", role:"ML · WIR", time:"8 min", date:"22 · Fev · 2026", grad:"linear-gradient(135deg,#1C17FF,#EE7D48)" },
+    author:"Head of AI", role:"ML · WIR", time:"8 min", date:"22 · Fev · 2026",
+    grad:"linear-gradient(135deg,#3222E9,#FE8B77)" },
 ];
 
 function BlogHero() {
@@ -41,8 +50,11 @@ function BlogHero() {
           <p className="blhero__sub">Ensaios, casos de uso e notas técnicas do time da WIR. Publicamos o que aprendemos — não o que vende.</p>
         </div>
         <article className="blhero__feature" onClick={()=>{}}>
-          <div className="blhero__feature-img" style={{background: hero.grad}}>
-            <span className="blhero__feature-label">IMAGE · editorial · 16:9</span>
+          <div className="blhero__feature-img"
+            style={hero.img
+              ? { backgroundImage: `linear-gradient(180deg, rgba(11,10,8,0.15), rgba(11,10,8,0.65)), url(${hero.img})`, backgroundSize: "cover", backgroundPosition: "center" }
+              : { background: hero.grad }}>
+            <span className="blhero__feature-label">· {hero.cat.toLowerCase()} · editorial</span>
           </div>
           <div className="blhero__feature-body">
             <div className="blhero__feature-meta">
@@ -101,9 +113,12 @@ function BlogGrid({ posts }) {
             <div className="blgrid__list">
               {posts.map((p,i) => (
                 <article key={p.id} className={"blpost" + (i === 0 ? " blpost--big" : "")}>
-                  <div className="blpost__img" style={{background: p.grad}}>
-                    <span className="blpost__img-label">IMAGE</span>
-                    <span className="blpost__img-meta">· {p.cat.toLowerCase()}</span>
+                  <div className="blpost__img"
+                    style={p.img
+                      ? { backgroundImage: `linear-gradient(180deg, rgba(11,10,8,0.2), rgba(11,10,8,0.7)), url(${p.img})`, backgroundSize: "cover", backgroundPosition: "center" }
+                      : { background: p.grad }}>
+                    <span className="blpost__img-label">{p.cat}</span>
+                    <span className="blpost__img-meta">· {p.time}</span>
                   </div>
                   <div className="blpost__body">
                     <div className="blpost__meta">

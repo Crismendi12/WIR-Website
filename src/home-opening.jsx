@@ -147,8 +147,8 @@ function Opening({ go }) {
         {/* Edition masthead */}
         <div className="opening__mast">
           <div className="opening__mast-L">
-            <span className="opening__vol">VOL. 01</span>
-            <span>ED. 04 · ABR 2026</span>
+            <span>ABR 2026</span>
+            <span>INFRAESTRUTURA DE IA · SEGUROS</span>
           </div>
           <div className="opening__mast-R">
             <span>SÃO PAULO ⟶ BAY AREA</span>
@@ -160,8 +160,8 @@ function Opening({ go }) {
         <div className="opening__hero">
           <div className="opening__hero-L">
             <div className="opening__kicker">
-              <span className="opening__kicker-v">v26.2</span>
-              <span>Em produção com 4 seguradoras Tier-1</span>
+              <span className="opening__kicker-dot"/>
+              <span>Em produção com seguradoras Tier-1</span>
             </div>
             <h1 className="display opening__title">
               A camada<br/>

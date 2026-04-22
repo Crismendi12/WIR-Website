@@ -79,41 +79,51 @@ function ProductTabs({ go }) {
           <h2 className="stack__title display">Quatro agentes. <em>Um core de decisão.</em></h2>
           <p className="stack__sub">A WIR entrega agentes especializados que cobrem todo o ciclo comercial — da geração de lead à emissão de apólice e retenção de carteira.</p>
         </div>
-        <div className="stack__tabs">
-          {prods.map((x,i) => (
-            <button key={x.k}
-              className={"stack__tab" + (i === active ? " is-active" : "")}
-              onClick={()=>setActive(i)}
-              style={{"--c": x.c}}>
-              <span className="stack__tab-k">{x.k}</span>
-              <span className="stack__tab-l">{x.title}</span>
-            </button>
-          ))}
-        </div>
-        <div className="stack__panel" style={{"--pc": p.c}} key={p.k}>
-          <div className="stack__panel-l">
-            <div className="stack__tag">{p.tag}</div>
-            <h3 className="display stack__panel-title">{p.title}</h3>
+
+        <div className="stack__layout">
+          {/* LEFT — Agent list (vertical tabs) */}
+          <div className="stack__tabs stack__tabs--vertical">
+            {prods.map((x,i) => (
+              <button key={x.k}
+                className={"stack__tab" + (i === active ? " is-active" : "")}
+                onClick={()=>setActive(i)}
+                style={{"--c": x.c}}>
+                <span className="stack__tab-k">{x.k}</span>
+                <span className="stack__tab-l">{x.title}</span>
+                <span className="stack__tab-tag">{x.tag}</span>
+                <span className="stack__tab-arrow" aria-hidden>→</span>
+              </button>
+            ))}
+          </div>
+
+          {/* RIGHT — Active agent representation */}
+          <div className="stack__panel" style={{"--pc": p.c}} key={p.k}>
+            <div className="stack__panel-top">
+              <div className="stack__vis">
+                <div className="stack__vis-code">{p.k}</div>
+                <div className="stack__vis-bg"/>
+              </div>
+              <div className="stack__panel-info">
+                <div className="stack__tag">{p.tag}</div>
+                <h3 className="display stack__panel-title">{p.title}</h3>
+              </div>
+            </div>
             <p className="stack__panel-lede">{p.lede}</p>
             <ul className="stack__bullets">
               {p.bullets.map((b,j) => <li key={j}><span className="stack__bu"/>{b}</li>)}
             </ul>
-            <button className="btn btn--ghost stack__cta" onClick={()=>go("solutions")}>
-              Explorar {p.k} <span className="btn__arrow">→</span>
-            </button>
-          </div>
-          <div className="stack__panel-r">
-            <div className="stack__vis">
-              <div className="stack__vis-code">{p.k}</div>
-              <div className="stack__vis-bg"/>
-            </div>
-            <div className="stack__m">
-              {p.m.map((x,j) => (
-                <div key={j} className="stack__m-cell">
-                  <b>{x.v}</b>
-                  <span>{x.l}</span>
-                </div>
-              ))}
+            <div className="stack__panel-bot">
+              <div className="stack__m">
+                {p.m.map((x,j) => (
+                  <div key={j} className="stack__m-cell">
+                    <b>{x.v}</b>
+                    <span>{x.l}</span>
+                  </div>
+                ))}
+              </div>
+              <button className="btn btn--ghost stack__cta" onClick={()=>go("solutions")}>
+                Explorar {p.k} <span className="btn__arrow">→</span>
+              </button>
             </div>
           </div>
         </div>
