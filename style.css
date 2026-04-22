@@ -1163,29 +1163,13 @@ html.js-ready [data-reveal].in{ opacity: 1; transform: translateY(0); }
 .integr__chip { padding: 20px 24px; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; font-family: var(--display); font-size: 18px; color: var(--ink); transition: all .2s ease; text-align: center; }
 .integr__chip:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
 
-/* ───────── Pricing calculator ───────── */
-.calc { margin-top: 80px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
-.calc__input { padding: 48px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 4px; }
-.calc__label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #E9E3D7; opacity: .6; margin-bottom: 24px; display: block; }
-.calc__value { font-family: var(--display); font-size: 88px; line-height: 1; color: #F2EEE5; margin-bottom: 32px; letter-spacing: -0.02em; }
-.calc__slider { width: 100%; height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; appearance: none; -webkit-appearance: none; cursor: pointer; }
-.calc__slider::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #F8AD39; cursor: grab; border: 3px solid #111110; box-shadow: 0 0 0 2px #F8AD39; }
-.calc__slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #F8AD39; cursor: grab; border: 3px solid #111110; }
-.calc__scale { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--mono); font-size: 11px; color: #E9E3D7; opacity: .5; }
-.calc__out { display: grid; gap: 16px; }
-.calc__card { padding: 32px 40px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; }
-.calc__card--hi { background: rgba(249,179,54,.08); border-color: rgba(249,179,54,.3); }
-.calc__k { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #E9E3D7; opacity: .6; margin-bottom: 16px; }
-.calc__v { font-family: var(--display); font-size: 56px; line-height: 1; letter-spacing: -0.02em; }
-.calc__v small { font-size: 32px; opacity: .7; margin-left: 4px; }
-.calc__sub { margin-top: 12px; font-family: var(--mono); font-size: 11px; color: #E9E3D7; opacity: .5; }
+/* (legacy Pricing calculator block from Figma export removed — was
+   forcing .calc into a 1fr/1.2fr grid and polluting .calc__input /
+   .calc__slider / .calc__scale with conflicting BEM styles) */
 
 @media (max-width: 900px) {
   .prodsec__grid { grid-template-columns: 1fr; gap: 32px; }
   .prodsec__side { position: static; flex-direction: row; }
   .prodsec__metrics { grid-template-columns: 1fr; gap: 16px; }
-  .calc { grid-template-columns: 1fr; gap: 32px; }
-  .ba { aspect-ratio: auto; min-height: 560px; }
-  .ba__side { padding: 32px; }
   .manifesto__text { font-size: 36px; }
 }
