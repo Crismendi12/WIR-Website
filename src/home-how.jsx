@@ -152,27 +152,24 @@ function Closing({ go }) {
   return (
     <section className="closing" data-reveal>
       <div className="wrap">
-        <div className="closing__grid">
-          <div className="closing__l">
-            <div className="eyebrow">· 07 — Próximo passo</div>
-            <h2 className="display closing__title">
-              Sua equipe tem<br/>
-              o <em>conhecimento.</em><br/>
-              A WIR dá a infra.
-            </h2>
-            <p className="closing__lede">
-              Subscrição é ofício. A WIR não substitui quem decide — entrega os trilhos para que sua equipe escale decisão, capacidade e margem, sem tocar no seu core.
-            </p>
-            <div className="closing__actions">
-              <button className="btn btn--solid" onClick={()=>go("contact")}>
-                Falar com a equipe <span className="btn__arrow">→</span>
-              </button>
-              <button className="btn btn--ghost" onClick={()=>go("solutions")}>
-                Explorar soluções <span className="btn__arrow">→</span>
-              </button>
-            </div>
+        <div className="closing__top">
+          <div className="eyebrow">· 07 — Próximo passo</div>
+          <h2 className="display closing__title">
+            Sua equipe tem o <em>conhecimento.</em> A WIR dá a infra.
+          </h2>
+          <p className="closing__lede">
+            Subscrição é ofício. A WIR não substitui quem decide — entrega os trilhos para que sua equipe escale decisão, capacidade e margem, sem tocar no seu core.
+          </p>
+          <div className="closing__actions">
+            <button className="btn btn--solid" onClick={()=>go("contact")}>
+              Falar com a equipe <span className="btn__arrow">→</span>
+            </button>
+            <button className="btn btn--ghost" onClick={()=>go("solutions")}>
+              Explorar soluções <span className="btn__arrow">→</span>
+            </button>
           </div>
-          <div className="closing__r">
+        </div>
+        <div className="closing__calc-wrap">
             <div className="calc">
               <div className="calc__head">
                 <div>
@@ -241,7 +238,6 @@ function Closing({ go }) {
                 * Estimativa ilustrativa usando R$ 156 / cotação como benchmark manual (dado do setor) e a cascata de pricing WIR por volume. Payback real depende de mix de produto, apetite e stack — calibramos no escopo do piloto.
               </div>
             </div>
-          </div>
         </div>
       </div>
     </section>

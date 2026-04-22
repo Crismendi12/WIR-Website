@@ -102,14 +102,10 @@ function ProductTabs({ go }) {
           {/* RIGHT — Active agent representation */}
           <div className="stack__panel" style={{"--pc": p.c}} key={p.k}>
             <div className="stack__panel-head">
-              <div className="stack__panel-badge">
-                <span className="stack__panel-badge-k">{p.k}</span>
-              </div>
-              <div className="stack__panel-meta">
-                <div className="stack__tag">{p.tag}</div>
-                <h3 className="display stack__panel-title">{p.title}</h3>
-              </div>
+              <span className="stack__panel-code">{p.k}</span>
+              <span className="stack__tag">{p.tag}</span>
             </div>
+            <h3 className="display stack__panel-title">{p.title}</h3>
             <p className="stack__panel-lede">{p.lede}</p>
             <ul className="stack__bullets">
               {p.bullets.map((b,j) => <li key={j}><span className="stack__bu"/>{b}</li>)}
