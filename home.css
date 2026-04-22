@@ -653,7 +653,7 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
    04 · STACK (product tabs)
    ───────────────────────────────────────── */
 .stack { padding: 140px 0 120px; background: var(--paper); }
-.stack__head { max-width: 900px; margin-bottom: 72px; }
+.stack__head { max-width: 1000px; margin: 0 auto 72px; text-align: center; }
 .stack__title {
   font-family: var(--f-display);
   font-size: clamp(56px, 7vw, 104px);
@@ -663,13 +663,13 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 .stack__title em { font-style: italic; color: var(--ink-3); }
 .stack__sub {
   font-size: 18px; line-height: 1.55; color: var(--ink-2);
-  max-width: 640px; text-wrap: pretty;
+  max-width: 640px; margin: 0 auto; text-wrap: pretty;
 }
 
 /* Vertical stack: tabs strip above, panel below — both full width */
 .stack__layout {
   display: flex; flex-direction: column; gap: 24px;
-  min-width: 0;
+  width: 100%; min-width: 0;
 }
 
 /* Horizontal tab strip */
