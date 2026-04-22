@@ -4,43 +4,21 @@
 
 const { useEffect, useState, useRef, useMemo } = React;
 
-// Wordmark — simplified version of WIR logo
-function Wordmark({ small }) {
-  const h = small ? 22 : 28;
+// Official WIR logo — uses brandbook SVG with proper gradient
+function Wordmark({ small, variant }) {
+  const h = small ? 22 : 32;
+  const src = variant === "white" ? "assets/wir-logo-branco.svg" : "assets/wir-logo-azul.svg";
   return (
-    <svg height={h} viewBox="0 0 240 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WIR">
-      <defs>
-        <linearGradient id="wirGrad" x1="0" x2="1" y1="0.5" y2="0.5">
-          <stop offset="0" stopColor="#1C17FF"/>
-          <stop offset="0.45" stopColor="#A44F98"/>
-          <stop offset="0.75" stopColor="#EE7D48"/>
-          <stop offset="1" stopColor="#F9B336"/>
-        </linearGradient>
-      </defs>
-      {/* W arc swoosh */}
-      <path d="M4 16 C 28 66, 52 12, 74 52 C 88 22, 100 14, 118 42" stroke="url(#wirGrad)" strokeWidth="7" strokeLinecap="round" fill="none"/>
-      {/* i dot */}
-      <circle cx="136" cy="18" r="6" fill="#0B0A08"/>
-      {/* i stem */}
-      <rect x="131" y="28" width="10" height="34" rx="4" fill="#0B0A08"/>
-      {/* r stem */}
-      <rect x="154" y="28" width="10" height="34" rx="4" fill="#0B0A08"/>
-      {/* r hook */}
-      <path d="M164 36 Q 174 26, 188 30" stroke="#0B0A08" strokeWidth="9" strokeLinecap="round" fill="none"/>
-    </svg>
+    <img src={src} alt="WIR Innovation" style={{ height: h + "px", width: "auto", display: "block" }} />
   );
 }
 
 function Ticker() {
   const items = [
-    { d: "b", t: "São Paulo · New York · Silicon Valley" },
     { d: "a", t: "Cotação média: <2 min" },
     { d: "p", t: "STP rate: 97%" },
-    { d: "o", t: "Mercados ativos: 47" },
     { d: "b", t: "Infraestrutura de IA para seguros" },
-    { d: "a", t: "Founders: 57 anos combinados" },
-    { d: "p", t: "SOC 2 Type II · HIPAA · LGPD" },
-    { d: "o", t: "Deploy em semanas, não meses" },
+    { d: "o", t: "SOC 2 Type II · HIPAA · LGPD" },
   ];
   const dotClass = (d) => "ticker__dot" + (d === "b" ? " ticker__dot--b" : d === "p" ? " ticker__dot--p" : d === "o" ? " ticker__dot--o" : "");
   return (
@@ -98,7 +76,7 @@ function Footer({ go }) {
       <div className="wrap">
         <div className="footer__grid">
           <div>
-            <Wordmark/>
+            <Wordmark variant="white"/>
             <p className="footer__brand-desc">Infraestrutura de IA para o mercado segurador. Automatize subscrição, sinistros, pricing e compliance sem substituir seus sistemas.</p>
           </div>
           <div>

@@ -6,9 +6,9 @@
    --f-display, --f-sans, --f-mono, --maxw, --pad
    ═══════════════════════════════════════════════════ */
 
-/* reveal */
-[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
-[data-reveal].is-revealed { opacity: 1; transform: none; }
+/* reveal (graceful: only hides when JS ready, so crawlers/no-JS see content) */
+html.js-ready [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 
 /* ─────────────────────────────────────────
    01 · OPENING
@@ -225,8 +225,12 @@
   padding: 56px 64px;
   display: flex; flex-direction: column;
 }
-.ba__side--before { background: #EDE6D7; color: var(--ink); }
-.ba__side--after { background: var(--night); color: var(--night-text); }
+.ba__side--before { background: #E8E3D5; color: #5A564C; filter: saturate(0.3); }
+.ba__side--before .ba__label { color: #827C6F; }
+.ba__side--before .ba__stat { color: #7A746A; }
+.ba__side--before .ba__foot { color: #9A9488; font-style: italic; }
+.ba__side--after { background: var(--night); color: var(--night-text); box-shadow: -12px 0 40px rgba(248,173,57,0.15); }
+.ba__side--after .ba__foot { color: #F8AD39; font-weight: 500; }
 .ba__label {
   font-family: var(--f-mono); font-size: 11px; letter-spacing: .18em;
   text-transform: uppercase; opacity: .6; margin-bottom: 24px;
