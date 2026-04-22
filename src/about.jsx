@@ -19,9 +19,14 @@ function AboutHero() {
             </h1>
           </div>
           <div className="abhero__portrait">
-            <div className="abhero__photo" role="img" aria-label="Retrato dos fundadores">
-              <span className="abhero__photo-label">IMAGE · Nicholas Weiser + Co-founder</span>
-              <span className="abhero__photo-meta">B&amp;W · studio portrait · São Paulo · Mar 2026</span>
+            <div className="abhero__photo abhero__photo--image"
+              role="img" aria-label="Nicholas Weiser, CEO · Co-Founder">
+              <img src="assets/team/nicholas.jpg" alt="Nicholas Weiser" className="abhero__photo-img"/>
+              <span className="abhero__photo-overlay"/>
+              <span className="abhero__photo-caption">
+                <b>Nicholas Weiser</b>
+                <em>CEO · Co-Founder</em>
+              </span>
             </div>
           </div>
         </div>
