@@ -122,14 +122,15 @@ function Trust() {
 
 // Pricing model (from AXA proposal): manual baseline R$156/cotação;
 // WIR tiered — R$87 (<=1k), R$61 (1-2k), R$43 (2k+). Time: 2.5h manual avg.
-function wirCostPerQuote(v) {
-  if (v <= 1000) return 87;
-  if (v <= 2000) return 61;
-  return 43;
+function wirTier(v) {
+  if (v <= 1000) return { unit: 87, k: "Tier 1", range: "até 1.000" };
+  if (v <= 2000) return { unit: 61, k: "Tier 2", range: "1.001 – 2.000" };
+  return                { unit: 43, k: "Tier 3", range: "2.001 +"      };
 }
 function calc(vol) {
   const manualUnit = 156;
-  const wirUnit = wirCostPerQuote(vol);
+  const t = wirTier(vol);
+  const wirUnit = t.unit;
   const costManual = vol * manualUnit;
   const costWir = vol * wirUnit;
   const savingsMonth = costManual - costWir;
@@ -137,7 +138,7 @@ function calc(vol) {
   const hoursManual = Math.round(vol * 2.5);
   const ftes = Math.max(1, Math.round((hoursManual / 160) * 10) / 10);
   const savingsPct = Math.round(((manualUnit - wirUnit) / manualUnit) * 100);
-  return { manualUnit, wirUnit, costManual, costWir, savingsMonth, savingsYear, hoursManual, ftes, savingsPct };
+  return { manualUnit, wirUnit, tier: t, costManual, costWir, savingsMonth, savingsYear, hoursManual, ftes, savingsPct };
 }
 const BRL = (n) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(n);
 const K = (n) => {
@@ -185,13 +186,25 @@ function Closing({ go }) {
               <div className="calc__input">
                 <div className="calc__input-row">
                   <label>Submissões / mês</label>
-                  <div className="calc__val num">{vol.toLocaleString("pt-BR")}</div>
+                  <div className="calc__val-wrap">
+                    <div className="calc__val num">{vol.toLocaleString("pt-BR")}</div>
+                    <div className="calc__tier">
+                      <span className="calc__tier-k">{r.tier.k}</span>
+                      <span className="calc__tier-range">{r.tier.range}</span>
+                    </div>
+                  </div>
                 </div>
-                <input type="range" min="200" max="3000" step="50"
-                  value={vol} onChange={(e)=>setVol(+e.target.value)}
-                  aria-label="Submissões por mês"/>
+                <div className="calc__slider">
+                  <input type="range" min="200" max="3000" step="50"
+                    value={vol} onChange={(e)=>setVol(+e.target.value)}
+                    aria-label="Submissões por mês"/>
+                  <div className="calc__marks" aria-hidden>
+                    <span style={{left: `${((1000-200)/2800)*100}%`}}/>
+                    <span style={{left: `${((2000-200)/2800)*100}%`}}/>
+                  </div>
+                </div>
                 <div className="calc__scale">
-                  <span>200</span><span>1.000</span><span>2.000</span><span>3.000</span>
+                  <span>200</span><span>1.000 <em>· T2</em></span><span>2.000 <em>· T3</em></span><span>3.000</span>
                 </div>
               </div>
 
@@ -207,10 +220,15 @@ function Closing({ go }) {
                   </div>
                 </div>
 
+                <div className="calc__arrow" aria-hidden>
+                  <span className="calc__arrow-line"/>
+                  <span className="calc__arrow-head">→</span>
+                </div>
+
                 <div className="calc__col calc__col--wir">
                   <div className="calc__col-k">· Com WIR · agentes</div>
                   <div className="calc__col-big num">{K(r.costWir)}<small>/mês</small></div>
-                  <div className="calc__col-unit">R$ {r.wirUnit} × cotação · tier pelo volume</div>
+                  <div className="calc__col-unit">R$ {r.wirUnit} × cotação · {r.tier.k} pelo volume</div>
                   <div className="calc__col-rows">
                     <div><span>UWs liberados</span><b>Foco em decisão</b></div>
                     <div><span>Tempo por cotação</span><b>Minutos</b></div>
@@ -231,6 +249,9 @@ function Closing({ go }) {
                 <div className="calc__result-row calc__result-row--meta">
                   <span>Redução por cotação</span>
                   <b>−{r.savingsPct}%</b>
+                  <div className="calc__bar" aria-hidden>
+                    <div className="calc__bar-fill" style={{width: `${r.savingsPct}%`}}/>
+                  </div>
                 </div>
               </div>
 
