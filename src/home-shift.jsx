@@ -84,8 +84,8 @@ function ProductTabs({ go }) {
         </div>
 
         <div className="stack__layout">
-          {/* LEFT — Agent list (vertical tabs) */}
-          <div className="stack__tabs stack__tabs--vertical">
+          {/* TOP — Horizontal agent tabs */}
+          <div className="stack__tabs stack__tabs--row">
             {prods.map((x,i) => (
               <button key={x.k}
                 className={"stack__tab" + (i === active ? " is-active" : "")}
@@ -94,22 +94,25 @@ function ProductTabs({ go }) {
                 <span className="stack__tab-k">{x.k}</span>
                 <span className="stack__tab-l">{x.title}</span>
                 <span className="stack__tab-tag">{x.tag}</span>
-                <span className="stack__tab-arrow" aria-hidden>→</span>
               </button>
             ))}
           </div>
 
-          {/* RIGHT — Active agent representation */}
+          {/* BELOW — Active agent detail, full width */}
           <div className="stack__panel" style={{"--pc": p.c}} key={p.k}>
             <div className="stack__panel-head">
               <span className="stack__panel-code">{p.k}</span>
               <span className="stack__tag">{p.tag}</span>
             </div>
-            <h3 className="display stack__panel-title">{p.title}</h3>
-            <p className="stack__panel-lede">{p.lede}</p>
-            <ul className="stack__bullets">
-              {p.bullets.map((b,j) => <li key={j}><span className="stack__bu"/>{b}</li>)}
-            </ul>
+            <div className="stack__panel-body">
+              <div className="stack__panel-lhs">
+                <h3 className="display stack__panel-title">{p.title}</h3>
+                <p className="stack__panel-lede">{p.lede}</p>
+              </div>
+              <ul className="stack__bullets">
+                {p.bullets.map((b,j) => <li key={j}><span className="stack__bu"/>{b}</li>)}
+              </ul>
+            </div>
             <div className="stack__panel-bot">
               <div className="stack__m">
                 {p.m.map((x,j) => (
