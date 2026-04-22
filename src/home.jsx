@@ -30,38 +30,42 @@ function AnimatedNum({ to, duration=1400 }) {
 
 Object.assign(window, { AnimatedNum });
 
-// Clients/partners trust bar — anonymized markers with brand-aligned shape
+// Trust bar — real partners & founders' background
 function TrustBar() {
-  const clients = [
-    { shape: "square",  tag: "Seguradora Tier-1", loc: "Brasil", stage: "Em produção" },
-    { shape: "diamond", tag: "MGA",               loc: "EUA",    stage: "Em produção" },
-    { shape: "triangle",tag: "Ressegurador",      loc: "LatAm",  stage: "Em piloto"   },
-    { shape: "circle",  tag: "InsurTech",         loc: "Brasil", stage: "Em produção" },
+  const founderLogos = [
+    { src: "assets/logos/lockton.png",      alt: "Lockton" },
+    { src: "assets/logos/aon.png",          alt: "Aon" },
+    { src: "assets/logos/jlt.png",          alt: "JLT" },
+    { src: "assets/logos/bain-capital.png", alt: "Bain Capital" },
+    { src: "assets/logos/patria.png",       alt: "Pátria Investimentos" },
+    { src: "assets/logos/ezze.png",         alt: "EZZE Seguros" },
   ];
-  const Shape = ({ type }) => {
-    const style = { width: 14, height: 14, display: "inline-block" };
-    if (type === "square")   return <span style={{ ...style, background: "var(--wir-purple)" }}/>;
-    if (type === "diamond")  return <span style={{ ...style, background: "var(--wir-amber)", transform: "rotate(45deg)" }}/>;
-    if (type === "triangle") return <span style={{ width: 0, height: 0, borderLeft: "7px solid transparent", borderRight: "7px solid transparent", borderBottom: "12px solid var(--wir-coral)", display: "inline-block" }}/>;
-    return <span style={{ ...style, background: "var(--wir-blue)", borderRadius: "50%" }}/>;
-  };
   return (
     <section className="trustbar" data-reveal>
       <div className="wrap">
         <div className="trustbar__head">
           <div className="eyebrow">· Em produção com</div>
-          <span className="trustbar__note">Clientes anonimizados sob NDA · logotipos por solicitação</span>
+          <span className="trustbar__note">Piloto ativo · demais clientes sob NDA</span>
         </div>
-        <div className="trustbar__grid">
-          {clients.map((c,i) => (
-            <div key={i} className="trustbar__cell">
-              <Shape type={c.shape}/>
-              <div className="trustbar__cell-body">
-                <b>{c.tag}</b>
-                <span>{c.loc} · {c.stage}</span>
+        <div className="trustbar__hero">
+          <img src="assets/logos/axa.png" alt="AXA" className="trustbar__axa"/>
+          <div className="trustbar__hero-body">
+            <b>Seguradora global Tier-1</b>
+            <span>Brasil · Transportes · Em piloto</span>
+          </div>
+        </div>
+        <div className="trustbar__founders">
+          <div className="trustbar__founders-head">
+            <span className="eyebrow">· O time vem de</span>
+            <span className="trustbar__note">Experiência acumulada de fundadores e advisors</span>
+          </div>
+          <div className="trustbar__logos">
+            {founderLogos.map((l,i) => (
+              <div key={i} className="trustbar__logo">
+                <img src={l.src} alt={l.alt} title={l.alt}/>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
