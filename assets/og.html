@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>WIR OG</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    font-family:'Inter Tight',system-ui,sans-serif;
+    background:#08090E; color:#F6F0E4;
+    position:relative;
+  }
+  /* radial brand glows */
+  .glow-a{position:absolute;top:-200px;right:-120px;width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(circle,rgba(117,64,172,.45),transparent 65%);filter:blur(40px)}
+  .glow-b{position:absolute;bottom:-260px;left:-160px;width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(circle,rgba(248,173,57,.30),transparent 65%);filter:blur(40px)}
+  .glow-c{position:absolute;top:40%;left:55%;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(254,139,119,.22),transparent 60%);filter:blur(30px)}
+  /* grid pattern */
+  .grid{position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 100%);
+  }
+  .wrap{
+    position:relative;z-index:2;height:100%;
+    padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  /* top bar */
+  .top{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand svg{height:44px;width:auto;display:block}
+  .kicker{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:8px 16px;background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
+    color:#C9BFA8;text-transform:uppercase;backdrop-filter:blur(12px);
+  }
+  .kicker-dot{width:8px;height:8px;border-radius:50%;background:#10B981;box-shadow:0 0 12px #10B981}
+  /* center headline */
+  .headline{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:112px;line-height:.95;letter-spacing:-0.025em;
+    color:#F6F0E4;max-width:960px;
+  }
+  .headline em{
+    font-style:italic;
+    background:linear-gradient(90deg,#3222E9 0%,#7540AC 40%,#FE8B77 75%,#F8AD39 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .sub{
+    margin-top:24px;max-width:760px;
+    font-size:22px;line-height:1.45;color:#C9BFA8;font-weight:400;
+  }
+  /* bottom meta */
+  .bot{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .meta{
+    display:flex;gap:28px;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;
+    color:#8A8374;text-transform:uppercase;
+  }
+  .meta b{color:#F6F0E4;font-weight:500}
+  .accent-bar{
+    width:100px;height:3px;border-radius:2px;
+    background:linear-gradient(90deg,#3222E9,#7540AC,#FE8B77,#F8AD39);
+  }
+</style>
+</head>
+<body>
+  <div class="glow-a"></div>
+  <div class="glow-b"></div>
+  <div class="glow-c"></div>
+  <div class="grid"></div>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <!-- inline WIR wordmark, gradient version -->
+        <svg viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7540AC"/>
+              <stop offset="0.5" stop-color="#FE8B77"/>
+              <stop offset="1" stop-color="#F8AD39"/>
+            </linearGradient>
+          </defs>
+          <text x="0" y="60" font-family="Instrument Serif, serif" font-size="64" fill="url(#wg)" font-style="italic" letter-spacing="-2">WIR</text>
+          <text x="140" y="60" font-family="Inter Tight, sans-serif" font-size="24" fill="#F6F0E4" font-weight="500" letter-spacing="-.5">Innovation</text>
+        </svg>
+      </div>
+      <div class="kicker">
+        <span class="kicker-dot"></span>
+        <span>Em piloto · Seguradora global · Brasil</span>
+      </div>
+    </div>
+
+    <div>
+      <h1 class="headline">A camada de<br/><em>inteligência</em> do seguro.</h1>
+      <p class="sub">Agentes de IA para subscrição, sinistros, pricing e compliance — decisão auditável em minutos, sem substituir seu core.</p>
+    </div>
+
+    <div class="bot">
+      <div class="meta">
+        <span><b>wir.innovation</b></span>
+        <span>São Paulo ⟶ Bay Area</span>
+        <span>Abril 2026</span>
+      </div>
+      <div class="accent-bar"></div>
+    </div>
+  </div>
+</body>
+</html>
