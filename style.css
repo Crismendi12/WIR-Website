@@ -379,40 +379,10 @@ p{ text-wrap: pretty; }
 }
 .solution-card:hover .solution-card__arrow{ background: var(--ink); color: var(--paper); transform: rotate(-45deg); }
 
-/* ─────────────  STACK DIAGRAM  ───────────── */
-.stack{ display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
-.stack-diagram{
-  position: relative;
-  padding: 40px;
-  background: var(--paper-2);
-  border: 1px solid var(--paper-3);
-  border-radius: 4px;
-}
-.stack-diagram__layer{
-  padding: 18px 22px; margin-bottom: 8px; border-radius: 2px;
-  display: flex; justify-content: space-between; align-items: center;
-  font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em;
-  background: var(--paper); border: 1px solid var(--paper-3);
-}
-.stack-diagram__layer:last-child{ margin-bottom: 0; }
-.stack-diagram__layer b{ font-weight: 500; }
-.stack-diagram__layer--ai{ background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.stack-diagram__layer--ai .pill{ background: var(--wir-amber); color: var(--ink); }
+/* (legacy STACK DIAGRAM block from Figma export removed — was forcing
+   .stack into a 1.1fr/1fr grid that compressed the current Stack section
+   content to the left half of the viewport) */
 .pill{ padding: 3px 8px; border-radius: 999px; font-size: 10px; background: var(--paper-3); color: var(--ink-2); }
-
-.stack-copy h3{
-  font-family: var(--f-display); font-size: 52px; line-height: 1.02;
-  letter-spacing: -0.02em; margin-bottom: 20px;
-}
-.stack-copy p{ font-size: 16px; color: var(--ink-2); margin-bottom: 18px; max-width: 42ch; }
-.stack-list{ list-style: none; margin-top: 24px; }
-.stack-list li{
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 12px 0; border-top: 1px solid var(--paper-3);
-  font-size: 14px;
-}
-.stack-list li:last-child{ border-bottom: 1px solid var(--paper-3); }
-.stack-list .k{ font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--ink-3); text-transform: uppercase; min-width: 88px; padding-top: 3px; }
 
 /* ─────────────  WORKFLOW  ───────────── */
 .workflow{

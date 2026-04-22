@@ -652,7 +652,7 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 /* ─────────────────────────────────────────
    04 · STACK (product tabs)
    ───────────────────────────────────────── */
-.stack { padding: 140px 0 120px; background: var(--paper); }
+.stack { padding: 140px 0 120px; background: var(--paper); display: block; }
 .stack > .wrap { width: 100%; }
 .stack__head { max-width: 1000px; margin: 0 auto 72px; text-align: center; }
 .stack__title {
