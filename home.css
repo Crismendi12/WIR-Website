@@ -108,8 +108,8 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   width: 10px; height: 10px; border-radius: 50%; background: #3a3630;
   display: inline-block;
 }
-.terminal__dots i:nth-child(1) { background: #EE7D48; }
-.terminal__dots i:nth-child(2) { background: #F9B336; }
+.terminal__dots i:nth-child(1) { background: #FE8B77; }
+.terminal__dots i:nth-child(2) { background: #F8AD39; }
 .terminal__dots i:nth-child(3) { background: #6BCF7F; }
 .terminal__title { flex: 1; color: var(--night-muted); }
 .terminal__clock { color: var(--wir-amber); font-weight: 500; }

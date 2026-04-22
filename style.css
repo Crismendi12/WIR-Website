@@ -12,12 +12,16 @@
   --ink-3:        #6A6458;    /* muted */
   --ink-4:        #9A9484;    /* disabled */
 
-  /* Signature (from brand gradient). Never mix all four in a gradient bar.
-     Use as SOLID accents, one per context. */
-  --wir-blue:     #1C17FF;
-  --wir-purple:   #A44F98;
-  --wir-orange:   #EE7D48;
-  --wir-amber:    #F9B336;
+  /* Signature colors — aligned to WIR Innovation Brandbook 04-11-2025.
+     Never mix all four in a gradient bar. Use as SOLID accents, one per context. */
+  --wir-blue:     #3222E9;    /* brand: deepblue */
+  --wir-purple:   #7540AC;    /* brand: primary purple */
+  --wir-magenta:  #AE46C0;    /* brand: magenta */
+  --wir-coral:    #FE8B77;    /* brand: coral */
+  --wir-orange:   #FE8B77;    /* alias */
+  --wir-amber:    #F8AD39;    /* brand: gold */
+  --wir-gold:     #F8AD39;    /* alias */
+  --wir-navy:     #0A0A2E;    /* brand: navy */
 
   /* Dark mode patch for dark sections */
   --night:        #0B0A08;
@@ -65,13 +69,21 @@ input,textarea,select{ font: inherit; color: inherit; }
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.02em;
+  text-wrap: balance;
+  font-feature-settings: "liga", "kern";
+}
+.display em, .display i{
+  font-style: italic;
+  font-feature-settings: "liga", "kern", "swsh";
 }
 .sans-display{
   font-family: var(--f-sans);
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.02;
+  text-wrap: balance;
 }
+p{ text-wrap: pretty; }
 
 /* ─────────────  LAYOUT  ───────────── */
 .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
@@ -1141,7 +1153,7 @@ html.js-ready [data-reveal].in{ opacity: 1; transform: translateY(0); }
 .manifesto__kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 48px; }
 .manifesto__text { font-size: clamp(40px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink); max-width: 1200px; text-wrap: balance; }
 .manifesto__text em { font-style: italic; color: var(--ink-60); }
-.manifesto__accent { display: block; margin-top: 40px; background: linear-gradient(90deg, #1C17FF 0%, #A44F98 40%, #EE7D48 70%, #F9B336 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.manifesto__accent { display: block; margin-top: 40px; background: linear-gradient(90deg, #3222E9 0%, #7540AC 40%, #FE8B77 70%, #F8AD39 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
 /* ───────── Before / After ───────── */
 .ba { position: relative; margin-top: 80px; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; aspect-ratio: 16/9; background: var(--paper2); user-select: none; }
@@ -1153,8 +1165,8 @@ html.js-ready [data-reveal].in{ opacity: 1; transform: translateY(0); }
 .ba__stat em { font-style: italic; font-size: .5em; opacity: .6; margin-left: 12px; }
 .ba__side ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 15px; }
 .ba__side--after ul { font-family: var(--mono); font-size: 13px; opacity: .85; }
-.ba__handle { position: absolute; top: 0; bottom: 0; width: 2px; background: #F9B336; pointer-events: none; z-index: 3; transform: translateX(-1px); box-shadow: 0 0 24px rgba(249,179,54,.6); }
-.ba__handle span { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 48px; height: 48px; border-radius: 50%; background: #F9B336; color: #111; display: grid; place-items: center; font-size: 18px; font-weight: 700; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+.ba__handle { position: absolute; top: 0; bottom: 0; width: 2px; background: #F8AD39; pointer-events: none; z-index: 3; transform: translateX(-1px); box-shadow: 0 0 24px rgba(249,179,54,.6); }
+.ba__handle span { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 48px; height: 48px; border-radius: 50%; background: #F8AD39; color: #111; display: grid; place-items: center; font-size: 18px; font-weight: 700; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
 .ba__slider { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 4; }
 
 /* ───────── Product sections ───────── */
@@ -1187,8 +1199,8 @@ html.js-ready [data-reveal].in{ opacity: 1; transform: translateY(0); }
 .calc__label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #E9E3D7; opacity: .6; margin-bottom: 24px; display: block; }
 .calc__value { font-family: var(--display); font-size: 88px; line-height: 1; color: #F2EEE5; margin-bottom: 32px; letter-spacing: -0.02em; }
 .calc__slider { width: 100%; height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; appearance: none; -webkit-appearance: none; cursor: pointer; }
-.calc__slider::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #F9B336; cursor: grab; border: 3px solid #111110; box-shadow: 0 0 0 2px #F9B336; }
-.calc__slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #F9B336; cursor: grab; border: 3px solid #111110; }
+.calc__slider::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #F8AD39; cursor: grab; border: 3px solid #111110; box-shadow: 0 0 0 2px #F8AD39; }
+.calc__slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #F8AD39; cursor: grab; border: 3px solid #111110; }
 .calc__scale { display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--mono); font-size: 11px; color: #E9E3D7; opacity: .5; }
 .calc__out { display: grid; gap: 16px; }
 .calc__card { padding: 32px 40px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; }

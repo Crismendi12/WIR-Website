@@ -20,7 +20,7 @@
 .abessay__grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
 .abessay__side { position: sticky; top: 120px; }
 .abessay__pullquote { font-family: var(--f-display); font-weight: 400; font-size: clamp(36px, 3.5vw, 52px); line-height: 1.15; letter-spacing: -0.015em; color: var(--ink); margin: 24px 0 32px; text-wrap: balance; }
-.abessay__pullquote em { font-style: italic; background: linear-gradient(90deg,#1C17FF 0%,#A44F98 50%,#EE7D48 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.abessay__pullquote em { font-style: italic; background: linear-gradient(90deg,#3222E9 0%,#7540AC 50%,#FE8B77 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .abessay__attr { padding-top: 20px; border-top: 1px solid rgba(11,10,8,.1); }
 .abessay__attr b { display: block; font-family: var(--f-sans); font-weight: 500; font-size: 15px; color: var(--ink); }
 .abessay__attr span { display: block; margin-top: 4px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; color: var(--ink-3); }
@@ -35,7 +35,7 @@
 .abtime__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(56px, 7vw, 104px); line-height: 1; letter-spacing: -0.025em; margin: 24px 0; color: var(--ink); }
 .abtime__title em { font-style: italic; color: var(--ink-3); }
 .abtime__rail { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
-.abtime__line { position: absolute; top: 78px; left: 16px; right: 16px; height: 1px; background: linear-gradient(90deg,#1C17FF 0%,#A44F98 25%,#EE7D48 60%,#F9B336 100%); z-index: 0; }
+.abtime__line { position: absolute; top: 78px; left: 16px; right: 16px; height: 1px; background: linear-gradient(90deg,#3222E9 0%,#7540AC 25%,#FE8B77 60%,#F8AD39 100%); z-index: 0; }
 .abtime__event { position: relative; padding-top: 72px; z-index: 1; }
 .abtime__dot { position: absolute; left: 0; top: 72px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); border: 3px solid var(--paper); box-shadow: 0 0 0 1px rgba(11,10,8,.1); transform: translateY(-50%); }
 .abtime__year { font-family: var(--f-display); font-weight: 400; font-size: 32px; letter-spacing: -0.015em; margin-bottom: 20px; padding-top: 16px; color: var(--ink); }
@@ -80,7 +80,7 @@
 .abpart { padding: 140px 0; background: var(--ink); color: var(--night-text); }
 .abpart__head { max-width: 1000px; margin-bottom: 72px; }
 .abpart__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(48px, 5vw, 80px); line-height: 1.05; letter-spacing: -0.025em; margin: 24px 0; color: var(--night-text); text-wrap: balance; }
-.abpart__title em { font-style: italic; background: linear-gradient(90deg,#A44F98 0%,#EE7D48 50%,#F9B336 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.abpart__title em { font-style: italic; background: linear-gradient(90deg,#7540AC 0%,#FE8B77 50%,#F8AD39 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .abpart__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .abpart__card { padding: 48px 40px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 6px; }
 .abpart__logo { font-family: var(--f-display); font-weight: 400; font-style: italic; font-size: 64px; letter-spacing: -0.025em; color: var(--night-text); margin-bottom: 8px; line-height: 1; }
@@ -108,7 +108,7 @@
 .abclose { padding: 120px 0; background: var(--ink); color: var(--night-text); }
 .abclose__inner { max-width: 900px; }
 .abclose__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(64px, 8vw, 120px); line-height: .95; letter-spacing: -0.03em; margin: 24px 0 32px; color: var(--night-text); }
-.abclose__title em { font-style: italic; background: linear-gradient(90deg,#A44F98 0%,#EE7D48 50%,#F9B336 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.abclose__title em { font-style: italic; background: linear-gradient(90deg,#7540AC 0%,#FE8B77 50%,#F8AD39 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .abclose__lede { font-size: 19px; line-height: 1.55; color: var(--night-muted); max-width: 680px; margin-bottom: 40px; }
 .abclose__actions { display: flex; gap: 12px; flex-wrap: wrap; }
 

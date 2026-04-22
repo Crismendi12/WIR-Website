@@ -7,7 +7,7 @@
 .solhero__meta { display: flex; gap: 32px; flex-wrap: wrap; padding-bottom: 40px; margin-bottom: 72px; border-bottom: 1px solid rgba(11,10,8,.08); font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); }
 .solhero__top { max-width: 1000px; margin-bottom: 96px; }
 .solhero__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(72px, 9vw, 144px); line-height: .92; letter-spacing: -0.028em; margin: 28px 0; color: var(--ink); }
-.solhero__title em { font-style: italic; background: linear-gradient(90deg,#1C17FF 0%,#A44F98 40%,#EE7D48 70%,#F9B336 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.solhero__title em { font-style: italic; background: linear-gradient(90deg,#3222E9 0%,#7540AC 40%,#FE8B77 70%,#F8AD39 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .solhero__lede { font-size: 20px; line-height: 1.5; color: var(--ink-2); max-width: 680px; text-wrap: pretty; }
 .solhero__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(11,10,8,.12); }
 .solhero__card { display: block; padding: 40px 32px 36px; border-right: 1px solid rgba(11,10,8,.08); border-bottom: 1px solid rgba(11,10,8,.08); position: relative; text-decoration: none; color: var(--ink); transition: background .25s ease; overflow: hidden; }
@@ -105,7 +105,7 @@
 .solclose { padding: 120px 0 120px; background: var(--ink); color: var(--night-text); }
 .solclose__grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: center; }
 .solclose__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(56px, 7vw, 104px); line-height: .95; letter-spacing: -0.03em; margin: 24px 0; color: var(--night-text); }
-.solclose__title em { font-style: italic; background: linear-gradient(90deg,#A44F98 0%,#EE7D48 50%,#F9B336 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.solclose__title em { font-style: italic; background: linear-gradient(90deg,#7540AC 0%,#FE8B77 50%,#F8AD39 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .solclose__r p { font-size: 17px; line-height: 1.6; color: var(--night-muted); margin-bottom: 32px; }
 .solclose__actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
