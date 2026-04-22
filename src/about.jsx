@@ -104,10 +104,10 @@ function AboutTimeline() {
 
 function AboutTeam() {
   const folks = [
-    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Operou 15+ anos em seguradoras e corretoras Tier-1 liderando transformação de subscrição comercial. Construiu equipes entre LatAm e US.", loc:"São Paulo", email:"nicholas@wirinnovation.ai", color:"var(--wir-blue)" },
-    { name:"José Carlos de Paula", role:"CSO / COO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora o resolve do lado da infraestrutura.", loc:"São Paulo", email:"jcdepaula@wirinnovation.ai", color:"var(--wir-purple)" },
-    { name:"Head of AI", role:"Liderança técnica", bio:"PhD Stanford. Publicações em fairness e explainability para modelos regulados. Ex-Palantir em fintech.", loc:"Bay Area", email:"ai@wirinnovation.ai", color:"var(--wir-coral)" },
-    { name:"Head of Delivery", role:"Customer Success", bio:"Ex-McKinsey e ex-Guidewire. Lidera os deploys dentro das Tier-1 — do kickoff ao primeiro quote em produção.", loc:"São Paulo", email:"delivery@wirinnovation.ai", color:"var(--wir-gold)" },
+    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Operou 15+ anos em seguradoras e corretoras Tier-1 liderando transformação de subscrição comercial. Construiu equipes entre LatAm e US.", loc:"São Paulo", email:"nicholas@wirinnovation.ai", photo:"assets/team/nicholas.jpg", color:"var(--wir-blue)" },
+    { name:"José Carlos de Paula", role:"CSO / COO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora o resolve do lado da infraestrutura.", loc:"São Paulo", email:"jcdepaula@wirinnovation.ai", photo:"assets/team/jc.jpg", color:"var(--wir-purple)" },
+    { name:"Head of AI", role:"Liderança técnica", bio:"PhD. Publicações em fairness e explainability para modelos regulados. Experiência em fintech e decisão automatizada.", loc:"Bay Area", email:"ai@wirinnovation.ai", photo:null, color:"var(--wir-coral)" },
+    { name:"Head of Delivery", role:"Customer Success", bio:"Lidera os deploys dentro das seguradoras — do kickoff ao primeiro quote em produção. Experiência em consultoria estratégica e InsurTech.", loc:"São Paulo", email:"delivery@wirinnovation.ai", photo:null, color:"var(--wir-gold)" },
   ];
   return (
     <section className="abteam" data-reveal>
@@ -119,9 +119,12 @@ function AboutTeam() {
         <div className="abteam__grid">
           {folks.map((f,i) => (
             <div key={i} className="abteam__card">
-              <div className="abteam__photo" style={{background: `linear-gradient(135deg, ${f.color}, var(--ink))`}}>
-                <span className="abteam__photo-label">IMAGE · {f.name.split(" ")[0]}</span>
-                <span className="abteam__initials display">{f.name.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>
+              <div className="abteam__photo"
+                style={f.photo
+                  ? { backgroundImage: `url(${f.photo})`, backgroundSize: "cover", backgroundPosition: "center" }
+                  : { background: `linear-gradient(135deg, ${f.color}, var(--ink))` }}>
+                {!f.photo && <span className="abteam__initials display">{f.name.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>}
+                {f.photo && <span className="abteam__photo-overlay"/>}
               </div>
               <div className="abteam__body">
                 <div className="abteam__name display">{f.name}</div>

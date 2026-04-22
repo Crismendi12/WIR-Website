@@ -1,22 +1,21 @@
 /* ───────── Movement 03 · The Shift + 04 · The Stack ───────── */
 
 function Shift() {
-  const [pos, setPos] = React.useState(50);
   const before = [
-    "E-mail recebido · encaminhado 4×",
+    "E-mail recebido · encaminhado várias vezes",
     "PDF impresso, anexado, re-digitado",
-    "3 ligações para validar CNPJ",
+    "Ligações para validar CNPJ",
     "Planilha manual de scoring",
     "Reunião de comitê · aprovação",
     "Apólice redigida e emitida",
   ];
   const after = [
-    "intake automático · 8s",
-    "enrich multi-fonte · 12s",
-    "score ML v26.2 · 4s",
-    "decisão auditável · 2s",
-    "escrita no core · 6s",
-    "trilha AXZ-8472 · ✓",
+    "intake automático",
+    "enrich multi-fonte",
+    "score ML · apetite · compliance",
+    "decisão auditável",
+    "escrita no core da seguradora",
+    "trilha imutável · learning loop",
   ];
   return (
     <section className="shift" data-reveal>
@@ -25,36 +24,26 @@ function Shift() {
         <h2 className="shift__title display">
           O mesmo caso.<br/><em>Duas realidades.</em>
         </h2>
-        <p className="shift__sub">Arraste para comparar um fluxo de subscrição tradicional com o mesmo caso processado pela WIR.</p>
+        <p className="shift__sub">O fluxo tradicional de subscrição comercial, lado a lado com o mesmo caso processado pela plataforma WIR.</p>
       </div>
       <div className="wrap">
-        <div className="ba" onMouseMove={(e)=>{
-          if (e.buttons !== 1) return;
-          const r = e.currentTarget.getBoundingClientRect();
-          setPos(Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100)));
-        }}>
+        <div className="ba ba--static">
           <div className="ba__side ba__side--before">
             <div className="ba__label">Antes · fluxo manual</div>
-            <div className="ba__stat display">47<em>dias</em></div>
+            <div className="ba__stat display">Ciclo<em>em semanas</em></div>
             <ol className="ba__list">
               {before.map((t,i) => <li key={i}><span className="ba__step">· 0{i+1}</span>{t}</li>)}
             </ol>
-            <div className="ba__foot">Broker aguarda · cliente escolhe concorrente</div>
+            <div className="ba__foot">Broker aguarda · cliente migra para concorrente</div>
           </div>
-          <div className="ba__side ba__side--after" style={{clipPath:`inset(0 0 0 ${pos}%)`}}>
+          <div className="ba__side ba__side--after">
             <div className="ba__label">Depois · WIR Agents</div>
-            <div className="ba__stat display">32<em>seg</em></div>
+            <div className="ba__stat display">Ciclo<em>automatizado</em></div>
             <ol className="ba__list ba__list--mono">
               {after.map((t,i) => <li key={i}><span className="ba__step">· 0{i+1}</span>{t}</li>)}
             </ol>
             <div className="ba__foot">Decisão auditável · apólice emitida · broker notificado</div>
           </div>
-          <div className="ba__handle" style={{left:`${pos}%`}}>
-            <span>⇔</span>
-          </div>
-          <input type="range" min="0" max="100" value={pos}
-            onChange={(e)=>setPos(+e.target.value)}
-            className="ba__slider" aria-label="Comparar antes e depois"/>
         </div>
       </div>
     </section>

@@ -50,8 +50,9 @@
 .abteam__title em { font-style: italic; color: var(--ink-3); }
 .abteam__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .abteam__card { background: var(--paper); border: 1px solid rgba(11,10,8,.08); border-radius: 4px; overflow: hidden; }
-.abteam__photo { aspect-ratio: 1; position: relative; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-.abteam__photo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(255,255,255,.12), transparent 60%); pointer-events: none; }
+.abteam__photo { aspect-ratio: 1; position: relative; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; filter: grayscale(0.05); }
+.abteam__photo-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(11,10,8,0.45) 100%); pointer-events: none; z-index: 1; }
+.abteam__photo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(255,255,255,.05), transparent 60%); pointer-events: none; }
 .abteam__photo-label { position: relative; z-index: 1; font-family: var(--f-mono); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.6); }
 .abteam__initials { position: relative; z-index: 1; font-family: var(--f-display); font-weight: 400; font-style: italic; font-size: 80px; letter-spacing: -0.03em; color: rgba(255,255,255,.95); align-self: end; line-height: 1; }
 .abteam__body { padding: 24px 24px 28px; }

@@ -1,48 +1,128 @@
 /* ───────── Movement 01 · Opening + 02 · Proof ───────── */
 
-function LiveTerminal() {
-  const lines = [
-    { t:200,  k:"> intake", v:"SUB-8472 · Global Logistics · Frota 142 veículos" },
-    { t:600,  k:"> parse",  v:"pdf_attachments=4 · entities=37 · confidence=0.97" },
-    { t:1100, k:"> enrich", v:"cnpj ok · histórico sinistros 5y · exposure map" },
-    { t:1600, k:"> score",  v:"model=wir-uw.v26.2 · risk=68 · apetite=match · ml=91.7%" },
-    { t:2100, k:"> decide", v:"QUOTE $847,200/y · reason: low-loss-ratio · hitl=false" },
-    { t:2500, k:"> write",  v:"policy issued → guidewire · audit#AXZ-8472 · ✓" },
-  ];
-  const [shown, setShown] = React.useState(0);
-  const [elapsed, setElapsed] = React.useState(0);
+// DecisionFlow — network pipeline visualization showing how data becomes decisions
+function DecisionFlow() {
+  const [pulse, setPulse] = React.useState(0);
   React.useEffect(() => {
-    let raf, start = performance.now();
-    const tick = (now) => {
-      const e = now - start;
-      setElapsed(e);
-      setShown(lines.filter(l => e >= l.t).length);
-      if (e < 3800) raf = requestAnimationFrame(tick);
-      else setTimeout(()=>{ start = performance.now(); setElapsed(0); setShown(0); raf = requestAnimationFrame(tick); }, 1800);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    const id = setInterval(() => setPulse(p => (p + 1) % 5), 1100);
+    return () => clearInterval(id);
   }, []);
+
+  const stages = [
+    { k: "INTAKE",  sub: "e-mail · PDF · API" },
+    { k: "ENRICH",  sub: "CNPJ · histórico" },
+    { k: "SCORE",   sub: "modelo WIR" },
+    { k: "DECIDE",  sub: "HITL · auditável" },
+    { k: "WRITE",   sub: "core · apólice" },
+  ];
+
   return (
-    <div className="terminal" aria-hidden>
-      <div className="terminal__top">
-        <span className="terminal__dots"><i/><i/><i/></span>
-        <span className="terminal__title">wir.agents · decision-stream · live</span>
-        <span className="terminal__clock num">{(elapsed/1000).toFixed(2)}s</span>
+    <div className="dflow" aria-label="Fluxo de decisão">
+      <div className="dflow__head">
+        <div className="dflow__title">
+          <span className="dflow__title-k">Fluxo de decisão</span>
+          <span className="dflow__title-v">wir.agents</span>
+        </div>
+        <div className="dflow__status">
+          <span className="dflow__dot"/>
+          live · aprendendo
+        </div>
       </div>
-      <div className="terminal__body">
-        {lines.slice(0,shown).map((l,i)=>(
-          <div key={i} className="terminal__line">
-            <span className="terminal__k">{l.k}</span>
-            <span className="terminal__v">{l.v}</span>
-          </div>
+
+      <svg className="dflow__svg" viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <defs>
+          <linearGradient id="dflowPath" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#7540AC" stopOpacity="0.15"/>
+            <stop offset="50%" stopColor="#7540AC" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="#F8AD39" stopOpacity="0.6"/>
+          </linearGradient>
+          <radialGradient id="dflowNode" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stopColor="#FE8B77" stopOpacity="1"/>
+            <stop offset="100%" stopColor="#7540AC" stopOpacity="1"/>
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3"/>
+          </filter>
+        </defs>
+
+        {/* Source nodes (left, 3 stacked) */}
+        {[{y:80,l:"e-mail"},{y:170,l:"PDF"},{y:260,l:"API"}].map((s,i) => (
+          <g key={i}>
+            <circle cx="50" cy={s.y} r="8" fill="#E9E3D7" stroke="#7540AC" strokeWidth="1.5"/>
+            <text x="30" y={s.y + 4} fill="#8A8374" fontSize="10"
+              fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="1">
+              {s.l}
+            </text>
+            {/* path from source to central spine */}
+            <path d={`M58 ${s.y} Q 100 ${s.y}, 130 170`}
+              stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
+          </g>
         ))}
-        {shown < lines.length && <div className="terminal__cursor">▊</div>}
-        {shown >= lines.length && (
-          <div className="terminal__done">
-            <span>· decisão completa</span><b>32s</b>
-          </div>
-        )}
+
+        {/* Central pipeline spine */}
+        <line x1="130" y1="170" x2="400" y2="170" stroke="#7540AC" strokeWidth="1" strokeOpacity="0.25" strokeDasharray="3 4"/>
+
+        {/* Processing stages on spine */}
+        {stages.map((s, i) => {
+          const x = 140 + i * 65;
+          const active = pulse === i;
+          return (
+            <g key={i}>
+              <circle cx={x} cy="170" r={active ? 14 : 10}
+                fill={active ? "url(#dflowNode)" : "#0B0A08"}
+                stroke={active ? "#F8AD39" : "#7540AC"}
+                strokeWidth={active ? 2 : 1.5}
+                filter={active ? "url(#glow)" : undefined}
+                style={{transition: "all .4s ease"}}/>
+              <text x={x} y="150" fill={active ? "#0B0A08" : "#6A6458"}
+                fontSize="9" fontFamily="JetBrains Mono, monospace"
+                textAnchor="middle" letterSpacing="1.5"
+                fontWeight={active ? "600" : "500"}
+                style={{transition: "fill .3s"}}>
+                {s.k}
+              </text>
+              <text x={x} y="195" fill="#9A9484"
+                fontSize="8" fontFamily="JetBrains Mono, monospace"
+                textAnchor="middle" letterSpacing="0.5">
+                {s.sub}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Output branches (right side, 2) */}
+        <path d="M400 170 Q 440 170, 450 80" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
+        <path d="M400 170 Q 440 170, 450 260" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
+
+        {[{y:80,l:"apólice",c:"#F8AD39"},{y:260,l:"audit trail",c:"#7540AC"}].map((o,i) => (
+          <g key={i}>
+            <rect x="435" y={o.y - 10} width="35" height="20" rx="4"
+              fill={o.c} fillOpacity="0.15"
+              stroke={o.c} strokeWidth="1"/>
+            <text x="452" y={o.y + 4} fill={o.c}
+              fontSize="8" fontFamily="JetBrains Mono, monospace"
+              textAnchor="middle" letterSpacing="0.5" fontWeight="600">
+              {o.l}
+            </text>
+          </g>
+        ))}
+
+        {/* Learning feedback loop (curved arc at bottom) */}
+        <path d="M 450 270 Q 250 320, 50 260"
+          stroke="#FE8B77" strokeWidth="1" strokeDasharray="4 4" fill="none" strokeOpacity="0.4"/>
+        <text x="250" y="310" fill="#FE8B77"
+          fontSize="9" fontFamily="JetBrains Mono, monospace"
+          textAnchor="middle" letterSpacing="1.5" fillOpacity="0.75">
+          · feedback loop · aprendizado contínuo ·
+        </text>
+      </svg>
+
+      <div className="dflow__foot">
+        <span>Dados</span>
+        <span className="dflow__arrow">→</span>
+        <span>Agentes</span>
+        <span className="dflow__arrow">→</span>
+        <span>Decisão auditável</span>
       </div>
     </div>
   );
@@ -50,16 +130,16 @@ function LiveTerminal() {
 
 function Opening({ go }) {
   const index = [
-    { n:"01", k:"O CENÁRIO",      stat:<><b>R$230</b> por cotação · <b>10%</b> de conversão</>,
-      cap:"Como o custo operacional corrói margem." },
-    { n:"02", k:"A SOLUÇÃO",      stat:<><b>4</b> camadas · <b>&lt;3s</b> por decisão</>,
-      cap:"Motor de IA que aprende com cada ciclo." },
-    { n:"03", k:"A EVIDÊNCIA",    stat:<><b>625 → 1.800</b> cotações/mês · <b>−62%</b> custo</>,
-      cap:"Mesma equipe. Tríplice capacidade." },
-    { n:"04", k:"A CLASSIFICAÇÃO", stat:<><b>65 / 25 / 10</b> · auto · assistido · senior</>,
-      cap:"Foco humano onde realmente importa." },
-    { n:"05", k:"O IMPACTO",      stat:<><b>3×</b> capacidade · <b>STP 97%</b></>,
-      cap:"Decisão auditável em cada camada." },
+    { n:"01", k:"O CENÁRIO",      stat:<>Custo por cotação <b>alto</b> · conversão <b>baixa</b></>,
+      cap:"Como o custo operacional corrói margem.", go:"solutions" },
+    { n:"02", k:"OS AGENTES",     stat:<><b>SSA</b> · <b>UCP</b> · <b>XBA</b> · <b>SNB</b></>,
+      cap:"Quatro agentes especializados no ciclo de seguro.", go:"solutions" },
+    { n:"03", k:"A EVIDÊNCIA",    stat:<>Mais volume · <b>menos</b> custo manual</>,
+      cap:"Mesma equipe, capacidade ampliada.", go:"solutions" },
+    { n:"04", k:"A CLASSIFICAÇÃO", stat:<>Auto · assistido · <b>senior</b></>,
+      cap:"Foco humano onde realmente importa.", go:"solutions" },
+    { n:"05", k:"O IMPACTO",      stat:<>Capacidade <b>ampliada</b> · decisão auditável</>,
+      cap:"Straight-through processing como padrão.", go:"about" },
   ];
   return (
     <section className="opening">
@@ -101,8 +181,8 @@ function Opening({ go }) {
             </div>
           </div>
           <div className="opening__hero-R">
-            <div className="opening__caption">· Decisão #AXZ-8472 · live feed</div>
-            <LiveTerminal/>
+            <div className="opening__caption">· Como a WIR transforma dados em decisões</div>
+            <DecisionFlow/>
           </div>
         </div>
 
@@ -111,13 +191,13 @@ function Opening({ go }) {
           <div className="opening__index-head">
             <div className="eyebrow">Nesta edição</div>
             <span className="opening__index-meta">
-              Estudo de caso AXA Transportes · Q1 2026
+              Plataforma WIR · Em produção · Q1 2026
             </span>
           </div>
           <div className="opening__index-grid">
             {index.map((item) => (
               <button key={item.n} className="opening__index-item"
-                onClick={()=>go(item.n === "02" || item.n === "04" ? "solutions" : "home")}>
+                onClick={()=>go(item.go)}>
                 <span className="opening__index-num">/{item.n}</span>
                 <div className="opening__index-body">
                   <div className="opening__index-title">{item.k}</div>

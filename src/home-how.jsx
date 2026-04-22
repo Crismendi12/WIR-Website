@@ -129,10 +129,10 @@ function Trust() {
 }
 
 function Closing({ go }) {
-  const [vol, setVol] = React.useState(5000);
-  const hours = Math.round(vol * 0.35);
-  const costManual = Math.round(vol * 47);
-  const annualSave = Math.round((costManual * 0.78 * 12) / 1000);
+  const [vol, setVol] = React.useState(800);
+  const hours = Math.round(vol * 0.42);
+  const costManual = Math.round(vol * 180);
+  const annualSave = Math.round((costManual * 0.72 * 12) / 1000);
   return (
     <section className="closing" data-reveal>
       <div className="wrap">
@@ -162,10 +162,10 @@ function Closing({ go }) {
               <div className="closing__calc-input">
                 <label>Submissões mensais</label>
                 <div className="closing__calc-val num">{vol.toLocaleString("pt-BR")}</div>
-                <input type="range" min="500" max="50000" step="500"
+                <input type="range" min="100" max="3000" step="50"
                   value={vol} onChange={(e)=>setVol(+e.target.value)}/>
                 <div className="closing__calc-scale">
-                  <span>500</span><span>50.000</span>
+                  <span>100</span><span>3.000</span>
                 </div>
               </div>
               <div className="closing__calc-out">
@@ -182,7 +182,7 @@ function Closing({ go }) {
                   <b className="num">R$ {annualSave.toLocaleString("pt-BR")}k</b>
                 </div>
               </div>
-              <div className="closing__calc-foot">*Estimativa com base em 78% STP · piloto de 90 dias.</div>
+              <div className="closing__calc-foot">*Estimativa ilustrativa · números reais variam por seguradora e produto.</div>
             </div>
           </div>
         </div>

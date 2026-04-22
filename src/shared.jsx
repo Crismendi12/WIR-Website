@@ -112,9 +112,6 @@ function Footer({ go }) {
           <span>Feito entre São Paulo e a Bay Area</span>
         </div>
       </div>
-      <div className="wrap" aria-hidden>
-        <div className="footer__marquee"><em>WIR</em> Innovation.</div>
-      </div>
     </footer>
   );
 }
