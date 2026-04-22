@@ -146,6 +146,33 @@ function AboutTeam() {
 }
 
 function AboutPartners() {
+  // Elegant typographic wordmarks with brand-aligned styling
+  const MahwayMark = () => (
+    <svg className="abpart__mark" viewBox="0 0 280 56" aria-label="Mahway">
+      <defs>
+        <linearGradient id="mahwayGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#3222E9"/>
+          <stop offset="1" stopColor="#7540AC"/>
+        </linearGradient>
+      </defs>
+      <text x="0" y="42" fontFamily="Instrument Serif, serif" fontSize="48"
+        fill="url(#mahwayGrad)" letterSpacing="-1.5">Mahway</text>
+      <rect x="0" y="50" width="180" height="2" fill="url(#mahwayGrad)" opacity="0.4"/>
+    </svg>
+  );
+  const AvanteMark = () => (
+    <svg className="abpart__mark" viewBox="0 0 280 56" aria-label="Avante">
+      <defs>
+        <linearGradient id="avanteGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#FE8B77"/>
+          <stop offset="1" stopColor="#F8AD39"/>
+        </linearGradient>
+      </defs>
+      <text x="0" y="42" fontFamily="Instrument Serif, serif" fontSize="48"
+        fill="url(#avanteGrad)" letterSpacing="-1.5" fontStyle="italic">Avante</text>
+      <rect x="0" y="50" width="140" height="2" fill="url(#avanteGrad)" opacity="0.4"/>
+    </svg>
+  );
   return (
     <section className="abpart" data-reveal>
       <div className="wrap">
@@ -155,23 +182,23 @@ function AboutPartners() {
         </div>
         <div className="abpart__grid">
           <div className="abpart__card">
-            <div className="abpart__logo display">Mahway</div>
+            <MahwayMark/>
             <div className="abpart__tag">Distribuição · Brasil</div>
             <p>Corretora de referência em risco corporativo. Traz a rede comercial e o domínio regulatório local. Parceria estratégica exclusiva em LatAm.</p>
             <div className="abpart__meta">
-              <span>· Fundada 1998</span>
-              <span>· 400+ clientes</span>
-              <span>· R$ 2B em prêmio anual</span>
+              <span>· Décadas de experiência</span>
+              <span>· Carteira robusta corporativa</span>
+              <span>· Referência em risco</span>
             </div>
           </div>
           <div className="abpart__card">
-            <div className="abpart__logo display">Avante</div>
-            <div className="abpart__tag">Engenharia · US</div>
-            <p>Venture studio focado em infra regulada. Aporta a capacidade de engenharia, compliance e go-to-market internacional.</p>
+            <AvanteMark/>
+            <div className="abpart__tag">Engenharia · US · Brasil</div>
+            <p>Venture studio focado em infra regulada. Aporta capacidade de engenharia, compliance e go-to-market internacional. Portfolio em InsurTech e FinTech LatAm.</p>
             <div className="abpart__meta">
-              <span>· Fundado 2020</span>
-              <span>· 12 portfolio companies</span>
-              <span>· $140M AUM</span>
+              <span>· Venture studio</span>
+              <span>· Portfolio em infra regulada</span>
+              <span>· LatAm + US</span>
             </div>
           </div>
         </div>

@@ -302,6 +302,79 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 }
 
 /* ─────────────────────────────────────────
+   01.5 · TRUST BAR (anonymized clients)
+   ───────────────────────────────────────── */
+.trustbar {
+  padding: 48px 0; background: var(--paper-2);
+  border-top: 1px solid rgba(11,10,8,.08);
+  border-bottom: 1px solid rgba(11,10,8,.08);
+}
+.trustbar__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 20px; margin-bottom: 24px;
+  border-bottom: 1px solid rgba(11,10,8,.08);
+  flex-wrap: wrap; gap: 12px;
+}
+.trustbar__note {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-4);
+}
+.trustbar__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.trustbar__cell {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 24px 14px 0;
+  border-right: 1px solid rgba(11,10,8,.08);
+}
+.trustbar__cell:last-child { border-right: none; padding-right: 0; }
+.trustbar__cell:not(:first-child) { padding-left: 24px; }
+.trustbar__cell-body b {
+  display: block; font-family: var(--f-sans); font-size: 14px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.005em;
+}
+.trustbar__cell-body span {
+  display: block; font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3); margin-top: 4px;
+}
+
+/* ─────────────────────────────────────────
+   06.5 · COMPLIANCE BADGES
+   ───────────────────────────────────────── */
+.compliance {
+  padding: 56px 0 72px; background: var(--paper);
+  border-top: 1px solid rgba(11,10,8,.08);
+  border-bottom: 1px solid rgba(11,10,8,.08);
+}
+.compliance__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.compliance__badge {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 8px 24px 8px 0;
+  border-right: 1px solid rgba(11,10,8,.08);
+  color: var(--wir-purple);
+}
+.compliance__badge:last-child { border-right: none; padding-right: 0; }
+.compliance__badge:not(:first-child) { padding-left: 24px; }
+.compliance__badge svg { flex-shrink: 0; margin-top: 2px; }
+.compliance__body { display: flex; flex-direction: column; gap: 4px; }
+.compliance__k {
+  font-family: var(--f-mono); font-size: 13px; font-weight: 600;
+  letter-spacing: .08em; color: var(--ink);
+}
+.compliance__k em {
+  font-style: normal; color: var(--wir-purple); font-weight: 500;
+  margin-left: 6px;
+}
+.compliance__d {
+  font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3); line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────
    02 · PROOF
    ───────────────────────────────────────── */
 .proof { padding: 120px 0; background: var(--paper); }
@@ -857,6 +930,10 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
    ───────────────────────────────────────── */
 @media (max-width: 1080px) {
   .opening__grid, .opening__hero, .closing__grid { grid-template-columns: 1fr; gap: 48px; }
+  .trustbar__grid, .compliance__grid { grid-template-columns: repeat(2, 1fr); row-gap: 24px; }
+  .trustbar__cell:nth-child(2), .compliance__badge:nth-child(2) { border-right: none; padding-right: 0; }
+  .trustbar__cell:nth-child(3), .compliance__badge:nth-child(3) { padding-left: 0; border-top: 1px solid rgba(11,10,8,.08); padding-top: 20px; }
+  .trustbar__cell:nth-child(4), .compliance__badge:nth-child(4) { border-top: 1px solid rgba(11,10,8,.08); padding-top: 20px; }
   .stack__layout { grid-template-columns: 1fr; gap: 32px; }
   .stack__tabs--vertical { position: static; }
   .stack__panel-top { grid-template-columns: 1fr; gap: 20px; }
