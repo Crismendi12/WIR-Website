@@ -120,11 +120,35 @@ function Trust() {
   );
 }
 
+// Pricing model (from AXA proposal): manual baseline R$156/cotação;
+// WIR tiered — R$87 (<=1k), R$61 (1-2k), R$43 (2k+). Time: 2.5h manual avg.
+function wirCostPerQuote(v) {
+  if (v <= 1000) return 87;
+  if (v <= 2000) return 61;
+  return 43;
+}
+function calc(vol) {
+  const manualUnit = 156;
+  const wirUnit = wirCostPerQuote(vol);
+  const costManual = vol * manualUnit;
+  const costWir = vol * wirUnit;
+  const savingsMonth = costManual - costWir;
+  const savingsYear = savingsMonth * 12;
+  const hoursManual = Math.round(vol * 2.5);
+  const ftes = Math.max(1, Math.round((hoursManual / 160) * 10) / 10);
+  const savingsPct = Math.round(((manualUnit - wirUnit) / manualUnit) * 100);
+  return { manualUnit, wirUnit, costManual, costWir, savingsMonth, savingsYear, hoursManual, ftes, savingsPct };
+}
+const BRL = (n) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(n);
+const K = (n) => {
+  if (n >= 1_000_000) return `R$ ${(n/1_000_000).toFixed(1).replace(".",",")}M`;
+  if (n >= 1_000)     return `R$ ${Math.round(n/1_000)}k`;
+  return BRL(n);
+};
+
 function Closing({ go }) {
-  const [vol, setVol] = React.useState(800);
-  const hours = Math.round(vol * 0.42);
-  const costManual = Math.round(vol * 180);
-  const annualSave = Math.round((costManual * 0.72 * 12) / 1000);
+  const [vol, setVol] = React.useState(1200);
+  const r = calc(vol);
   return (
     <section className="closing" data-reveal>
       <div className="wrap">
@@ -149,32 +173,73 @@ function Closing({ go }) {
             </div>
           </div>
           <div className="closing__r">
-            <div className="closing__calc">
-              <div className="closing__calc-k">Calculadora rápida · ROI estimado</div>
-              <div className="closing__calc-input">
-                <label>Submissões mensais</label>
-                <div className="closing__calc-val num">{vol.toLocaleString("pt-BR")}</div>
-                <input type="range" min="100" max="3000" step="50"
-                  value={vol} onChange={(e)=>setVol(+e.target.value)}/>
-                <div className="closing__calc-scale">
-                  <span>100</span><span>3.000</span>
+            <div className="calc">
+              <div className="calc__head">
+                <div>
+                  <div className="calc__eyebrow">· Calculadora · Underwriter vs WIR</div>
+                  <div className="calc__title">Quanto custa<br/><em>seu status quo.</em></div>
+                </div>
+                <div className="calc__pulse" aria-hidden>
+                  <span className="calc__pulse-dot"/>
+                  live · recalcula
                 </div>
               </div>
-              <div className="closing__calc-out">
-                <div className="closing__calc-row">
-                  <span>Horas/mês economizadas</span>
-                  <b className="num">{hours.toLocaleString("pt-BR")}h</b>
+
+              <div className="calc__input">
+                <div className="calc__input-row">
+                  <label>Submissões / mês</label>
+                  <div className="calc__val num">{vol.toLocaleString("pt-BR")}</div>
                 </div>
-                <div className="closing__calc-row">
-                  <span>Custo manual estimado/mês</span>
-                  <b className="num">R$ {Math.round(costManual/1000)}k</b>
-                </div>
-                <div className="closing__calc-row closing__calc-row--hi">
-                  <span>Savings anual com WIR</span>
-                  <b className="num">R$ {annualSave.toLocaleString("pt-BR")}k</b>
+                <input type="range" min="200" max="3000" step="50"
+                  value={vol} onChange={(e)=>setVol(+e.target.value)}
+                  aria-label="Submissões por mês"/>
+                <div className="calc__scale">
+                  <span>200</span><span>1.000</span><span>2.000</span><span>3.000</span>
                 </div>
               </div>
-              <div className="closing__calc-foot">* Estimativa ilustrativa. Resultados reais dependem de apetite, mix de produto e stack atual — calibramos contigo no escopo do piloto.</div>
+
+              <div className="calc__split">
+                <div className="calc__col calc__col--manual">
+                  <div className="calc__col-k">· Sem WIR · fluxo manual</div>
+                  <div className="calc__col-big num">{K(r.costManual)}<small>/mês</small></div>
+                  <div className="calc__col-unit">R$ 156 × cotação · benchmark do setor</div>
+                  <div className="calc__col-rows">
+                    <div><span>Horas/mês em operação</span><b className="num">{r.hoursManual.toLocaleString("pt-BR")}h</b></div>
+                    <div><span>FTEs equivalentes</span><b className="num">~{r.ftes.toString().replace(".",",")} UWs</b></div>
+                    <div><span>Tempo em decisão real</span><b>{"<"} 40%</b></div>
+                  </div>
+                </div>
+
+                <div className="calc__col calc__col--wir">
+                  <div className="calc__col-k">· Com WIR · agentes</div>
+                  <div className="calc__col-big num">{K(r.costWir)}<small>/mês</small></div>
+                  <div className="calc__col-unit">R$ {r.wirUnit} × cotação · tier pelo volume</div>
+                  <div className="calc__col-rows">
+                    <div><span>UWs liberados</span><b>Foco em decisão</b></div>
+                    <div><span>Tempo por cotação</span><b>Minutos</b></div>
+                    <div><span>Trilha auditável</span><b>100%</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="calc__result">
+                <div className="calc__result-row">
+                  <span>Economia mensal</span>
+                  <b className="num">{K(r.savingsMonth)}</b>
+                </div>
+                <div className="calc__result-row calc__result-row--hi">
+                  <span>Economia anual projetada</span>
+                  <b className="num">{K(r.savingsYear)}</b>
+                </div>
+                <div className="calc__result-row calc__result-row--meta">
+                  <span>Redução por cotação</span>
+                  <b>−{r.savingsPct}%</b>
+                </div>
+              </div>
+
+              <div className="calc__foot">
+                * Estimativa ilustrativa usando R$ 156 / cotação como benchmark manual (dado do setor) e a cascata de pricing WIR por volume. Payback real depende de mix de produto, apetite e stack — calibramos no escopo do piloto.
+              </div>
             </div>
           </div>
         </div>

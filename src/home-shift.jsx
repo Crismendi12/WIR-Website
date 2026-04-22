@@ -101,12 +101,11 @@ function ProductTabs({ go }) {
 
           {/* RIGHT — Active agent representation */}
           <div className="stack__panel" style={{"--pc": p.c}} key={p.k}>
-            <div className="stack__panel-top">
-              <div className="stack__vis">
-                <div className="stack__vis-code">{p.k}</div>
-                <div className="stack__vis-bg"/>
+            <div className="stack__panel-head">
+              <div className="stack__panel-badge">
+                <span className="stack__panel-badge-k">{p.k}</span>
               </div>
-              <div className="stack__panel-info">
+              <div className="stack__panel-meta">
                 <div className="stack__tag">{p.tag}</div>
                 <h3 className="display stack__panel-title">{p.title}</h3>
               </div>

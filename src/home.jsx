@@ -1,41 +1,37 @@
 /* ───────── Home · assembler ───────── */
 
-// Trust bar — real partners & founders' background
+// Trust bar — founders' background (Lockton, Aon, JLT, Bain Capital, Pátria, EZZE)
 function TrustBar() {
-  const founderLogos = [
-    { src: "assets/logos/lockton.png",      alt: "Lockton" },
-    { src: "assets/logos/aon.png",          alt: "Aon" },
-    { src: "assets/logos/jlt.png",          alt: "JLT" },
-    { src: "assets/logos/bain-capital.png", alt: "Bain Capital" },
-    { src: "assets/logos/patria.png",       alt: "Pátria Investimentos" },
-    { src: "assets/logos/ezze.png",         alt: "EZZE Seguros" },
+  const logos = [
+    { src: "assets/logos/lockton.png",      alt: "Lockton",              tag: "Broker global · P&C" },
+    { src: "assets/logos/aon.png",          alt: "Aon",                  tag: "Risco corporativo" },
+    { src: "assets/logos/jlt.png",          alt: "JLT",                  tag: "Specialty insurance" },
+    { src: "assets/logos/bain-capital.png", alt: "Bain Capital",         tag: "Private equity" },
+    { src: "assets/logos/patria.png",       alt: "Pátria Investimentos", tag: "Asset management" },
+    { src: "assets/logos/ezze.png",         alt: "EZZE Seguros",         tag: "Seguradora digital" },
   ];
   return (
     <section className="trustbar" data-reveal>
       <div className="wrap">
         <div className="trustbar__head">
-          <div className="eyebrow">· Em produção com</div>
-          <span className="trustbar__note">Piloto ativo · demais clientes sob NDA</span>
+          <div>
+            <div className="eyebrow">· Construído por quem viveu o problema</div>
+            <h2 className="trustbar__title display">
+              Décadas de <em>mercado real</em><br/>
+              dentro da nossa arquitetura.
+            </h2>
+          </div>
+          <p className="trustbar__note">
+            Os fundadores e advisors da WIR vêm de seguradoras, corretoras e casas de investimento que moldaram o setor na última década. A plataforma carrega esse aprendizado em cada decisão que entrega.
+          </p>
         </div>
-        <div className="trustbar__hero">
-          <img src="assets/logos/axa.png" alt="AXA" className="trustbar__axa"/>
-          <div className="trustbar__hero-body">
-            <b>Seguradora global Tier-1</b>
-            <span>Brasil · Transportes · Em piloto</span>
-          </div>
-        </div>
-        <div className="trustbar__founders">
-          <div className="trustbar__founders-head">
-            <span className="eyebrow">· O time vem de</span>
-            <span className="trustbar__note">Experiência acumulada de fundadores e advisors</span>
-          </div>
-          <div className="trustbar__logos">
-            {founderLogos.map((l,i) => (
-              <div key={i} className="trustbar__logo">
-                <img src={l.src} alt={l.alt} title={l.alt}/>
-              </div>
-            ))}
-          </div>
+        <div className="trustbar__logos">
+          {logos.map((l,i) => (
+            <div key={i} className="trustbar__logo">
+              <img src={l.src} alt={l.alt} title={l.alt}/>
+              <span className="trustbar__logo-tag">{l.tag}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
