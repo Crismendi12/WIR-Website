@@ -124,11 +124,11 @@ function SolHero({ go }) {
         <div className="solhero__top">
           <div className="eyebrow">· Soluções</div>
           <h1 className="display solhero__title">
-            Quatro agentes.<br/>
+            Quatro produtos.<br/>
             <em>Um core de decisão.</em>
           </h1>
           <p className="solhero__lede">
-            A WIR não é uma ferramenta — é um stack. Cada agente resolve um movimento do ciclo comercial, operando dentro dos seus sistemas e escrevendo trilha auditável para cada decisão.
+            A WIR não é uma ferramenta — é um stack. Cada solução resolve um movimento do ciclo comercial, operando dentro dos seus sistemas e escrevendo trilha auditável para cada decisão.
           </p>
         </div>
         <div className="solhero__grid">
@@ -321,7 +321,7 @@ function SolClosing({ go }) {
           <div>
             <div className="eyebrow eyebrow--onDark">· Próximo passo</div>
             <h2 className="display solclose__title">
-              Escolha o agente que<br/>
+              Escolha o produto que<br/>
               mais <em>dói hoje</em>.
             </h2>
           </div>

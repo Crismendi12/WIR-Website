@@ -79,8 +79,8 @@ function ProductTabs({ go }) {
       <div className="wrap">
         <div className="stack__head">
           <div className="eyebrow">· 04 — O stack</div>
-          <h2 className="stack__title display">Quatro agentes. <em>Um core de decisão.</em></h2>
-          <p className="stack__sub">A WIR entrega agentes especializados que cobrem todo o ciclo comercial — da geração de lead à emissão de apólice e retenção de carteira.</p>
+          <h2 className="stack__title display">Quatro produtos. <em>Um core de decisão.</em></h2>
+          <p className="stack__sub">A WIR entrega soluções especializadas que cobrem todo o ciclo comercial — da geração de lead à emissão de apólice e retenção de carteira.</p>
         </div>
 
         <div className="stack__layout">

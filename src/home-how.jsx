@@ -226,7 +226,7 @@ function Closing({ go }) {
                 </div>
 
                 <div className="calc__col calc__col--wir">
-                  <div className="calc__col-k">· Com WIR · agentes</div>
+                  <div className="calc__col-k">· Com WIR · produtos</div>
                   <div className="calc__col-big num">{K(r.costWir)}<small>/mês</small></div>
                   <div className="calc__col-unit">R$ {r.wirUnit} × cotação · {r.tier.k} pelo volume</div>
                   <div className="calc__col-rows">

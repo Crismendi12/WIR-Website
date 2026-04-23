@@ -9,11 +9,11 @@ function DecisionFlow() {
   }, []);
 
   const stages = [
-    { k: "INTAKE",  sub: "e-mail · PDF · API" },
-    { k: "ENRICH",  sub: "CNPJ · histórico" },
-    { k: "SCORE",   sub: "modelo WIR" },
-    { k: "DECIDE",  sub: "HITL · auditável" },
-    { k: "WRITE",   sub: "core · apólice" },
+    { k: "RECEBER",    sub: "e-mail · anexos · API" },
+    { k: "ENRIQUECER", sub: "CNPJ · histórico" },
+    { k: "PONTUAR",    sub: "modelo WIR" },
+    { k: "DECIDIR",    sub: "supervisão humana" },
+    { k: "SUBSCREVER", sub: "core · apólice" },
   ];
 
   return (
@@ -21,11 +21,11 @@ function DecisionFlow() {
       <div className="dflow__head">
         <div className="dflow__title">
           <span className="dflow__title-k">Fluxo de decisão</span>
-          <span className="dflow__title-v">wir.agents</span>
+          <span className="dflow__title-v">wir.produtos</span>
         </div>
         <div className="dflow__status">
           <span className="dflow__dot"/>
-          live · aprendendo
+          ao vivo · aprendendo
         </div>
       </div>
 
@@ -46,7 +46,7 @@ function DecisionFlow() {
         </defs>
 
         {/* Source nodes (left, 3 stacked) */}
-        {[{y:80,l:"e-mail"},{y:170,l:"PDF"},{y:260,l:"API"}].map((s,i) => (
+        {[{y:80,l:"e-mail"},{y:170,l:"anexos"},{y:260,l:"API"}].map((s,i) => (
           <g key={i}>
             <circle cx="50" cy={s.y} r="8" fill="#E9E3D7" stroke="#7540AC" strokeWidth="1.5"/>
             <text x="30" y={s.y + 4} fill="#8A8374" fontSize="10"
@@ -94,7 +94,7 @@ function DecisionFlow() {
         <path d="M400 170 Q 440 170, 450 80" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
         <path d="M400 170 Q 440 170, 450 260" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
 
-        {[{y:80,l:"apólice",c:"#F8AD39"},{y:260,l:"audit trail",c:"#7540AC"}].map((o,i) => (
+        {[{y:80,l:"apólice",c:"#F8AD39"},{y:260,l:"trilha",c:"#7540AC"}].map((o,i) => (
           <g key={i}>
             <rect x="435" y={o.y - 10} width="35" height="20" rx="4"
               fill={o.c} fillOpacity="0.15"
@@ -113,14 +113,14 @@ function DecisionFlow() {
         <text x="250" y="310" fill="#FE8B77"
           fontSize="9" fontFamily="JetBrains Mono, monospace"
           textAnchor="middle" letterSpacing="1.5" fillOpacity="0.75">
-          · feedback loop · aprendizado contínuo ·
+          · ciclo de aprendizado contínuo ·
         </text>
       </svg>
 
       <div className="dflow__foot">
         <span>Dados</span>
         <span className="dflow__arrow">→</span>
-        <span>Agentes</span>
+        <span>Produtos WIR</span>
         <span className="dflow__arrow">→</span>
         <span>Decisão auditável</span>
       </div>
@@ -130,16 +130,16 @@ function DecisionFlow() {
 
 function Opening({ go }) {
   const index = [
-    { n:"01", k:"O CENÁRIO",      stat:<>Custo por cotação <b>alto</b> · conversão <b>baixa</b></>,
+    { n:"01", k:"O DESAFIO",       stat:<>Custo por cotação <b>alto</b> · conversão <b>baixa</b></>,
       cap:"Como o custo operacional corrói margem.", go:"solutions" },
-    { n:"02", k:"OS AGENTES",     stat:<><b>SSA</b> · <b>UCP</b> · <b>XBA</b> · <b>SNB</b></>,
-      cap:"Quatro agentes especializados no ciclo de seguro.", go:"solutions" },
-    { n:"03", k:"A EVIDÊNCIA",    stat:<>Mais volume · <b>menos</b> custo manual</>,
+    { n:"02", k:"OS PRODUTOS",     stat:<><b>SSA</b> · <b>UCP</b> · <b>XBA</b> · <b>SNB</b></>,
+      cap:"Quatro produtos especializados no ciclo de seguro.", go:"solutions" },
+    { n:"03", k:"A EVIDÊNCIA",     stat:<>Mais volume · <b>menos</b> custo manual</>,
       cap:"Mesma equipe, capacidade ampliada.", go:"solutions" },
-    { n:"04", k:"A CLASSIFICAÇÃO", stat:<>Auto · assistido · <b>senior</b></>,
+    { n:"04", k:"A CLASSIFICAÇÃO", stat:<>Automático · assistido · <b>sênior</b></>,
       cap:"Foco humano onde realmente importa.", go:"solutions" },
-    { n:"05", k:"O IMPACTO",      stat:<>Capacidade <b>ampliada</b> · decisão auditável</>,
-      cap:"Straight-through processing como padrão.", go:"about" },
+    { n:"05", k:"O IMPACTO",       stat:<>Capacidade <b>ampliada</b> · decisão auditável</>,
+      cap:"Subscrição contínua como padrão.", go:"about" },
   ];
   return (
     <section className="opening">
@@ -161,15 +161,15 @@ function Opening({ go }) {
           <div className="opening__hero-L">
             <div className="opening__kicker">
               <span className="opening__kicker-dot"/>
-              <span>Em piloto com seguradora global · Brasil</span>
+              <span>Infraestrutura em produção · decisão 24/7</span>
             </div>
             <h1 className="display opening__title">
-              A camada<br/>
-              de <em>inteligência</em><br/>
+              A camada de<br/>
+              <em>inteligência</em><br/>
               do seguro.
             </h1>
             <p className="opening__lede">
-              Automatize subscrição, sinistros, pricing e compliance com agentes de IA — sem substituir seus sistemas atuais.
+              A nova era de seguros é <b>inteligência de dados, velocidade e escala</b>. A WIR entrega essa infraestrutura dentro dos sistemas que você já opera — sem substituir o seu core.
             </p>
             <div className="opening__actions">
               <button className="btn btn--solid" onClick={()=>go("contact")}>

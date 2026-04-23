@@ -42,7 +42,7 @@ function AboutEssay() {
   const paragraphs = [
     { k: "A tese", text: "O mercado de Seguros e Danos cresce dois dígitos ao ano. A estrutura das seguradoras, não. Corretoras emitem PDFs. Underwriters rabiscam planilhas. Comitês se reúnem para decidir sobre riscos que o cliente já esqueceu. A fricção é tão grande que virou aceitável — e é exatamente essa normalização que cria espaço para uma nova camada." },
     { k: "A decisão", text: "No começo de 2026, depois de quase duas décadas operando dentro de seguradoras e corretoras de Tier-1, decidimos parar de reclamar da infraestrutura e construir uma nova. Não um SaaS a mais. Não um chatbot. Uma camada de decisão auditável que opera dentro dos sistemas que já existem e devolve, em minutos, o que antes levava semanas." },
-    { k: "O método", text: "Contratamos quem já viveu o problema — operadores, subscritores, atuários — e os sentamos ao lado de engenheiros de ML que vieram de fintech e de logística. A combinação é pouco comum no setor, mas é o que permite construir agentes que funcionam em produção, não em slide." },
+    { k: "O método", text: "Contratamos quem já viveu o problema — operadores, subscritores, atuários — e os sentamos ao lado de engenheiros de ML que vieram de fintech e de logística. A combinação é pouco comum no setor, mas é o que permite construir produtos que funcionam em produção, não em slide." },
     { k: "A promessa", text: "Seguro é, no fim, um contrato sobre decisões difíceis tomadas sob pressão. O papel da WIR não é remover o humano do processo — é devolver ao humano o que só ele pode fazer: julgamento. Tudo o mais — intake, enriquecimento, scoring, escrita — deve ser automático, auditável e rápido o suficiente para que a decisão chegue enquanto o cliente ainda está ouvindo." },
   ];
   return (
@@ -79,7 +79,7 @@ function AboutTimeline() {
     { y: "2015", t: "O encontro", d: "Nicholas e José Carlos se cruzam em um projeto de automação de subscrição comercial em NY — e descobrem que compartilham a mesma frustração com a infraestrutura do setor." },
     { y: "2020", t: "A hipótese", d: "COVID acelera a digitalização forçada. Seguradoras aceitam automação como sobrevivência. O cenário regulatório começa a se abrir para parcerias de infraestrutura." },
     { y: "2024", t: "O caminho", d: "Os fundadores decidem que a próxima etapa não é consultoria nem mais um SaaS — é construir a camada de infraestrutura que o setor nunca teve." },
-    { y: "2026 · Q1", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a WIR entre São Paulo e a Bay Area, com apoio da Avante (venture studio) e parceria de distribuição da Mahway (venture builder nos EUA)." },
+    { y: "2026 · Q1", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a WIR entre São Paulo e San Francisco, com apoio da Avante (venture studio) e parceria de distribuição da Mahway (venture builder nos EUA)." },
     { y: "2026 · Q2", t: "Primeiro POC", d: "Primeiro POC entra em execução com seguradora global no Brasil, no ramo de Transportes. Ciclos de cotação que viviam em semanas passam a viver em minutos." },
     { y: "2026", t: "Hoje", d: "Equipe completa em operação — Head of AI, Chief of Staff e Sr. Underwriter já a bordo. Expansão da plataforma para Riscos de Engenharia em avaliação." },
   ];
@@ -110,7 +110,7 @@ function AboutTimeline() {
 
 function AboutTeam() {
   const folks = [
-    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Carreira construída em seguradoras e corretoras Tier-1, liderando transformação de subscrição comercial entre LatAm e US. Apaixonado pela intersecção entre ofício do underwriter e decisão algorítmica.", loc:"São Paulo · Bay Area", photo:"assets/team/nicholas.jpg" },
+    { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Carreira construída em seguradoras e corretoras Tier-1, liderando transformação de subscrição comercial entre LatAm e US. Apaixonado pela intersecção entre ofício do underwriter e decisão algorítmica.", loc:"São Paulo · San Francisco", photo:"assets/team/nicholas.jpg" },
     { name:"José Carlos de Paula", role:"CSO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora resolve o problema do lado certo: o da infraestrutura.", loc:"São Paulo", photo:"assets/team/jose-carlos.jpg" },
   ];
   const crew = [
@@ -260,7 +260,7 @@ function AboutValues() {
 function AboutFAQ() {
   const qs = [
     { q:"Quanto tempo até a primeira decisão em produção?",
-      a:"2 a 4 semanas para o primeiro agente em piloto dentro do seu ambiente, com conectores prontos para Guidewire, Duck Creek e Majesco. Escalada para produção plena costuma acontecer no trimestre seguinte." },
+      a:"2 a 4 semanas para o primeiro produto em execução dentro do seu ambiente, com conectores prontos para Guidewire, Duck Creek e Majesco. Escalada para produção plena costuma acontecer no trimestre seguinte." },
     { q:"A WIR substitui meu core de apólices?",
       a:"Não. A WIR é uma camada de decisão — escuta inputs, aplica regras e modelos, e devolve resultados estruturados ao seu core via REST ou GraphQL. O sistema de registro continua sendo o seu." },
     { q:"Como a supervisão humana e a auditoria funcionam?",
@@ -312,7 +312,7 @@ function AboutClose({ go }) {
             Estamos <em>contratando.</em>
           </h2>
           <p className="abclose__lede">
-            Engineering, ML, delivery e GTM. Posições remotas, SP, NYC e Bay Area. Se você já operou seguro por dentro ou construiu infra regulada em outro setor — temos cadeira aberta.
+            Engineering, ML, delivery e GTM. Posições remotas, SP, NYC e San Francisco. Se você já operou seguro por dentro ou construiu infra regulada em outro setor — temos cadeira aberta.
           </p>
           <div className="abclose__actions">
             <a className="btn btn--solid btn--onDark" href="#" onClick={(e)=>e.preventDefault()}>

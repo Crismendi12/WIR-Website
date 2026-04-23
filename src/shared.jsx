@@ -77,7 +77,7 @@ function Footer({ go }) {
         <div className="footer__grid">
           <div>
             <Wordmark variant="white"/>
-            <p className="footer__brand-desc">Infraestrutura de IA para o mercado segurador. Automatize subscrição, sinistros, pricing e compliance sem substituir seus sistemas.</p>
+            <p className="footer__brand-desc">A nova era de seguros é inteligência de dados, velocidade e escala. A WIR entrega essa infraestrutura dentro dos sistemas que você já opera.</p>
           </div>
           <div>
             <h4>Produto</h4>
@@ -109,7 +109,7 @@ function Footer({ go }) {
         </div>
         <div className="footer__bot">
           <span>© 2026 WIR Innovation</span>
-          <span>Feito entre São Paulo e a Bay Area</span>
+          <span>Feito entre São Paulo e San Francisco</span>
         </div>
       </div>
     </footer>

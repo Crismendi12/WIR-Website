@@ -16,14 +16,14 @@ function TrustBar() {
       <div className="wrap">
         <div className="trustbar__head">
           <div>
-            <div className="eyebrow">· Construído por quem viveu o problema</div>
+            <div className="eyebrow">· De dentro do setor · para dentro do setor</div>
             <h2 className="trustbar__title display">
-              Décadas de <em>mercado real</em><br/>
-              dentro da nossa arquitetura.
+              Décadas operando o mercado.<br/>
+              Agora <em>virando infraestrutura.</em>
             </h2>
           </div>
           <p className="trustbar__note">
-            Os fundadores e advisors da WIR vêm de seguradoras, corretoras e casas de investimento que moldaram o setor na última década. A plataforma carrega esse aprendizado em cada decisão que entrega.
+            Os fundadores, advisors e parceiros da WIR construíram carreira dentro de bancos globais, seguradoras Tier-1, corretoras internacionais e casas de investimento. Essa experiência vive hoje no núcleo da plataforma — não como referência, como arquitetura.
           </p>
         </div>
         <div className="trustbar__logos">

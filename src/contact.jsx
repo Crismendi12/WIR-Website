@@ -9,7 +9,7 @@ function ContactClocks() {
   const offices = [
     { city:"São Paulo",   tz:"America/Sao_Paulo",  addr:"Av. Faria Lima, 3500 · 18º" },
     { city:"New York",    tz:"America/New_York",   addr:"345 Park Avenue · 32nd Fl" },
-    { city:"Bay Area",    tz:"America/Los_Angeles",addr:"401 Hamilton · Palo Alto"   },
+    { city:"San Francisco", tz:"America/Los_Angeles", addr:"Financial District"       },
   ];
   const fmt = (tz) => {
     try {
@@ -135,7 +135,7 @@ function ContactForm() {
 
         {step === 0 && (
           <div className="ctform__panel">
-            <h2 className="display ctform__panel-title">Por qual agente <em>você começaria?</em></h2>
+            <h2 className="display ctform__panel-title">Por qual produto <em>você começaria?</em></h2>
             <div className="ctform__options">
               {interests.map(x => (
                 <button key={x.k}
