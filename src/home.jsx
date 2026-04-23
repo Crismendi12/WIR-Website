@@ -3,6 +3,7 @@
 // Trust bar — founders' background (Lockton, Aon, JLT, Bain Capital, Pátria, EZZE)
 function TrustBar() {
   const logos = [
+    { src: "assets/logos/santander.svg",    alt: "Banco Santander",      tag: "Banking global" },
     { src: "assets/logos/lockton.png",      alt: "Lockton",              tag: "Broker global · P&C" },
     { src: "assets/logos/aon.png",          alt: "Aon",                  tag: "Risco corporativo" },
     { src: "assets/logos/jlt.png",          alt: "JLT",                  tag: "Specialty insurance" },
@@ -76,7 +77,7 @@ function ComplianceBadges() {
     { k: "LGPD",  v: "Conforme",    desc: "Proteção de dados pessoais (BR)" },
     { k: "SOC 2", v: "Em processo", desc: "Arquitetura e controles prontos" },
     { k: "HIPAA", v: "Alinhado",    desc: "Privacidade em saúde (US)" },
-    { k: "ISO",   v: "27001 ready", desc: "Base de gestão de segurança" },
+    { k: "ISO",   v: "27001 em processo", desc: "Base de gestão de segurança" },
   ];
   const Shield = ({ color }) => (
     <svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden>

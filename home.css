@@ -440,7 +440,7 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   padding-bottom: 8px;
 }
 .trustbar__logos {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 0;
   border-left: 1px solid rgba(11,10,8,.08);
   border-top: 1px solid rgba(11,10,8,.08);
   border-radius: 10px; overflow: hidden;
@@ -1342,8 +1342,8 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   .compliance__badge:nth-child(3) { padding-left: 0; border-top: 1px solid rgba(11,10,8,.08); padding-top: 20px; }
   .compliance__badge:nth-child(4) { border-top: 1px solid rgba(11,10,8,.08); padding-top: 20px; }
   .trustbar__head { grid-template-columns: 1fr; gap: 28px; align-items: start; }
-  .trustbar__logos { grid-template-columns: repeat(3, 1fr); }
-  .trustbar__logo:nth-child(3n) { border-right: none; }
+  .trustbar__logos { grid-template-columns: repeat(4, 1fr); }
+  .trustbar__logo:nth-child(4n) { border-right: none; }
   .stack__panel-body { grid-template-columns: 1fr; gap: 28px; }
   .stack__panel { padding: 40px 32px 36px; }
   .stack__tabs--row { grid-template-columns: repeat(2, 1fr); }

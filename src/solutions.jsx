@@ -278,19 +278,18 @@ function SolIntegrations() {
 
 function SolPricing({ go }) {
   const plans = [
-    { k:"Pilot", tag:"4 semanas", price:"Gratuito", desc:"Piloto com 1 módulo dentro do seu ambiente. Sem custo de implementação, escopo fechado, KPIs acordados.", features:["1 módulo WIR","Até 1.000 decisões","Conector pronto","Acompanhamento semanal","Relatório executivo final"], cta:"Agendar pilot", hi:false },
-    { k:"Scale", tag:"Produção", price:"Por volume", desc:"Operação em produção com pricing decrescente por volume de decisões. SLA de uptime e suporte dedicado.", features:["Todos os 4 módulos","Volume ilimitado","SLA 99.95%","Suporte dedicado","Customizações de modelo","Treinamento para equipes"], cta:"Falar com vendas", hi:true },
-    { k:"Enterprise", tag:"Customizado", price:"On demand", desc:"Deploy on-premise ou private cloud, SLA customizado, modelos proprietários e integrações sob medida.", features:["On-prem / Private cloud","Modelos proprietários","SLA customizado","Equipe de delivery","Compliance auditada","Carreira técnica dedicada"], cta:"Conversar com C-level", hi:false },
+    { k:"Implementação", tag:"Setup único · 3 a 6 meses", price:"Projeto", desc:"Build do módulo dentro do seu ambiente: integração, testes, ajustes ao apetite e go-live. Preço fechado, escopo claro, KPIs acordados antes de começar.", features:["1 a 2 módulos em produção","Integração com seu core (Guidewire, Duck Creek, Majesco)","Motor calibrado ao seu manual de subscrição","Treinamento do time de UW e TI","Relatório executivo + handoff técnico"], cta:"Conversar sobre escopo", hi:false },
+    { k:"SaaS", tag:"Operação contínua · pós go-live", price:"Por decisão processada", desc:"Operação em produção depois do go-live. Preço unitário decrescente por volume — quanto mais decisões, menos custa cada uma. Sem taxa fixa, sem surprise billing.", features:["Todos os módulos ativos","Pricing tierizado por volume","SLA de uptime e latência","Suporte dedicado + observabilidade","Customizações de modelo contínuas","Treinamento recorrente"], cta:"Ver pricing por volume", hi:true },
   ];
   return (
     <section className="solprice" data-reveal>
       <div className="wrap">
         <div className="solprice__head">
           <div className="eyebrow">· 06 — Pricing</div>
-          <h2 className="display solprice__title">Transparente.<br/><em>Baseado em decisões.</em></h2>
-          <p className="solprice__sub">Cobramos pelo que você usa — volume de decisões processadas — com preço unitário decrescente por escala. Sem setup, sem surprise billing.</p>
+          <h2 className="display solprice__title">Duas fases.<br/><em>Uma parceria de longo prazo.</em></h2>
+          <p className="solprice__sub">Construímos primeiro, cobrimos por uso depois. Sem free pilot — projeto tem escopo, deadline e custo acordados antes de começar. Quando o módulo está em produção, o SaaS cobra por volume de decisões.</p>
         </div>
-        <div className="solprice__grid">
+        <div className="solprice__grid solprice__grid--2">
           {plans.map((p,i) => (
             <div key={p.k} className={"solprice__plan" + (p.hi ? " is-hi" : "")}>
               <div className="solprice__plan-tag">{p.tag}</div>
@@ -327,7 +326,7 @@ function SolClosing({ go }) {
             </h2>
           </div>
           <div className="solclose__r">
-            <p>Piloto gratuito de 4 semanas com 1 módulo dentro do seu ambiente. Escopo fechado, KPIs acordados, relatório executivo ao final.</p>
+            <p>Começamos com um projeto de implementação — 3 a 6 meses, escopo e preço fechados, 1 ou 2 módulos em produção dentro do seu ambiente. Depois do go-live, a operação vira SaaS por volume de decisões.</p>
             <div className="solclose__actions">
               <button className="btn btn--solid btn--onDark" onClick={()=>go("contact")}>
                 Agendar conversa <span className="btn__arrow">→</span>

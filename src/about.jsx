@@ -41,7 +41,7 @@ function AboutHero() {
 function AboutEssay() {
   const paragraphs = [
     { k: "A tese", text: "O mercado de Seguros e Danos cresce dois dígitos ao ano. A estrutura das seguradoras, não. Corretoras emitem PDFs. Underwriters rabiscam planilhas. Comitês se reúnem para decidir sobre riscos que o cliente já esqueceu. A fricção é tão grande que virou aceitável — e é exatamente essa normalização que cria espaço para uma nova camada." },
-    { k: "A decisão", text: "Em 2024, depois de quase duas décadas operando dentro de seguradoras e corretoras de Tier-1, decidimos parar de reclamar da infraestrutura e construir uma nova. Não um SaaS a mais. Não um chatbot. Uma camada de decisão auditável que opera dentro dos sistemas que já existem e devolve, em segundos, o que antes levava semanas." },
+    { k: "A decisão", text: "No começo de 2026, depois de quase duas décadas operando dentro de seguradoras e corretoras de Tier-1, decidimos parar de reclamar da infraestrutura e construir uma nova. Não um SaaS a mais. Não um chatbot. Uma camada de decisão auditável que opera dentro dos sistemas que já existem e devolve, em minutos, o que antes levava semanas." },
     { k: "O método", text: "Contratamos quem já viveu o problema — operadores, subscritores, atuários — e os sentamos ao lado de engenheiros de ML que vieram de fintech e de logística. A combinação é pouco comum no setor, mas é o que permite construir agentes que funcionam em produção, não em slide." },
     { k: "A promessa", text: "Seguro é, no fim, um contrato sobre decisões difíceis tomadas sob pressão. O papel da WIR não é remover o humano do processo — é devolver ao humano o que só ele pode fazer: julgamento. Tudo o mais — intake, enriquecimento, scoring, escrita — deve ser automático, auditável e rápido o suficiente para que a decisão chegue enquanto o cliente ainda está ouvindo." },
   ];
@@ -75,12 +75,13 @@ function AboutEssay() {
 
 function AboutTimeline() {
   const events = [
-    { y: "2005", t: "Primeiros passos", d: "Fundadores começam carreiras em seguradoras e corretoras globais, liderando projetos de transformação digital em mercados maduros." },
-    { y: "2015", t: "O encontro", d: "Os futuros co-founders se cruzam em um projeto de automação de subscrição comercial em NY — e descobrem que compartilham a mesma frustração." },
-    { y: "2020", t: "A hipótese", d: "COVID acelera a digitalização forçada. Seguradoras aceitam automação como sobrevivência. O cenário regulatório começa a se abrir." },
-    { y: "2024", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a empresa entre São Paulo e a Bay Area. Primeiros engineering hires vêm de fintech, logística e ML aplicado." },
-    { y: "2025", t: "Primeiro piloto", d: "Primeira seguradora entra em produção com o UCP. Ciclos de cotação que viviam em semanas passam a viver em minutos." },
-    { y: "2026", t: "Hoje", d: "Plataforma em produção entre Brasil e LatAm, com ampliação do catálogo de agentes e expansão em avaliação para mercados de língua inglesa." },
+    { y: "2005", t: "Primeiros passos", d: "Os futuros co-founders constroem carreiras em seguradoras e corretoras globais, liderando projetos de transformação digital em mercados maduros." },
+    { y: "2015", t: "O encontro", d: "Nicholas e José Carlos se cruzam em um projeto de automação de subscrição comercial em NY — e descobrem que compartilham a mesma frustração com a infraestrutura do setor." },
+    { y: "2020", t: "A hipótese", d: "COVID acelera a digitalização forçada. Seguradoras aceitam automação como sobrevivência. O cenário regulatório começa a se abrir para parcerias de infraestrutura." },
+    { y: "2024", t: "O caminho", d: "Os fundadores decidem que a próxima etapa não é consultoria nem mais um SaaS — é construir a camada de infraestrutura que o setor nunca teve." },
+    { y: "2026 · Q1", t: "WIR é fundada", d: "Nicholas Weiser e José Carlos de Paula fundam a WIR entre São Paulo e a Bay Area, com apoio da Avante (venture studio) e parceria de distribuição da Mahway (venture builder nos EUA)." },
+    { y: "2026 · Q2", t: "Primeiro POC", d: "Primeiro POC entra em execução com seguradora global no Brasil, no ramo de Transportes. Ciclos de cotação que viviam em semanas passam a viver em minutos." },
+    { y: "2026", t: "Hoje", d: "Equipe completa em operação — Head of AI, Chief of Staff e Sr. Underwriter já a bordo. Expansão da plataforma para Riscos de Engenharia em avaliação." },
   ];
   return (
     <section className="abtime" data-reveal>
@@ -112,11 +113,11 @@ function AboutTeam() {
     { name:"Nicholas Weiser", role:"CEO · Co-Founder", bio:"Carreira construída em seguradoras e corretoras Tier-1, liderando transformação de subscrição comercial entre LatAm e US. Apaixonado pela intersecção entre ofício do underwriter e decisão algorítmica.", loc:"São Paulo · Bay Area", photo:"assets/team/nicholas.jpg" },
     { name:"José Carlos de Paula", role:"CSO · Co-Founder", bio:"Estratégia e operações. Viveu o desafio de escalar underwriting dentro de estruturas tradicionais — agora resolve o problema do lado certo: o da infraestrutura.", loc:"São Paulo", photo:"assets/team/jose-carlos.jpg" },
   ];
-  const roles = [
-    { k:"AI", t:"Head of AI",         d:"ML para decisão regulada · fairness · explainability." },
-    { k:"CS", t:"Head of Delivery",   d:"Deploys em seguradoras · do kickoff ao primeiro quote em produção." },
-    { k:"UW", t:"Sr. Underwriter",    d:"Tradução de apetite em regras e fatores — dentro do motor WIR." },
-    { k:"SE", t:"Staff Engineer",     d:"Arquitetura de infra regulada · Guidewire · Duck Creek · event-driven." },
+  const crew = [
+    { k:"AI",  t:"Head of AI",       d:"Lidera o core de ML — modelos de risco, fairness e explainability em decisão regulada." },
+    { k:"COS", t:"Chief of Staff",   d:"Operações, delivery e governança executiva entre times de produto, engenharia e clientes." },
+    { k:"UW",  t:"Sr. Underwriter",  d:"Tradução de apetite em regras e fatores — dentro do motor WIR, ao lado dos subscritores do cliente." },
+    { k:"ENG", t:"Engenharia",       d:"Infra regulada, integrações com core systems e observabilidade em produção." },
   ];
   return (
     <section className="abteam" data-reveal>
@@ -144,11 +145,11 @@ function AboutTeam() {
 
         <div className="abteam__open">
           <div className="abteam__open-head">
-            <span className="eyebrow">· Posições em aberto</span>
-            <span className="abteam__open-note">Estamos contratando · envie currículo para <b>jobs@wir.innovation</b></span>
+            <span className="eyebrow">· Time operacional</span>
+            <span className="abteam__open-note">Equipe completa para deploy do primeiro POC</span>
           </div>
           <div className="abteam__open-grid">
-            {roles.map((r,i) => (
+            {crew.map((r,i) => (
               <div key={i} className="abteam__open-cell">
                 <div className="abteam__open-k">/{r.k}</div>
                 <div className="abteam__open-t">{r.t}</div>
@@ -200,22 +201,24 @@ function AboutPartners() {
         <div className="abpart__grid">
           <div className="abpart__card">
             <MahwayMark/>
-            <div className="abpart__tag">Distribuição · Brasil</div>
-            <p>Corretora de referência em risco corporativo. Traz a rede comercial e o domínio regulatório local. Parceria estratégica exclusiva em LatAm.</p>
+            <div className="abpart__tag">Venture builder · Estados Unidos</div>
+            <p>Venture builder com presença em Los Angeles, San Francisco e Nova York, com foco em serviços AI-first. Aporta capacidade de go-to-market, capital e a tese comercial que abre portas no mercado norte-americano.</p>
             <div className="abpart__meta">
-              <span>· Décadas de experiência</span>
-              <span>· Carteira robusta corporativa</span>
-              <span>· Referência em risco</span>
+              <span>· Los Angeles</span>
+              <span>· San Francisco</span>
+              <span>· New York</span>
+              <span>· AI-first services</span>
             </div>
           </div>
           <div className="abpart__card">
             <AvanteMark/>
-            <div className="abpart__tag">Engenharia · US · Brasil</div>
-            <p>Venture studio focado em infra regulada. Aporta capacidade de engenharia, compliance e go-to-market internacional. Portfolio em InsurTech e FinTech LatAm.</p>
+            <div className="abpart__tag">Venture studio · Brasil</div>
+            <p>Venture studio com portfolio em InsurTech, legal claims e soluções de serviços orientadas por IA. Aporta capacidade de engenharia, governança regulatória e operação dentro do mercado LatAm.</p>
             <div className="abpart__meta">
-              <span>· Venture studio</span>
-              <span>· Portfolio em infra regulada</span>
-              <span>· LatAm + US</span>
+              <span>· InsurTech</span>
+              <span>· Legal claims</span>
+              <span>· Service-driven AI-first</span>
+              <span>· Brazil</span>
             </div>
           </div>
         </div>

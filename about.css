@@ -63,11 +63,11 @@
 
 /* ── abteam ── */
 .abteam { padding: 140px 0; background: var(--paper-2); border-top: 1px solid rgba(11,10,8,.08); border-bottom: 1px solid rgba(11,10,8,.08); }
-.abteam__head { max-width: 900px; margin-bottom: 64px; }
+.abteam__head { max-width: 900px; margin: 0 auto 64px; text-align: center; }
 .abteam__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(56px, 7vw, 100px); line-height: 1; letter-spacing: -0.025em; margin: 24px 0; color: var(--ink); }
 .abteam__title em { font-style: italic; color: var(--ink-3); }
 .abteam__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-.abteam__grid--2 { grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 960px; }
+.abteam__grid--2 { grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 960px; margin: 0 auto; }
 .abteam__grid--2 .abteam__photo { aspect-ratio: 4/3; }
 .abteam__grid--2 .abteam__body { padding: 32px 32px 36px; }
 .abteam__grid--2 .abteam__name { font-size: 36px; }
