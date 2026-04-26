@@ -147,7 +147,7 @@ function Opening({ go }) {
             <span>INFRAESTRUTURA DE IA · SEGUROS</span>
           </div>
           <div className="opening__mast-R">
-            <span>SÃO PAULO ⟶ BAY AREA</span>
+            <span>SÃO PAULO ⟶ SILICON VALLEY</span>
             <span className="opening__mast-lang"><em>PT</em> · EN · ES</span>
           </div>
         </div>
