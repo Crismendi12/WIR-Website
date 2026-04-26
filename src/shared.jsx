@@ -121,7 +121,7 @@ function Footer({ go }) {
         </div>
         <div className="footer__bot">
           <span>© 2026 WIR Innovation</span>
-          <span>wirinnovation.ai · Feito entre São Paulo e San Francisco</span>
+          <span>wirinnovation.ai · Feito entre São Paulo e Silicon Valley</span>
         </div>
       </div>
     </footer>

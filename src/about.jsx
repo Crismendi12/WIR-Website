@@ -79,7 +79,7 @@ function AboutTimeline() {
     { k:"Origem",   y:"+ 30 anos",         t:"De experiência somada",
       d:"Sócios C-Level de seguradoras e corretoras Tier-1, fundos de Private Equity e Venture Builder global. A WIR não nasceu como um experimento — nasceu da experiência operacional acumulada." },
     { k:"Fundação", y:"2026",              t:"WIR é fundada · POC em execução",
-      d:"Founders se unem entre São Paulo e San Francisco com Mahway (Venture Builder · California) e Avante (Venture Studio · Brasil). Primeiro POC com seguradora global no ramo de Transportes." },
+      d:"Founders se unem entre São Paulo e Silicon Valley com Mahway (Venture Builder · California) e Avante (Venture Studio · Brasil). Primeiro POC com seguradora global no ramo de Transportes." },
     { k:"Ambição",  y:"+ Próxima década",  t:"A camada de IA do seguro brasileiro",
       d:"Construímos a plataforma de IA que o mercado segurador nunca teve — para que executar inovação não seja uma exceção, mas a operação padrão das seguradoras Tier-1 da região." },
   ];
@@ -108,7 +108,7 @@ function AboutTimeline() {
 function AboutTeam() {
   const founders = [
     { name:"Nicholas Weiser", role:"CEO · Co-Founder",
-      photo:"assets/team/nicholas.jpg", loc:"São Paulo · San Francisco",
+      photo:"assets/team/nicholas.jpg", loc:"São Paulo · Silicon Valley",
       bullets:[
         "Empreendedor e investidor em 5 startups de sucesso",
         "27 anos de experiência em empresas nacionais e globais",
@@ -255,7 +255,7 @@ function AboutTechIA() {
         </div>
 
         <div className="abtech__foot">
-          A combinação <b>WIR (expertise em seguros) + Avante (governança) + Mahway (Tech & IA global)</b> é o que nos posiciona em outro patamar — entregamos infraestrutura segurança operacional com a velocidade de uma startup nativa em IA.
+          A combinação <b>WIR (expertise em seguros) + Avante (governança) + Mahway (Tech & IA global)</b> é o que nos posiciona em outro patamar — entregamos plataforma enterprise, segurança operacional e velocidade de startup nativa em IA, em um único parceiro.
         </div>
       </div>
     </section>
@@ -400,7 +400,7 @@ function AboutClose({ go }) {
             Estamos <em>contratando.</em>
           </h2>
           <p className="abclose__lede">
-            Engineering, ML, delivery e GTM. Posições remotas, SP, NYC e San Francisco. Se você já operou seguro por dentro ou construiu infra regulada em outro setor — temos cadeira aberta.
+            Engineering, ML, delivery e GTM. Posições remotas, SP, NYC e Silicon Valley. Se você já operou seguro por dentro ou construiu plataforma regulada em outro setor — temos cadeira aberta.
           </p>
           <div className="abclose__actions">
             <a className="btn btn--solid btn--onDark" href="#" onClick={(e)=>e.preventDefault()}>

@@ -9,7 +9,7 @@ function ContactClocks() {
   const offices = [
     { city:"São Paulo",   tz:"America/Sao_Paulo",  addr:"Av. Faria Lima, 3500 · 18º" },
     { city:"New York",    tz:"America/New_York",   addr:"345 Park Avenue · 32nd Fl" },
-    { city:"San Francisco", tz:"America/Los_Angeles", addr:"Financial District"       },
+    { city:"Silicon Valley", tz:"America/Los_Angeles", addr:"California · EUA"       },
   ];
   const fmt = (tz) => {
     try {

@@ -165,7 +165,7 @@ function Opening({ go }) {
               do seguro.
             </h1>
             <p className="opening__lede">
-              A nova era de seguros é <b>inteligência de dados, velocidade e escala</b>. A WIR entrega essa infraestrutura dentro dos sistemas que você já opera — sem substituir o seu core.
+              A nova era de seguros é <b>inteligência de dados, velocidade e escala</b>. A WIR entrega essa plataforma de IA dentro dos sistemas que você já opera — sem substituir o seu core.
             </p>
             <div className="opening__actions">
               <button className="btn btn--solid" onClick={()=>go("contact")}>
