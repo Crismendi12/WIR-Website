@@ -56,6 +56,34 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   font-size: 19px; line-height: 1.55; color: var(--ink-2); max-width: 540px;
 }
 
+.cthero__founders {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  margin-top: 32px; padding-top: 24px;
+  border-top: 1px solid rgba(11,10,8,.08);
+}
+.cthero__founder { display: flex; align-items: center; gap: 12px; }
+.cthero__founder-photo {
+  width: 52px; height: 52px; border-radius: 50%;
+  background-size: cover; background-position: center top;
+  border: 2px solid var(--paper); box-shadow: 0 4px 12px rgba(11,10,8,.12);
+  flex-shrink: 0;
+}
+.cthero__founder-body b {
+  display: block; font-family: var(--f-display); font-size: 15px;
+  font-weight: 400; color: var(--ink); letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+.cthero__founder-body span {
+  display: block; font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3); margin-top: 4px;
+}
+.cthero__founders-note {
+  margin-left: auto; font-family: var(--f-display); font-style: italic;
+  font-size: 16px; color: var(--wir-purple); max-width: 200px;
+  text-align: right;
+}
+
 /* ───────── Office clocks ───────── */
 .ctclocks {
   display: grid; gap: 16px;

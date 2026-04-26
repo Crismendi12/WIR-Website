@@ -115,10 +115,10 @@ function HomePage({ go }) {
     <>
       <Opening go={go}/>
       <TrustBar/>
+      <ProductTabs go={go}/>
+      <WorkflowSVG/>
       <Trust/>
       <Shift/>
-      <WorkflowSVG/>
-      <ProductTabs go={go}/>
       <Proof/>
       <ComplianceBadges/>
       <Closing go={go}/>

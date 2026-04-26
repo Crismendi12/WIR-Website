@@ -423,8 +423,8 @@ function AboutPage({ go }) {
       <AboutHero/>
       <AboutEssay/>
       <AboutTimeline/>
-      <AboutTeam/>
       <AboutPartners/>
+      <AboutTeam/>
       <AboutTechIA/>
       <AboutValues/>
       <AboutFAQ/>

@@ -49,6 +49,23 @@ function ContactHero() {
             <p className="cthero__lede">
               Cada seguradora opera diferente. Em uma conversa de 30 min com nossos sócios, calibramos o que faz sentido para a sua realidade — volume, custo atual, apetite e estrutura — e desenhamos juntos se um projeto de implementação se justifica.
             </p>
+            <div className="cthero__founders">
+              <div className="cthero__founder">
+                <div className="cthero__founder-photo" style={{backgroundImage:"url(assets/team/nicholas.jpg)"}}/>
+                <div className="cthero__founder-body">
+                  <b>Nicholas Weiser</b>
+                  <span>CEO · Co-Founder</span>
+                </div>
+              </div>
+              <div className="cthero__founder">
+                <div className="cthero__founder-photo" style={{backgroundImage:"url(assets/team/jose-carlos.jpg)"}}/>
+                <div className="cthero__founder-body">
+                  <b>José Carlos de Paula</b>
+                  <span>CSO · Co-Founder</span>
+                </div>
+              </div>
+              <div className="cthero__founders-note">Você vai falar com um de nós.</div>
+            </div>
           </div>
           <ContactClocks/>
         </div>

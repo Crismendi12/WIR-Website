@@ -391,8 +391,8 @@ function SolutionsPage({ go }) {
   return (
     <>
       <SolHero go={go}/>
-      <SolWorkflow/>
       <SolDeep/>
+      <SolWorkflow/>
       <SolIntegrations/>
       <SolPricing go={go}/>
       <SolClosing go={go}/>
