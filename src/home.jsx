@@ -1,36 +1,39 @@
 /* ───────── Home · assembler ───────── */
 
-// Trust bar — founders' background (Lockton, Aon, JLT, Bain Capital, Pátria, EZZE)
+// Sócios & Conselheiros Estratégicos — institutional logo wall
 function TrustBar() {
   const logos = [
-    { src: "assets/logos/santander.svg",    alt: "Banco Santander",      tag: "Banking global" },
-    { src: "assets/logos/lockton.png",      alt: "Lockton",              tag: "Broker global · P&C" },
-    { src: "assets/logos/aon.png",          alt: "Aon",                  tag: "Risco corporativo" },
-    { src: "assets/logos/jlt.png",          alt: "JLT",                  tag: "Specialty insurance" },
-    { src: "assets/logos/bain-capital.png", alt: "Bain Capital",         tag: "Private equity" },
-    { src: "assets/logos/patria.png",       alt: "Pátria Investimentos", tag: "Asset management" },
-    { src: "assets/logos/ezze.png",         alt: "EZZE Seguros",         tag: "Seguradora digital" },
+    { src: "assets/logos/ezze.png",              alt: "EZZE" },
+    { src: "assets/logos/patria.png",            alt: "Pátria Investimentos" },
+    { src: "assets/logos/bain-capital.png",      alt: "Bain Capital" },
+    { src: "assets/logos/santander.png",         alt: "Banco Santander" },
+    { src: "assets/logos/hapvida-notredame.png", alt: "Hapvida · NotreDame Intermédica" },
+    { src: "assets/logos/lockton.png",           alt: "Lockton" },
+    { src: "assets/logos/aon.png",               alt: "Aon" },
+    { src: "assets/logos/gallagher.png",         alt: "Gallagher" },
+    { src: "assets/logos/jlt.png",               alt: "JLT" },
+    { src: "assets/logos/trrv.png",              alt: "TRRV" },
+    { src: "assets/logos/vis.png",               alt: "VIS" },
   ];
   return (
     <section className="trustbar" data-reveal>
       <div className="wrap">
         <div className="trustbar__head">
           <div>
-            <div className="eyebrow">· De dentro do setor · para dentro do setor</div>
+            <div className="eyebrow">· Sócios & Conselheiros Estratégicos</div>
             <h2 className="trustbar__title display">
-              Décadas operando o mercado.<br/>
-              Agora <em>virando infraestrutura.</em>
+              Décadas no setor.<br/>
+              <em>World Class</em> em IA.
             </h2>
           </div>
           <p className="trustbar__note">
-            Os fundadores, advisors e parceiros da WIR construíram carreira dentro de bancos globais, seguradoras Tier-1, corretoras internacionais e casas de investimento. Essa experiência vive hoje no núcleo da plataforma — não como referência, como arquitetura.
+            A experiência de décadas como sócios e C-Level de seguradoras e corretoras nacionais e internacionais, somada ao expertise de sócios de fundos de Private Equity e Venture Builder internacional, proporciona aos nossos clientes um conhecimento profundo do mercado segurador, solidez financeira de longo prazo e nível World Class em tecnologia e Inteligência Artificial.
           </p>
         </div>
         <div className="trustbar__logos">
           {logos.map((l,i) => (
             <div key={i} className="trustbar__logo">
               <img src={l.src} alt={l.alt} title={l.alt}/>
-              <span className="trustbar__logo-tag">{l.tag}</span>
             </div>
           ))}
         </div>
@@ -112,12 +115,11 @@ function HomePage({ go }) {
     <>
       <Opening go={go}/>
       <TrustBar/>
-      <Proof/>
-      <Shift/>
-      <ProductTabs go={go}/>
-      <Outcomes/>
-      <WorkflowSVG/>
       <Trust/>
+      <Shift/>
+      <WorkflowSVG/>
+      <ProductTabs go={go}/>
+      <Proof/>
       <ComplianceBadges/>
       <Closing go={go}/>
     </>

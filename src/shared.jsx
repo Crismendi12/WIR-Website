@@ -6,7 +6,7 @@ const { useEffect, useState, useRef, useMemo } = React;
 
 // Official WIR logo — uses brandbook SVG with proper gradient
 function Wordmark({ small, variant }) {
-  const h = small ? 36 : 52;
+  const h = small ? 44 : 64;
   const src = variant === "white" ? "assets/wir-logo-branco.svg" : "assets/wir-logo-azul.svg";
   return (
     <img src={src} alt="WIR Innovation" style={{ height: h + "px", width: "auto", display: "block" }} />
@@ -40,7 +40,7 @@ function Nav({ route, go }) {
     { id: "home", label: "Início" },
     { id: "solutions", label: "Soluções" },
     { id: "about", label: "Sobre" },
-    { id: "blog", label: "Ideias" },
+    { id: "blog", label: "Insights" },
   ];
   return (
     <>
@@ -71,45 +71,57 @@ function Nav({ route, go }) {
 }
 
 function Footer({ go }) {
+  const socials = [
+    { k:"LinkedIn",  href:"https://www.linkedin.com/company/wir-innovation/" },
+    { k:"Instagram", href:"https://www.instagram.com/wirinnovation" },
+    { k:"X",         href:"https://x.com/wirinnovationai" },
+  ];
   return (
     <footer className="footer">
       <div className="wrap">
         <div className="footer__grid">
           <div>
             <Wordmark variant="white"/>
-            <p className="footer__brand-desc">A nova era de seguros é inteligência de dados, velocidade e escala. A WIR entrega essa infraestrutura dentro dos sistemas que você já opera.</p>
+            <p className="footer__brand-desc">A nova era de seguros é inteligência de dados, velocidade e escala. A WIR Innovation é a plataforma de IA que entrega essa estrutura dentro dos sistemas que você já opera.</p>
+            <div className="footer__social">
+              {socials.map((s,i) => (
+                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="footer__social-link">
+                  {s.k} <span aria-hidden>↗</span>
+                </a>
+              ))}
+            </div>
           </div>
           <div>
             <h4>Produto</h4>
             <ul>
               <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Soluções</a></li>
-              <li><a href="#">Integrações</a></li>
-              <li><a href="#">Segurança</a></li>
-              <li><a href="#">Docs da API</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Workflow Inteligente</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Integrações</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Pricing</a></li>
             </ul>
           </div>
           <div>
             <h4>Empresa</h4>
             <ul>
               <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Sobre</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("blog")}}>Ideias</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("blog")}}>Insights de IA</a></li>
               <li><a href="#" onClick={(e)=>{e.preventDefault();go("contact")}}>Contato</a></li>
-              <li><a href="#">Carreiras</a></li>
+              <li><a href="mailto:contato@wirinnovation.ai">contato@wirinnovation.ai</a></li>
             </ul>
           </div>
           <div>
-            <h4>Legal</h4>
+            <h4>Sócios & Holding</h4>
             <ul>
-              <li><a href="#">Privacidade</a></li>
-              <li><a href="#">Termos</a></li>
-              <li><a href="#">LGPD</a></li>
-              <li><a href="#">SOC 2</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Mahway · California</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Avante · Brasil</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Conselheiros estratégicos</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Princípios</a></li>
             </ul>
           </div>
         </div>
         <div className="footer__bot">
           <span>© 2026 WIR Innovation</span>
-          <span>Feito entre São Paulo e San Francisco</span>
+          <span>wirinnovation.ai · Feito entre São Paulo e San Francisco</span>
         </div>
       </div>
     </footer>

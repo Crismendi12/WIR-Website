@@ -19,11 +19,11 @@ function WorkflowSVG() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   const steps = [
-    { k:"01", t:"Intake",      d:"E-mail, PDF, API — a WIR aceita o formato que você já usa.", c:"#1C17FF" },
-    { k:"02", t:"Enrich",      d:"Cruza com 40+ fontes: CNPJ, histórico, exposure map, crédito.", c:"#4D38C0" },
-    { k:"03", t:"Score",       d:"Motor ML multi-fator calibrado ao seu apetite.", c:"#A44F98" },
-    { k:"04", t:"Decide",      d:"Cotação, decisão ou escalada para humano — com explicação.", c:"#EE7D48" },
-    { k:"05", t:"Write",       d:"Escreve no seu core: Guidewire, Duck Creek, Majesco, Sapiens.", c:"#F9B336" },
+    { k:"01", t:"Coleta",       d:"E-mail, anexos, API — a WIR aceita o formato que você já usa.", c:"#1C17FF" },
+    { k:"02", t:"Enriquecer",   d:"Cruza com múltiplas fontes externas: CNPJ, histórico do broker, exposição, crédito.", c:"#4D38C0" },
+    { k:"03", t:"Pontuar",      d:"Motor ML multi-fator calibrado ao seu apetite e à sua manual de subscrição.", c:"#A44F98" },
+    { k:"04", t:"Decidir",      d:"Cotação, recusa automática ou escalada para humano — sempre com explicação.", c:"#EE7D48" },
+    { k:"05", t:"Subscrever",   d:"Escreve no seu core de apólice e devolve a trilha de auditoria completa.", c:"#F9B336" },
   ];
   const pathLen = 1200;
   return (
@@ -81,18 +81,18 @@ function WorkflowSVG() {
 
 function Trust() {
   const stats = [
-    { v:"40%",  l:"Tempo do UW em tarefas administrativas.", src:"Deloitte" },
-    { v:"70%",  l:"Seguradoras travadas em TI legada.",      src:"BCG" },
-    { v:"60%+", l:"Brokers escolhem por velocidade.",        src:"Capgemini" },
-    { v:"30%",  l:"Tempo perdido organizando dados.",        src:"Gartner" },
+    { k:"Eficiência",            v:"40%",    l:"do tempo do underwriter gasto com tarefas administrativas.",         src:"Deloitte" },
+    { k:"Transformação Digital", v:"70%",    l:"das seguradoras não executam inovação por limitação de TI.",         src:"BCG" },
+    { k:"Velocidade",            v:"60%+",   l:"dos brokers escolhem seguradora pela velocidade de resposta.",       src:"Capgemini" },
+    { k:"Foco em Negócios",      v:"20-30%", l:"do tempo corporativo perdido organizando dados não estruturados.",   src:"Gartner" },
   ];
   return (
-    <section className="trust" data-reveal>
+    <section id="desafios" className="trust" data-reveal>
       <div className="wrap">
-        <div className="eyebrow eyebrow--onDark">· 06 — Por que agora</div>
+        <div className="eyebrow eyebrow--onDark">· Desafios do mercado</div>
         <div className="trust__top">
           <blockquote className="trust__quote display">
-            "O mercado de Seguros e Danos cresce <em>dois dígitos ao ano</em> — mas a estrutura das seguradoras não acompanha. Essa é a fricção que a WIR resolve."
+            "Mercado de Seguros e Danos cresce <em>dois dígitos ao ano</em>. Mas a estrutura das empresas não acompanha esta aceleração."
           </blockquote>
           <div className="trust__attrib">
             <div className="trust__avatar trust__avatar--photo" style={{backgroundImage:"url(assets/team/nicholas.jpg)"}}/>
@@ -104,10 +104,11 @@ function Trust() {
         </div>
         <div className="trust__divider"/>
         <div className="trust__bot">
-          <div className="trust__bot-k">O custo do manual — dados do setor</div>
+          <div className="trust__bot-k">Quatro forças que tornam o status quo insustentável</div>
           <div className="trust__stats">
             {stats.map((s,i) => (
               <div key={i} className="trust__stat">
+                <div className="trust__stat-k">{s.k}</div>
                 <div className="trust__stat-v display">{s.v}</div>
                 <div className="trust__stat-l">{s.l}</div>
                 <div className="trust__stat-s">Fonte · <b>{s.src}</b></div>
@@ -120,145 +121,72 @@ function Trust() {
   );
 }
 
-// Pricing model (from AXA proposal): manual baseline R$156/cotação;
-// WIR tiered — R$87 (<=1k), R$61 (1-2k), R$43 (2k+). Time: 2.5h manual avg.
-function wirTier(v) {
-  if (v <= 1000) return { unit: 87, k: "Tier 1", range: "até 1.000" };
-  if (v <= 2000) return { unit: 61, k: "Tier 2", range: "1.001 – 2.000" };
-  return                { unit: 43, k: "Tier 3", range: "2.001 +"      };
-}
-function calc(vol) {
-  const manualUnit = 156;
-  const t = wirTier(vol);
-  const wirUnit = t.unit;
-  const costManual = vol * manualUnit;
-  const costWir = vol * wirUnit;
-  const savingsMonth = costManual - costWir;
-  const savingsYear = savingsMonth * 12;
-  const hoursManual = Math.round(vol * 2.5);
-  const ftes = Math.max(1, Math.round((hoursManual / 160) * 10) / 10);
-  const savingsPct = Math.round(((manualUnit - wirUnit) / manualUnit) * 100);
-  return { manualUnit, wirUnit, tier: t, costManual, costWir, savingsMonth, savingsYear, hoursManual, ftes, savingsPct };
-}
-const BRL = (n) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(n);
-const K = (n) => {
-  if (n >= 1_000_000) return `R$ ${(n/1_000_000).toFixed(1).replace(".",",")}M`;
-  if (n >= 1_000)     return `R$ ${Math.round(n/1_000)}k`;
-  return BRL(n);
-};
-
 function Closing({ go }) {
-  const [vol, setVol] = React.useState(1200);
-  const r = calc(vol);
+  const dimensions = [
+    { k:"Volume",      l:"Cotações por mês",        d:"Quantos pedidos chegam pelos canais." },
+    { k:"Custo",       l:"Estrutura operacional",   d:"Headcount, ferramentas e tempo gasto em tarefas administrativas." },
+    { k:"Conversão",   l:"Apetite × resposta",      d:"Quanto da carteira fecha por velocidade de retorno." },
+    { k:"Compliance",  l:"Auditoria e SLA",         d:"Trilha de decisão, conformidade regulatória, governança interna." },
+  ];
   return (
     <section className="closing" data-reveal>
       <div className="wrap">
         <div className="closing__top">
-          <div className="eyebrow">· 07 — Próximo passo</div>
+          <div className="eyebrow">· Próximo passo</div>
           <h2 className="display closing__title">
-            Sua equipe tem o <em>conhecimento.</em> A WIR dá a infra.
+            Sua equipe tem o <em>conhecimento.</em><br/>
+            A WIR dá a <em>plataforma de IA para escalar.</em>
           </h2>
           <p className="closing__lede">
             Subscrição é ofício. A WIR não substitui quem decide — entrega os trilhos para que sua equipe escale decisão, capacidade e margem, sem tocar no seu core.
           </p>
           <div className="closing__actions">
             <button className="btn btn--solid" onClick={()=>go("contact")}>
-              Falar com a equipe <span className="btn__arrow">→</span>
+              Agendar conversa com nossos sócios <span className="btn__arrow">→</span>
             </button>
             <button className="btn btn--ghost" onClick={()=>go("solutions")}>
               Explorar soluções <span className="btn__arrow">→</span>
             </button>
           </div>
         </div>
+
         <div className="closing__calc-wrap">
-            <div className="calc">
-              <div className="calc__head">
-                <div>
-                  <div className="calc__eyebrow">· Calculadora · Underwriter vs WIR</div>
-                  <div className="calc__title">Quanto custa<br/><em>seu status quo.</em></div>
-                </div>
-                <div className="calc__pulse" aria-hidden>
-                  <span className="calc__pulse-dot"/>
-                  live · recalcula
-                </div>
+          <div className="calc">
+            <div className="calc__head">
+              <div>
+                <div className="calc__eyebrow">· Simulação personalizada</div>
+                <div className="calc__title">Cada seguradora<br/><em>opera diferente.</em></div>
               </div>
-
-              <div className="calc__input">
-                <div className="calc__input-row">
-                  <label>Submissões / mês</label>
-                  <div className="calc__val-wrap">
-                    <div className="calc__val num">{vol.toLocaleString("pt-BR")}</div>
-                    <div className="calc__tier">
-                      <span className="calc__tier-k">{r.tier.k}</span>
-                      <span className="calc__tier-range">{r.tier.range}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="calc__slider">
-                  <input type="range" min="200" max="3000" step="50"
-                    value={vol} onChange={(e)=>setVol(+e.target.value)}
-                    aria-label="Submissões por mês"/>
-                  <div className="calc__marks" aria-hidden>
-                    <span style={{left: `${((1000-200)/2800)*100}%`}}/>
-                    <span style={{left: `${((2000-200)/2800)*100}%`}}/>
-                  </div>
-                </div>
-                <div className="calc__scale">
-                  <span>200</span><span>1.000 <em>· T2</em></span><span>2.000 <em>· T3</em></span><span>3.000</span>
-                </div>
-              </div>
-
-              <div className="calc__split">
-                <div className="calc__col calc__col--manual">
-                  <div className="calc__col-k">· Sem WIR · fluxo manual</div>
-                  <div className="calc__col-big num">{K(r.costManual)}<small>/mês</small></div>
-                  <div className="calc__col-unit">R$ 156 × cotação · benchmark do setor</div>
-                  <div className="calc__col-rows">
-                    <div><span>Horas/mês em operação</span><b className="num">{r.hoursManual.toLocaleString("pt-BR")}h</b></div>
-                    <div><span>FTEs equivalentes</span><b className="num">~{r.ftes.toString().replace(".",",")} UWs</b></div>
-                    <div><span>Tempo em decisão real</span><b>{"<"} 40%</b></div>
-                  </div>
-                </div>
-
-                <div className="calc__arrow" aria-hidden>
-                  <span className="calc__arrow-line"/>
-                  <span className="calc__arrow-head">→</span>
-                </div>
-
-                <div className="calc__col calc__col--wir">
-                  <div className="calc__col-k">· Com WIR · produtos</div>
-                  <div className="calc__col-big num">{K(r.costWir)}<small>/mês</small></div>
-                  <div className="calc__col-unit">R$ {r.wirUnit} × cotação · {r.tier.k} pelo volume</div>
-                  <div className="calc__col-rows">
-                    <div><span>UWs liberados</span><b>Foco em decisão</b></div>
-                    <div><span>Tempo por cotação</span><b>Minutos</b></div>
-                    <div><span>Trilha auditável</span><b>100%</b></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="calc__result">
-                <div className="calc__result-row">
-                  <span>Economia mensal</span>
-                  <b className="num">{K(r.savingsMonth)}</b>
-                </div>
-                <div className="calc__result-row calc__result-row--hi">
-                  <span>Economia anual projetada</span>
-                  <b className="num">{K(r.savingsYear)}</b>
-                </div>
-                <div className="calc__result-row calc__result-row--meta">
-                  <span>Redução por cotação</span>
-                  <b>−{r.savingsPct}%</b>
-                  <div className="calc__bar" aria-hidden>
-                    <div className="calc__bar-fill" style={{width: `${r.savingsPct}%`}}/>
-                  </div>
-                </div>
-              </div>
-
-              <div className="calc__foot">
-                * Estimativa ilustrativa usando R$ 156 / cotação como benchmark manual (dado do setor) e a cascata de pricing WIR por volume. Payback real depende de mix de produto, apetite e stack — calibramos no escopo do piloto.
+              <div className="calc__pulse" aria-hidden>
+                <span className="calc__pulse-dot"/>
+                sob medida
               </div>
             </div>
+
+            <p className="calc__intro">
+              Não acreditamos em prometer números no site — acreditamos em <b>simular junto com você</b>. Em uma conversa de 30 min com nossos sócios, calibramos o modelo de impacto da WIR usando os seus dados reais: volume de cotações, custo por submissão, taxa de conversão e estrutura atual.
+            </p>
+
+            <div className="calc__dims">
+              {dimensions.map((d,i) => (
+                <div key={i} className="calc__dim">
+                  <div className="calc__dim-k">/0{i+1}</div>
+                  <div className="calc__dim-t">{d.k}</div>
+                  <div className="calc__dim-l">{d.l}</div>
+                  <div className="calc__dim-d">{d.d}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="calc__cta-row">
+              <div className="calc__cta-l">
+                <b>Resultado:</b> uma projeção honesta de payback, capacidade ampliada e ganho de margem — calibrada à sua realidade.
+              </div>
+              <button className="btn btn--solid btn--onDark" onClick={()=>go("contact")}>
+                Quero simular com meus dados <span className="btn__arrow">→</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

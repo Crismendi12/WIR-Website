@@ -36,18 +36,18 @@ function BlogHero() {
     <section className="blhero">
       <div className="wrap">
         <div className="blhero__meta">
-          <span>· Ideias · Edição 14</span>
+          <span>· Insights de IA · Edição 14</span>
           <span>· Publicado quinzenalmente</span>
-          <span>· Atualizado 18 · Abr · 2026</span>
+          <span>· Atualizado Abr · 2026</span>
         </div>
         <div className="blhero__top">
-          <div className="eyebrow">· Ideias</div>
+          <div className="eyebrow">· Insights de IA</div>
           <h1 className="display blhero__mast">
-            Leituras sobre<br/>
-            <em>infra, seguro</em><br/>
+            Insights sobre<br/>
+            <em>IA, seguro</em><br/>
             e decisão.
           </h1>
-          <p className="blhero__sub">Ensaios, casos de uso e notas técnicas do time da WIR. Publicamos o que aprendemos — não o que vende.</p>
+          <p className="blhero__sub">Ensaios, casos de uso e notas técnicas do time da WIR sobre como Inteligência Artificial está redesenhando a operação do mercado segurador.</p>
         </div>
         <article className="blhero__feature" onClick={()=>{}}>
           <div className="blhero__feature-img"
@@ -158,18 +158,18 @@ function BlogGrid({ posts }) {
             </div>
             <div className="blside__news">
               <div className="eyebrow eyebrow--onDark" style={{marginBottom: 20}}>· Newsletter</div>
-              <h3 className="display blside__news-title">Notas do mercado,<br/><em>quinzenalmente.</em></h3>
+              <h3 className="display blside__news-title">Insights de IA,<br/><em>quinzenalmente.</em></h3>
               <p className="blside__news-sub">Ensaios curtos, 1 caso prático e leituras recomendadas. Sem marketing.</p>
               <form className="blside__news-form" onSubmit={(e)=>e.preventDefault()}>
                 <input type="email" placeholder="seu@email.com"/>
                 <button type="submit">Assinar <span aria-hidden>→</span></button>
               </form>
-              <div className="blside__news-meta">· 2.400+ leitores · sem spam · cancelar quando quiser</div>
+              <div className="blside__news-meta">· Comunidade de operadores do setor · sem spam</div>
             </div>
             <div className="blside__tags">
               <div className="eyebrow" style={{marginBottom: 16}}>· Tópicos</div>
               <div className="blside__tags-row">
-                {["underwriting","auditabilidade","LGPD","MGA","LLM","regulação","STP","integrations","observability","pricing","compliance","private-cloud"].map((t,i) => (
+                {["IA aplicada","underwriting","auditabilidade","LGPD","compliance","subscrição","integrações","observability"].map((t,i) => (
                   <a key={i} href="#" className="blside__tag">#{t}</a>
                 ))}
               </div>

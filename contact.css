@@ -294,7 +294,24 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   letter-spacing: .1em; color: var(--night-muted);
 }
 
-/* ───────────────── CHANNELS ───────────────── */
+/* ───────────────── SOCIAL ───────────────── */
+.ctsocial { padding: 100px 0; background: var(--paper); position: relative; overflow: hidden; }
+.ctsocial__head { max-width: 800px; margin-bottom: 48px; text-align: center; margin-left: auto; margin-right: auto; }
+.ctsocial__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(40px, 5vw, 68px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink); margin: 16px 0; text-wrap: balance; }
+.ctsocial__title em { font-style: italic; background: linear-gradient(90deg, var(--wir-purple), var(--wir-coral), var(--wir-amber)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.ctsocial__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1080px; margin: 0 auto; }
+.ctsocial__card { display: block; padding: 32px 28px 36px; border-radius: 14px; background: var(--paper-2); border: 1px solid rgba(11,10,8,.08); text-decoration: none; color: var(--ink); position: relative; transition: transform .25s ease, border-color .25s ease; overflow: hidden; }
+.ctsocial__card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--wir-purple), var(--wir-amber)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.ctsocial__card:hover { transform: translateY(-3px); border-color: rgba(117,64,172,.3); }
+.ctsocial__card:hover::before { transform: scaleX(1); }
+.ctsocial__k { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--wir-purple); margin-bottom: 14px; }
+.ctsocial__v { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: 26px; letter-spacing: -0.015em; color: var(--ink); }
+.ctsocial__arrow { position: absolute; right: 20px; bottom: 20px; font-family: var(--f-mono); font-size: 16px; color: var(--ink-3); opacity: 0; transform: translate(-4px, 4px); transition: all .3s ease; }
+.ctsocial__card:hover .ctsocial__arrow { opacity: 1; transform: none; color: var(--wir-purple); }
+@media (max-width: 1080px) { .ctsocial__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .ctsocial__grid { grid-template-columns: 1fr; } }
+
+/* ───────────────── CHANNELS (legacy) ───────────────── */
 .ctchan { padding: 120px 0; background: var(--paper); }
 .ctchan__head { max-width: 900px; margin-bottom: 56px; }
 .ctchan__title {

@@ -34,20 +34,20 @@ function ContactHero() {
     <section className="cthero">
       <div className="wrap">
         <div className="cthero__meta">
-          <span>· Formulário de contato</span>
-          <span>· Resposta média · 6h úteis</span>
-          <span>· Escritórios · 3 cidades</span>
+          <span>· Falar com nossos sócios</span>
+          <span>· Resposta em até 24h úteis</span>
+          <span>· Conversa estratégica · não comercial</span>
         </div>
         <div className="cthero__grid">
           <div>
-            <div className="eyebrow">· Falar com a equipe</div>
+            <div className="eyebrow">· Próxima conversa</div>
             <h1 className="display cthero__title">
-              Conversa de<br/>
-              <em>trinta minutos.</em><br/>
-              Zero pitch.
+              Vamos conversar<br/>
+              sobre como <em>escalar<br/>
+              o seu negócio?</em>
             </h1>
             <p className="cthero__lede">
-              Contamos o que fazemos, você conta o que precisa, e decidimos juntos se faz sentido um piloto. Se não fizer, te conectamos com alguém que pode ajudar.
+              Cada seguradora opera diferente. Em uma conversa de 30 min com nossos sócios, calibramos o que faz sentido para a sua realidade — volume, custo atual, apetite e estrutura — e desenhamos juntos se um projeto de implementação se justifica.
             </p>
           </div>
           <ContactClocks/>
@@ -66,11 +66,8 @@ function ContactForm() {
   const update = (k, v) => setData(d => ({ ...d, [k]: v }));
 
   const interests = [
-    { k:"SSA", t:"Smart Sales", d:"Distribuição + lead scoring",      c:"#1C17FF" },
-    { k:"UCP", t:"Underwriter Co-Pilot", d:"Subscrição + cotação",    c:"#A44F98" },
-    { k:"XBA", t:"X-sell Brokers", d:"Cross-sell + retenção",         c:"#EE7D48" },
-    { k:"SNB", t:"SDR New Business", d:"Outbound + agendamento",      c:"#F9B336" },
-    { k:"explore", t:"Conversa exploratória", d:"Não sei ainda qual módulo encaixa", c:"#6A6458" },
+    { k:"SSA", t:"Smart Sales",          d:"Distribuição + lead scoring",   c:"#1C17FF" },
+    { k:"UCP", t:"Underwriter Co-Pilot", d:"Subscrição + cotação",          c:"#A44F98" },
   ];
   const roles = [
     "C-level (CEO / COO / CIO)",
@@ -305,14 +302,41 @@ function ContactDemo() {
   );
 }
 
+function ContactSocial() {
+  const channels = [
+    { k:"LinkedIn",  v:"@wir-innovation",  href:"https://www.linkedin.com/company/wir-innovation/" },
+    { k:"Instagram", v:"@wirinnovation",   href:"https://www.instagram.com/wirinnovation" },
+    { k:"X",         v:"@wirinnovationai", href:"https://x.com/wirinnovationai" },
+    { k:"E-mail",    v:"contato@wirinnovation.ai", href:"mailto:contato@wirinnovation.ai" },
+  ];
+  return (
+    <section className="ctsocial" data-reveal>
+      <div className="wrap">
+        <div className="ctsocial__head">
+          <div className="eyebrow">· Outros canais</div>
+          <h2 className="display ctsocial__title">Acompanhe a WIR<br/><em>nas nossas redes.</em></h2>
+        </div>
+        <div className="ctsocial__grid">
+          {channels.map((c,i) => (
+            <a key={i} className="ctsocial__card" href={c.href} target="_blank" rel="noopener noreferrer">
+              <div className="ctsocial__k">· {c.k}</div>
+              <div className="ctsocial__v display">{c.v}</div>
+              <span className="ctsocial__arrow" aria-hidden>→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactPage() {
   useReveal();
   return (
     <>
       <ContactHero/>
       <ContactForm/>
-      <ContactDemo/>
-      <ContactChannels/>
+      <ContactSocial/>
     </>
   );
 }

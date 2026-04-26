@@ -9,11 +9,11 @@ function DecisionFlow() {
   }, []);
 
   const stages = [
-    { k: "RECEBER",    sub: "e-mail · anexos · API" },
-    { k: "ENRIQUECER", sub: "CNPJ · histórico" },
-    { k: "PONTUAR",    sub: "modelo WIR" },
-    { k: "DECIDIR",    sub: "supervisão humana" },
-    { k: "SUBSCREVER", sub: "core · apólice" },
+    { k: "COLETA"     },
+    { k: "ENRIQ."     },
+    { k: "SCORE"      },
+    { k: "DECISÃO"    },
+    { k: "EMISSÃO"    },
   ];
 
   return (
@@ -45,62 +45,58 @@ function DecisionFlow() {
           </filter>
         </defs>
 
-        {/* Source nodes (left, 3 stacked) */}
+        {/* Source nodes (left, 3 stacked) — labels with breathing room */}
         {[{y:80,l:"e-mail"},{y:170,l:"anexos"},{y:260,l:"API"}].map((s,i) => (
           <g key={i}>
-            <circle cx="50" cy={s.y} r="8" fill="#E9E3D7" stroke="#7540AC" strokeWidth="1.5"/>
-            <text x="30" y={s.y + 4} fill="#8A8374" fontSize="10"
-              fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="1">
+            <circle cx="60" cy={s.y} r="8" fill="#E9E3D7" stroke="#7540AC" strokeWidth="1.5"/>
+            <text x="22" y={s.y + 4} fill="#6A6458" fontSize="11"
+              fontFamily="JetBrains Mono, monospace" textAnchor="end" letterSpacing="0.5"
+              fontWeight="500">
               {s.l}
             </text>
             {/* path from source to central spine */}
-            <path d={`M58 ${s.y} Q 100 ${s.y}, 130 170`}
+            <path d={`M68 ${s.y} Q 110 ${s.y}, 140 170`}
               stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
           </g>
         ))}
 
         {/* Central pipeline spine */}
-        <line x1="130" y1="170" x2="400" y2="170" stroke="#7540AC" strokeWidth="1" strokeOpacity="0.25" strokeDasharray="3 4"/>
+        <line x1="140" y1="170" x2="395" y2="170" stroke="#7540AC" strokeWidth="1" strokeOpacity="0.25" strokeDasharray="3 4"/>
 
-        {/* Processing stages on spine */}
+        {/* Processing stages on spine — wider spacing, no sub label to prevent overlap */}
         {stages.map((s, i) => {
-          const x = 140 + i * 65;
+          const x = 150 + i * 60;
           const active = pulse === i;
           return (
             <g key={i}>
-              <circle cx={x} cy="170" r={active ? 14 : 10}
+              <circle cx={x} cy="170" r={active ? 13 : 9}
                 fill={active ? "url(#dflowNode)" : "#0B0A08"}
                 stroke={active ? "#F8AD39" : "#7540AC"}
                 strokeWidth={active ? 2 : 1.5}
                 filter={active ? "url(#glow)" : undefined}
                 style={{transition: "all .4s ease"}}/>
-              <text x={x} y="150" fill={active ? "#0B0A08" : "#6A6458"}
-                fontSize="9" fontFamily="JetBrains Mono, monospace"
-                textAnchor="middle" letterSpacing="1.5"
-                fontWeight={active ? "600" : "500"}
+              <text x={x} y={i % 2 === 0 ? 145 : 200} fill={active ? "#0B0A08" : "#6A6458"}
+                fontSize="9.5" fontFamily="JetBrains Mono, monospace"
+                textAnchor="middle" letterSpacing="0.8"
+                fontWeight={active ? "700" : "500"}
                 style={{transition: "fill .3s"}}>
                 {s.k}
-              </text>
-              <text x={x} y="195" fill="#9A9484"
-                fontSize="8" fontFamily="JetBrains Mono, monospace"
-                textAnchor="middle" letterSpacing="0.5">
-                {s.sub}
               </text>
             </g>
           );
         })}
 
         {/* Output branches (right side, 2) */}
-        <path d="M400 170 Q 440 170, 450 80" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
-        <path d="M400 170 Q 440 170, 450 260" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
+        <path d="M395 170 Q 435 170, 445 80" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
+        <path d="M395 170 Q 435 170, 445 260" stroke="url(#dflowPath)" strokeWidth="1.5" fill="none"/>
 
-        {[{y:80,l:"apólice",c:"#F8AD39"},{y:260,l:"trilha",c:"#7540AC"}].map((o,i) => (
+        {[{y:80,l:"cotação",c:"#F8AD39"},{y:260,l:"trilha",c:"#7540AC"}].map((o,i) => (
           <g key={i}>
-            <rect x="435" y={o.y - 10} width="35" height="20" rx="4"
+            <rect x="425" y={o.y - 12} width="48" height="24" rx="5"
               fill={o.c} fillOpacity="0.15"
               stroke={o.c} strokeWidth="1"/>
-            <text x="452" y={o.y + 4} fill={o.c}
-              fontSize="8" fontFamily="JetBrains Mono, monospace"
+            <text x="449" y={o.y + 4} fill={o.c}
+              fontSize="9" fontFamily="JetBrains Mono, monospace"
               textAnchor="middle" letterSpacing="0.5" fontWeight="600">
               {o.l}
             </text>
@@ -130,16 +126,16 @@ function DecisionFlow() {
 
 function Opening({ go }) {
   const index = [
-    { n:"01", k:"O DESAFIO",       stat:<>Custo por cotação <b>alto</b> · conversão <b>baixa</b></>,
-      cap:"Como o custo operacional corrói margem.", go:"solutions" },
-    { n:"02", k:"OS PRODUTOS",     stat:<><b>SSA</b> · <b>UCP</b> · <b>XBA</b> · <b>SNB</b></>,
-      cap:"Quatro produtos especializados no ciclo de seguro.", go:"solutions" },
+    { n:"01", k:"O DESAFIO",       stat:<>Estrutura das seguradoras <b>não acompanha</b> o crescimento</>,
+      cap:"40% do tempo do underwriter perdido em tarefas administrativas.", goHash:"desafios" },
+    { n:"02", k:"OS PRODUTOS",     stat:<><b>SSA</b> · <b>UCP</b> em produção · <b>XBA</b> · <b>SNB</b> em desenvolvimento</>,
+      cap:"Camada única de IA conectando todo o ciclo de subscrição.", go:"solutions" },
     { n:"03", k:"A EVIDÊNCIA",     stat:<>Mais volume · <b>menos</b> custo manual</>,
-      cap:"Mesma equipe, capacidade ampliada.", go:"solutions" },
+      cap:"Mesma equipe, capacidade ampliada — sem trocar o core.", go:"solutions" },
     { n:"04", k:"A CLASSIFICAÇÃO", stat:<>Automático · assistido · <b>sênior</b></>,
-      cap:"Foco humano onde realmente importa.", go:"solutions" },
-    { n:"05", k:"O IMPACTO",       stat:<>Capacidade <b>ampliada</b> · decisão auditável</>,
-      cap:"Subscrição contínua como padrão.", go:"about" },
+      cap:"Foco humano onde realmente importa: analisar e subscrever risco.", go:"solutions" },
+    { n:"05", k:"O IMPACTO",       stat:<>Plataforma de IA para <b>ESCALAR</b></>,
+      cap:"Sua equipe tem o conhecimento. A WIR dá os trilhos.", go:"about" },
   ];
   return (
     <section className="opening">
@@ -197,7 +193,14 @@ function Opening({ go }) {
           <div className="opening__index-grid">
             {index.map((item) => (
               <button key={item.n} className="opening__index-item"
-                onClick={()=>go(item.go)}>
+                onClick={()=>{
+                  if (item.goHash) {
+                    const el = document.getElementById(item.goHash);
+                    if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+                  } else if (item.go) {
+                    go(item.go);
+                  }
+                }}>
                 <span className="opening__index-num">/{item.n}</span>
                 <div className="opening__index-body">
                   <div className="opening__index-title">{item.k}</div>
@@ -217,17 +220,17 @@ function Opening({ go }) {
 
 function Proof() {
   const m = [
-    { w:"Minutos",    l:"Decisão",       c:"Não semanas. Não comitês intermináveis." },
-    { w:"Contínuo",   l:"Processamento", c:"Straight-through como padrão, exceção como exceção." },
-    { w:"Auditável",  l:"Cada saída",    c:"Modelo, versão, confiança e inputs — exportáveis." },
-    { w:"Ampliada",   l:"Capacidade",    c:"Mesmo time. Mais negócio. Sem contratar." },
+    { w:"Minutos",    l:"Decisão",         c:"Não semanas. Não comitês intermináveis." },
+    { w:"Contínuo",   l:"Processamento",   c:"Operação 24/7 — exceção como exceção." },
+    { w:"Auditável",  l:"Workflow",        c:"Modelo, versão, confiança e inputs — exportáveis." },
+    { w:"Ampliada",   l:"Capacidade",      c:"Mesmo time. Mais negócio. Sem contratar." },
   ];
   return (
     <section className="proof" data-reveal>
       <div className="wrap">
         <div className="proof__head">
-          <div className="eyebrow">· 02 — Prova</div>
-          <div className="proof__note">Resultados observados em piloto · sujeitos a NDA</div>
+          <div className="eyebrow">· ROI — Retorno sobre o investimento</div>
+          <div className="proof__note">Resultados observados em produção · sujeitos a NDA</div>
         </div>
         <div className="proof__grid">
           {m.map((x,i) => (

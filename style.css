@@ -503,6 +503,9 @@ p{ text-wrap: pretty; }
 .footer a{ font-size: 14px; color: var(--paper); opacity: 0.85; transition: opacity .2s; }
 .footer a:hover{ opacity: 1; }
 .footer__brand-desc{ font-size: 14px; color: rgba(245,241,234,0.7); line-height: 1.55; max-width: 36ch; margin-top: 18px; }
+.footer__social{ display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+.footer__social-link{ display: inline-flex; align-items: center; gap: 4px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; color: var(--night-text); transition: all .25s ease; }
+.footer__social-link:hover{ background: var(--wir-purple); border-color: var(--wir-purple); transform: translateY(-1px); }
 .footer__bot{
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 32px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em;

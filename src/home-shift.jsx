@@ -1,52 +1,51 @@
 /* ───────── Movement 03 · The Shift + 04 · The Stack ───────── */
 
 function Shift() {
-  const gargalos = [
-    { c:"var(--wir-blue)",   k:"Intake sem triagem",
-      hoje:"Cotações chegam por e-mail sem priorização — fila por ordem de chegada.",
-      impacto:"Oportunidades de alto valor ficam enterradas." },
-    { c:"var(--wir-purple)", k:"Análise 100% manual",
-      hoje:"Underwriter extrai dados de e-mails, PDFs e planilhas — horas por cotação.",
-      impacto:"Maior parte do tempo gasto em operação, não em decisão." },
-    { c:"var(--wir-amber)",  k:"Pricing sem padronização",
-      hoje:"Manual de subscrição em PDF, fórmulas em Excel — sem trilha de auditoria.",
-      impacto:"Inconsistência de decisão entre subscritores." },
-    { c:"var(--wir-coral)",  k:"Aprovação por e-mail",
-      hoje:"Cadeia de alçadas via e-mail — sem rastreamento de SLA.",
-      impacto:"Propostas expiram antes da decisão final." },
-    { c:"#10B981",           k:"Zero visibilidade",
-      hoje:"Sem dashboard, sem analytics, sem pipeline em tempo real.",
-      impacto:"Gestão opera no escuro — decisões sem dados." },
+  // Dores vs Soluções — slide institucional, mapeado a SSA/UCP/em-dev
+  const rows = [
+    { dor:"E-mails de cotações desorganizados",       sol:"Estruturação e leitura automática de submissões",  prod:"SSA",       status:"prod" },
+    { dor:"Falta de priorização comercial",            sol:"Classificação por apetite e rentabilidade",         prod:"SSA",       status:"prod" },
+    { dor:"Underwriter fazendo operação manual",       sol:"Eliminação completa das tarefas manuais",           prod:"UCP",       status:"prod" },
+    { dor:"Pipeline invisível para gestão",            sol:"Dashboard estratégico em tempo real",               prod:"UCP",       status:"prod" },
+    { dor:"Riscos fora do apetite processados",        sol:"Recusa automática inteligente",                     prod:"SSA / UCP", status:"prod" },
+    { dor:"TI sobrecarregada e sem orçamento",         sol:"Plataforma 100% externa — sem TI",                  prod:"SSA / UCP", status:"prod" },
   ];
   return (
     <section className="shift" data-reveal>
       <div className="wrap shift__head">
-        <div className="eyebrow">· 03 — Diagnóstico</div>
+        <div className="eyebrow">· Dores vs. Soluções</div>
         <h2 className="shift__title display">
-          Cinco gargalos que<br/><em>limitam o crescimento.</em>
+          O problema estrutural.<br/><em>A resposta da WIR.</em>
         </h2>
-        <p className="shift__sub">O que observamos dentro das operações de subscrição hoje — e onde a WIR se encaixa como camada de decisão sem substituir o core.</p>
+        <p className="shift__sub">Cada dor que observamos dentro das operações de subscrição mapeia diretamente para uma capacidade da plataforma — sem trocar o core, sem projeto pesado de TI.</p>
       </div>
       <div className="wrap">
-        <div className="gargalos">
-          <div className="gargalos__head">
-            <div>Gargalo</div>
-            <div>Como funciona hoje</div>
-            <div>Impacto no negócio</div>
+        <div className="dvs">
+          <div className="dvs__head">
+            <div className="dvs__head-l">Antes · Problema estrutural</div>
+            <div className="dvs__head-c"></div>
+            <div className="dvs__head-r">Solução WIR</div>
+            <div className="dvs__head-p">Produto</div>
           </div>
-          {gargalos.map((g,i) => (
-            <div key={i} className="gargalos__row" style={{"--c": g.c}}>
-              <div className="gargalos__k">
-                <span className="gargalos__num">/0{i+1}</span>
-                <span>{g.k}</span>
+          {rows.map((r,i) => (
+            <div key={i} className="dvs__row">
+              <div className="dvs__dor">
+                <span className="dvs__x" aria-hidden>✕</span>
+                {r.dor}
               </div>
-              <div className="gargalos__hoje">{g.hoje}</div>
-              <div className="gargalos__impacto">{g.impacto}</div>
+              <div className="dvs__arrow" aria-hidden>→</div>
+              <div className="dvs__sol">
+                <span className="dvs__check" aria-hidden>✓</span>
+                {r.sol}
+              </div>
+              <div className="dvs__prod">{r.prod}</div>
             </div>
           ))}
-          <div className="gargalos__foot">
-            <span>· Fonte: entrevistas com times de subscrição em seguradoras e corretoras LatAm</span>
-          </div>
+        </div>
+        <div className="dvs__legend">
+          <span className="dvs__pill dvs__pill--dev">XBA</span>
+          <span className="dvs__pill dvs__pill--dev">SNB</span>
+          <span className="dvs__legend-txt">Novos produtos em desenvolvimento</span>
         </div>
       </div>
     </section>
