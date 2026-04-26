@@ -49,7 +49,7 @@ function BlogHero() {
           </h1>
           <p className="blhero__sub">Ensaios, casos de uso e notas técnicas do time da WIR sobre como Inteligência Artificial está redesenhando a operação do mercado segurador.</p>
         </div>
-        <article className="blhero__feature" onClick={()=>{}}>
+        <article className="blhero__feature">
           <div className="blhero__feature-img"
             style={hero.img
               ? { backgroundImage: `linear-gradient(180deg, rgba(11,10,8,0.15), rgba(11,10,8,0.65)), url(${hero.img})`, backgroundSize: "cover", backgroundPosition: "center" }
@@ -70,7 +70,7 @@ function BlogHero() {
                 <b>{hero.author}</b>
                 <span>{hero.role}</span>
               </div>
-              <a className="blhero__feature-cta" href="#">Ler o ensaio <span aria-hidden>→</span></a>
+              <span className="blhero__feature-cta blhero__feature-cta--soon">Em breve <span aria-hidden>·</span></span>
             </div>
           </div>
         </article>
@@ -134,7 +134,7 @@ function BlogGrid({ posts }) {
                         <b>{p.author}</b>
                         <span>{p.role}</span>
                       </div>
-                      <a className="blpost__cta" href="#">Ler <span aria-hidden>→</span></a>
+                      <span className="blpost__cta blpost__cta--soon">Em breve</span>
                     </div>
                   </div>
                 </article>
@@ -160,8 +160,15 @@ function BlogGrid({ posts }) {
               <div className="eyebrow eyebrow--onDark" style={{marginBottom: 20}}>· Newsletter</div>
               <h3 className="display blside__news-title">Insights de IA,<br/><em>quinzenalmente.</em></h3>
               <p className="blside__news-sub">Ensaios curtos, 1 caso prático e leituras recomendadas. Sem marketing.</p>
-              <form className="blside__news-form" onSubmit={(e)=>e.preventDefault()}>
-                <input type="email" placeholder="seu@email.com"/>
+              <form className="blside__news-form" onSubmit={(e)=>{
+                e.preventDefault();
+                const email = e.target.elements[0].value.trim();
+                if (!email) return;
+                const subject = "Inscrição newsletter Insights de IA";
+                const body = `Quero me inscrever na newsletter da WIR Innovation.%0A%0AE-mail: ${encodeURIComponent(email)}`;
+                window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${body}`;
+              }}>
+                <input type="email" placeholder="seu@email.com" required/>
                 <button type="submit">Assinar <span aria-hidden>→</span></button>
               </form>
               <div className="blside__news-meta">· Comunidade de operadores do setor · sem spam</div>
@@ -170,7 +177,7 @@ function BlogGrid({ posts }) {
               <div className="eyebrow" style={{marginBottom: 16}}>· Tópicos</div>
               <div className="blside__tags-row">
                 {["IA aplicada","underwriting","auditabilidade","LGPD","compliance","subscrição","integrações","observability"].map((t,i) => (
-                  <a key={i} href="#" className="blside__tag">#{t}</a>
+                  <span key={i} className="blside__tag">#{t}</span>
                 ))}
               </div>
             </div>

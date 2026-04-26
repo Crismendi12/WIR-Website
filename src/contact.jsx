@@ -96,6 +96,32 @@ function ContactForm() {
 
   const [submitted, setSubmitted] = React.useState(false);
 
+  // Submit handler: opens user's e-mail client with pre-filled message to contato@wirinnovation.ai
+  // Until a server-side endpoint (Formspree/N8N webhook) is configured, this guarantees the lead actually reaches us.
+  const handleSubmit = () => {
+    const interestLabel = (interests.find(x => x.k === data.interest) || {}).t || data.interest;
+    const subject = `[WIR · novo contato] ${data.name} · ${data.company}`;
+    const body =
+`Nome: ${data.name}
+E-mail: ${data.email}
+Telefone: ${data.phone || "—"}
+
+Empresa: ${data.company}
+Porte: ${data.size}
+Papel: ${data.role}
+
+Interesse: ${interestLabel} (${data.interest})
+
+Contexto:
+${data.notes || "(sem contexto adicional)"}
+
+—
+Enviado pelo formulário do site wirinnovation.ai`;
+    const mailto = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setSubmitted(true);
+  };
+
   if (submitted) {
     return (
       <section className="ctform" data-reveal>
@@ -106,7 +132,10 @@ function ContactForm() {
               Obrigado, <em>{data.name.split(" ")[0] || "pessoal"}.</em>
             </h2>
             <p className="ctform__done-lede">
-              Respondemos em até 6h úteis com 2 ou 3 horários para uma conversa de 30 minutos. Enquanto isso, você recebe um deck técnico com arquitetura e casos de uso no e-mail <b>{data.email}</b>.
+              Seu cliente de e-mail abriu uma mensagem pré-preenchida para <b>contato@wirinnovation.ai</b>. Confirme o envio e respondemos em até 24h úteis com 2 ou 3 horários para conversar com nossos sócios.
+            </p>
+            <p className="ctform__done-lede" style={{marginTop: 16}}>
+              Caso o e-mail não tenha aberto automaticamente, escreva para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a>.
             </p>
             <div className="ctform__done-ref num">· Ref #{Math.random().toString(36).slice(2,8).toUpperCase()}</div>
           </div>
@@ -214,7 +243,7 @@ function ContactForm() {
               Continuar <span className="btn__arrow">→</span>
             </button>
           ) : (
-            <button className="btn btn--solid" disabled={!canNext()} onClick={()=>setSubmitted(true)}>
+            <button className="btn btn--solid" disabled={!canNext()} onClick={handleSubmit}>
               Enviar pedido <span className="btn__arrow">→</span>
             </button>
           )}

@@ -403,8 +403,8 @@ function AboutClose({ go }) {
             Engineering, ML, delivery e GTM. Posições remotas, SP, NYC e Silicon Valley. Se você já operou seguro por dentro ou construiu plataforma regulada em outro setor — temos cadeira aberta.
           </p>
           <div className="abclose__actions">
-            <a className="btn btn--solid btn--onDark" href="#" onClick={(e)=>e.preventDefault()}>
-              Ver carreiras <span className="btn__arrow">→</span>
+            <a className="btn btn--solid btn--onDark" href="mailto:contato@wirinnovation.ai?subject=Interesse%20em%20carreira%20WIR%20Innovation&body=Ol%C3%A1%2C%20gostaria%20de%20saber%20sobre%20oportunidades%20na%20WIR%20Innovation.">
+              Enviar currículo <span className="btn__arrow">→</span>
             </a>
             <button className="btn btn--ghost btn--onDark" onClick={()=>go("contact")}>
               Falar com a equipe <span className="btn__arrow">→</span>
