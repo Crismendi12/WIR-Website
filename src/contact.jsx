@@ -95,13 +95,73 @@ function ContactForm() {
   };
 
   const [submitted, setSubmitted] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(null);
 
-  // Submit handler: opens user's e-mail client with pre-filled message to contato@wirinnovation.ai
-  // Until a server-side endpoint (Formspree/N8N webhook) is configured, this guarantees the lead actually reaches us.
-  const handleSubmit = () => {
+  // Submit pipeline (in order):
+  //   1) POST to Supabase REST API (durable storage, queryable later)
+  //   2) Fire-and-forget POST to notifyWebhook (Slack/n8n/Make for instant alerts)
+  //   3) If both fail, open mailto fallback so the lead still reaches us
+  // This guarantees zero lost leads in any failure mode.
+  const handleSubmit = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    setSubmitError(null);
+
     const interestLabel = (interests.find(x => x.k === data.interest) || {}).t || data.interest;
-    const subject = `[WIR · novo contato] ${data.name} · ${data.company}`;
-    const body =
+    const payload = {
+      name:           data.name,
+      email:          data.email,
+      phone:          data.phone || null,
+      company:        data.company,
+      company_size:   data.size,
+      role:           data.role,
+      interest_code:  data.interest,
+      interest_label: interestLabel,
+      notes:          data.notes || null,
+      source:         "website",
+      page:           "/contact",
+      user_agent:     navigator.userAgent,
+      submitted_at:   new Date().toISOString(),
+    };
+
+    const cfg = window.WIR_CONFIG || {};
+    let supabaseOk = false;
+
+    // Step 1 · Supabase REST insert
+    if (cfg.supabaseUrl && cfg.supabaseAnonKey) {
+      try {
+        const res = await fetch(`${cfg.supabaseUrl}/rest/v1/${cfg.leadsTable || "leads"}`, {
+          method: "POST",
+          headers: {
+            "Content-Type":  "application/json",
+            "apikey":        cfg.supabaseAnonKey,
+            "Authorization": `Bearer ${cfg.supabaseAnonKey}`,
+            "Prefer":        "return=minimal",
+          },
+          body: JSON.stringify(payload),
+        });
+        supabaseOk = res.ok;
+        if (!res.ok) console.warn("Supabase lead insert failed", res.status, await res.text());
+      } catch (e) {
+        console.warn("Supabase lead insert threw", e);
+      }
+    }
+
+    // Step 2 · Webhook (fire and forget — automation: Slack/n8n/Make/Zapier)
+    if (cfg.notifyWebhook) {
+      fetch(cfg.notifyWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        mode: "no-cors", // tolerate cross-origin webhooks (Slack, Make, etc.)
+      }).catch(() => {});
+    }
+
+    // Step 3 · mailto fallback if Supabase didn't accept the insert
+    if (!supabaseOk) {
+      const subject = `[WIR · novo contato] ${data.name} · ${data.company}`;
+      const body =
 `Nome: ${data.name}
 E-mail: ${data.email}
 Telefone: ${data.phone || "—"}
@@ -117,8 +177,10 @@ ${data.notes || "(sem contexto adicional)"}
 
 —
 Enviado pelo formulário do site wirinnovation.ai`;
-    const mailto = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+      window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -243,8 +305,8 @@ Enviado pelo formulário do site wirinnovation.ai`;
               Continuar <span className="btn__arrow">→</span>
             </button>
           ) : (
-            <button className="btn btn--solid" disabled={!canNext()} onClick={handleSubmit}>
-              Enviar pedido <span className="btn__arrow">→</span>
+            <button className="btn btn--solid" disabled={!canNext() || submitting} onClick={handleSubmit}>
+              {submitting ? "Enviando…" : "Enviar pedido"} <span className="btn__arrow">→</span>
             </button>
           )}
         </div>

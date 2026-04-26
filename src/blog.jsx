@@ -160,13 +160,40 @@ function BlogGrid({ posts }) {
               <div className="eyebrow eyebrow--onDark" style={{marginBottom: 20}}>· Newsletter</div>
               <h3 className="display blside__news-title">Insights de IA,<br/><em>quinzenalmente.</em></h3>
               <p className="blside__news-sub">Ensaios curtos, 1 caso prático e leituras recomendadas. Sem marketing.</p>
-              <form className="blside__news-form" onSubmit={(e)=>{
+              <form className="blside__news-form" onSubmit={async (e)=>{
                 e.preventDefault();
                 const email = e.target.elements[0].value.trim();
                 if (!email) return;
-                const subject = "Inscrição newsletter Insights de IA";
-                const body = `Quero me inscrever na newsletter da WIR Innovation.%0A%0AE-mail: ${encodeURIComponent(email)}`;
-                window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${body}`;
+                const payload = { email, source: "newsletter", page: "/blog", submitted_at: new Date().toISOString() };
+                const cfg = window.WIR_CONFIG || {};
+                let ok = false;
+                if (cfg.supabaseUrl && cfg.supabaseAnonKey) {
+                  try {
+                    const res = await fetch(`${cfg.supabaseUrl}/rest/v1/${cfg.newsletterTable || "newsletter_signups"}`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type":  "application/json",
+                        "apikey":        cfg.supabaseAnonKey,
+                        "Authorization": `Bearer ${cfg.supabaseAnonKey}`,
+                        "Prefer":        "return=minimal",
+                      },
+                      body: JSON.stringify(payload),
+                    });
+                    ok = res.ok;
+                  } catch (err) { console.warn("newsletter insert failed", err); }
+                }
+                if (cfg.notifyWebhook) {
+                  fetch(cfg.notifyWebhook, { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({ ...payload, type: "newsletter_signup" }), mode: "no-cors" }).catch(()=>{});
+                }
+                if (ok) {
+                  e.target.elements[0].value = "";
+                  alert("Inscrição recebida! Você receberá os próximos Insights de IA no e-mail informado.");
+                } else {
+                  // Fallback mailto
+                  const subject = "Inscrição newsletter Insights de IA";
+                  const body = `Quero me inscrever na newsletter da WIR Innovation.%0A%0AE-mail: ${encodeURIComponent(email)}`;
+                  window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${body}`;
+                }
               }}>
                 <input type="email" placeholder="seu@email.com" required/>
                 <button type="submit">Assinar <span aria-hidden>→</span></button>

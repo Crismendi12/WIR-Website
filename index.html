@@ -46,12 +46,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- Styles -->
-<link rel="stylesheet" href="style.css?v=20260425c" />
-<link rel="stylesheet" href="home.css?v=20260425c" />
-<link rel="stylesheet" href="solutions.css?v=20260425c" />
-<link rel="stylesheet" href="about.css?v=20260425c" />
-<link rel="stylesheet" href="blog.css?v=20260425c" />
-<link rel="stylesheet" href="contact.css?v=20260425c" />
+<link rel="stylesheet" href="style.css?v=20260425d" />
+<link rel="stylesheet" href="home.css?v=20260425d" />
+<link rel="stylesheet" href="solutions.css?v=20260425d" />
+<link rel="stylesheet" href="about.css?v=20260425d" />
+<link rel="stylesheet" href="blog.css?v=20260425d" />
+<link rel="stylesheet" href="contact.css?v=20260425d" />
 
 <!-- Structured data for SEO / GEO (ChatGPT, Perplexity) -->
 <script type="application/ld+json">
@@ -78,6 +78,26 @@
       "titleWeight": 700,
       "watermark": "on"
     }/*EDITMODE-END*/;
+  </script>
+
+  <!-- ─────── WIR Form Submission Config ─────── -->
+  <!-- Fill these in to enable real lead capture in Supabase + automation.
+       Until filled, the contact form falls back to a pre-composed mailto.
+       Both keys below are SAFE TO EXPOSE in client code (Supabase anon key
+       is designed for browser use, protected by RLS policies).            -->
+  <script>
+    window.WIR_CONFIG = {
+      // Supabase (recommended primary): create project at supabase.com, then:
+      //   1) Run the SQL in /docs/setup-supabase.sql to create the leads table
+      //   2) Settings → API → copy "Project URL" and "anon public" key below
+      supabaseUrl:     "",  // e.g. "https://abcd1234.supabase.co"
+      supabaseAnonKey: "",  // public anon key (safe to expose, RLS-protected)
+      leadsTable:      "leads",
+
+      // Optional: webhook fired in parallel (n8n / Make / Zapier / Slack incoming)
+      // Use this for instant notifications, not as primary storage.
+      notifyWebhook:   ""   // e.g. "https://hook.us1.make.com/abc123..."
+    };
   </script>
 
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
