@@ -13,7 +13,7 @@ function DecisionFlow() {
     { k: "ENRIQ."     },
     { k: "SCORE"      },
     { k: "DECISÃO"    },
-    { k: "EMISSÃO"    },
+    { k: "SUBSCRIÇÃO" },
   ];
 
   return (
@@ -29,7 +29,7 @@ function DecisionFlow() {
         </div>
       </div>
 
-      <svg className="dflow__svg" viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <svg className="dflow__svg" viewBox="-30 0 510 340" xmlns="http://www.w3.org/2000/svg" aria-hidden>
         <defs>
           <linearGradient id="dflowPath" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#7540AC" stopOpacity="0.15"/>
@@ -109,7 +109,7 @@ function DecisionFlow() {
         <text x="250" y="310" fill="#FE8B77"
           fontSize="9" fontFamily="JetBrains Mono, monospace"
           textAnchor="middle" letterSpacing="1.5" fillOpacity="0.75">
-          · ciclo de aprendizado contínuo ·
+          · ciclo de aprendizado contínuo · machine learning ·
         </text>
       </svg>
 
@@ -127,15 +127,15 @@ function DecisionFlow() {
 function Opening({ go }) {
   const index = [
     { n:"01", k:"O DESAFIO",       stat:<>Estrutura das seguradoras <b>não acompanha</b> o crescimento</>,
-      cap:"40% do tempo do underwriter perdido em tarefas administrativas.", goHash:"desafios" },
-    { n:"02", k:"OS PRODUTOS",     stat:<><b>SSA</b> · <b>UCP</b> em produção · <b>XBA</b> · <b>SNB</b> em desenvolvimento</>,
-      cap:"Camada única de IA conectando todo o ciclo de subscrição.", go:"solutions" },
+      cap:"40% do tempo do executivo envolvido em tarefas administrativas.", goHash:"desafios" },
+    { n:"02", k:"OS PRODUTOS",     stat:<><b>SSA</b> · <b>UI</b> em operação · <b>XBA</b> · <b>SNB</b> em desenvolvimento</>,
+      cap:"Camada única de IA conectando todo o ciclo do seu negócio.", go:"solutions" },
     { n:"03", k:"A EVIDÊNCIA",     stat:<>Mais volume · <b>menos</b> custo manual</>,
       cap:"Mesma equipe, capacidade ampliada — sem trocar o core.", go:"solutions" },
     { n:"04", k:"A CLASSIFICAÇÃO", stat:<>Automático · assistido · <b>sênior</b></>,
       cap:"Foco humano onde realmente importa: analisar e subscrever risco.", go:"solutions" },
     { n:"05", k:"O IMPACTO",       stat:<>Plataforma de IA para <b>ESCALAR</b></>,
-      cap:"Sua equipe tem o conhecimento. A WIR dá os trilhos.", go:"about" },
+      cap:"Sua equipe tem o conhecimento. A WIR entrega a plataforma.", go:"about" },
   ];
   return (
     <section className="opening">
@@ -144,7 +144,7 @@ function Opening({ go }) {
         <div className="opening__mast">
           <div className="opening__mast-L">
             <span>ABR 2026</span>
-            <span>INFRAESTRUTURA DE IA · SEGUROS</span>
+            <span>INTELIGÊNCIA ARTIFICIAL · SEGUROS</span>
           </div>
           <div className="opening__mast-R">
             <span>SÃO PAULO ⟶ SILICON VALLEY</span>
@@ -157,7 +157,7 @@ function Opening({ go }) {
           <div className="opening__hero-L">
             <div className="opening__kicker">
               <span className="opening__kicker-dot"/>
-              <span>Infraestrutura em produção · decisão 24/7</span>
+              <span>Plataforma em produção · decisão 24/7</span>
             </div>
             <h1 className="display opening__title">
               A camada de<br/>
@@ -165,7 +165,7 @@ function Opening({ go }) {
               do seguro.
             </h1>
             <p className="opening__lede">
-              A nova era de seguros é <b>inteligência de dados, velocidade e escala</b>. A WIR entrega essa plataforma de IA dentro dos sistemas que você já opera — sem substituir o seu core.
+              A nova era do seguro é <b>inteligência de dados, velocidade e escala</b>. A WIR entrega uma camada de IA com analytics e dashboards real time, sem substituir os sistemas atuais.
             </p>
             <div className="opening__actions">
               <button className="btn btn--solid" onClick={()=>go("contact")}>
@@ -184,12 +184,6 @@ function Opening({ go }) {
 
         {/* Editorial index */}
         <div className="opening__index">
-          <div className="opening__index-head">
-            <div className="eyebrow">Nesta edição</div>
-            <span className="opening__index-meta">
-              Plataforma WIR · Em produção · Q1 2026
-            </span>
-          </div>
           <div className="opening__index-grid">
             {index.map((item) => (
               <button key={item.n} className="opening__index-item"
@@ -219,25 +213,34 @@ function Opening({ go }) {
 }
 
 function Proof() {
-  const m = [
-    { w:"Minutos",    l:"Decisão",         c:"Não semanas. Não comitês intermináveis." },
-    { w:"Contínuo",   l:"Processamento",   c:"Operação 24/7 — exceção como exceção." },
-    { w:"Auditável",  l:"Workflow",        c:"Modelo, versão, confiança e inputs — exportáveis." },
-    { w:"Ampliada",   l:"Capacidade",      c:"Mesmo time. Mais negócio. Sem contratar." },
+  const indicators = [
+    { sign:"+", w:"Eficiência",   l:"Escalar volume de cotações",
+      c:"Possibilidade de crescer exponencialmente o volume de cotações." },
+    { sign:"+", w:"Faturamento",  l:"Mais cotações geram mais negócios fechados",
+      c:"O retorno mais rápido aos corretores gera mais possibilidades de negócios e repiques, além do aumento do volume de cotações por mês." },
+    { sign:"−", w:"DA · Custos",  l:"Aumento de margem · Lucratividade",
+      c:"Com o aumento das cotações sem necessidade de crescer o headcount na mesma proporção, traz uma redução da Despesa Administrativa e possível aumento de margem." },
+    { sign:"+", w:"Inteligência", l:"Dashboards, Analytics e Relatórios real time",
+      c:"Analisar de forma pró-ativa os negócios em andamento e o pipeline para focar nos fechamentos." },
+    { sign:"+", w:"AI First",     l:"Pioneiros em automação com IA",
+      c:"Quem sai na frente com soluções tecnológicas consegue liderar e atrair os melhores resultados, com avaliação de risco e assertividade na precificação superiores aos concorrentes." },
+    { sign:"+", w:"Escalar",      l:"Futuro das seguradoras",
+      c:"Possibilidade de escalar os negócios devido às automações e à evolução da inteligência artificial." },
   ];
   return (
     <section className="proof" data-reveal>
       <div className="wrap">
         <div className="proof__head">
-          <div className="eyebrow">· ROI — Retorno sobre o investimento</div>
-          <div className="proof__note">Resultados observados em produção · sujeitos a NDA</div>
+          <div className="eyebrow">· Análise de possibilidades de retorno sobre o investimento</div>
+          <h2 className="proof__title display">6 indicadores estratégicos de resultado</h2>
         </div>
-        <div className="proof__grid">
-          {m.map((x,i) => (
+        <div className="proof__grid proof__grid--6">
+          {indicators.map((x,i) => (
             <div key={i} className="proof__cell">
-              <div className="proof__idx">/0{i+1}</div>
+              <div className="proof__word display">
+                <span className="proof__sign">{x.sign}</span> {x.w}
+              </div>
               <div className="proof__label">{x.l}</div>
-              <div className="proof__word display">{x.w}.</div>
               <div className="proof__caption">{x.c}</div>
             </div>
           ))}

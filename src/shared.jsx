@@ -38,9 +38,11 @@ function Ticker() {
 function Nav({ route, go }) {
   const links = [
     { id: "home", label: "Início" },
-    { id: "solutions", label: "Soluções" },
     { id: "about", label: "Sobre" },
-    { id: "blog", label: "Insights" },
+    { id: "solutions", label: "Produtos & IA" },
+    { id: "protection", label: "Proteção de Dados" },
+    { id: "blog", label: "Insights & News" },
+    { id: "contact", label: "Contato" },
   ];
   return (
     <>
@@ -75,6 +77,7 @@ function Footer({ go }) {
     { k:"LinkedIn",  href:"https://www.linkedin.com/company/wir-innovation/" },
     { k:"Instagram", href:"https://www.instagram.com/wirinnovation" },
     { k:"X",         href:"https://x.com/wirinnovationai" },
+    { k:"Facebook",  href:"#" },
   ];
   return (
     <footer className="footer">
@@ -82,7 +85,7 @@ function Footer({ go }) {
         <div className="footer__grid">
           <div>
             <Wordmark variant="white"/>
-            <p className="footer__brand-desc">A nova era de seguros é inteligência de dados, velocidade e escala. A WIR Innovation é a plataforma de IA que entrega essa estrutura dentro dos sistemas que você já opera.</p>
+            <p className="footer__brand-desc">A nova era do seguro é inteligência de dados, velocidade e escala. A WIR Innovation é a plataforma de IA que entrega essa estrutura dentro dos sistemas que você já opera.</p>
             <div className="footer__social">
               {socials.map((s,i) => (
                 <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="footer__social-link">
@@ -92,21 +95,21 @@ function Footer({ go }) {
             </div>
           </div>
           <div>
-            <h4>Produto</h4>
+            <h4>Empresa</h4>
             <ul>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Soluções</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Workflow Inteligente</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Integrações</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Pricing</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("home")}}>Início</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Sobre</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("solutions")}}>Produtos & IA</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("protection")}}>Proteção de Dados</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("blog")}}>Insights & News</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("contact")}}>Contato</a></li>
             </ul>
           </div>
           <div>
-            <h4>Empresa</h4>
+            <h4>Contato</h4>
             <ul>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Sobre</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("blog")}}>Insights de IA</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("contact")}}>Contato</a></li>
               <li><a href="mailto:contato@wirinnovation.ai">contato@wirinnovation.ai</a></li>
+              <li><a href="#" onClick={(e)=>{e.preventDefault();go("contact")}}>Falar com a equipe</a></li>
             </ul>
           </div>
           <div>

@@ -84,7 +84,7 @@ function ContactForm() {
 
   const interests = [
     { k:"SSA", t:"Smart Sales",          d:"Distribuição + lead scoring",   c:"#1C17FF" },
-    { k:"UCP", t:"Underwriter Co-Pilot", d:"Subscrição + cotação",          c:"#A44F98" },
+    { k:"UI",  t:"Underwriter Intelligence", d:"Subscrição inteligente",       c:"#A44F98" },
   ];
   const roles = [
     "C-level (CEO / COO / CIO)",

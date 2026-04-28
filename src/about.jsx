@@ -2,35 +2,17 @@
 
 function AboutHero() {
   return (
-    <section className="abhero">
+    <section className="abhero abhero--solo">
       <div className="wrap">
         <div className="abhero__meta">
           <span>· Sobre a WIR Innovation</span>
           <span>· Plataforma de IA · Mercado segurador</span>
           <span>· Sócios e Conselheiros World Class</span>
         </div>
-        <div className="abhero__grid">
-          <div>
-            <div className="eyebrow">· WIR significa "Nós"</div>
-            <h1 className="display abhero__title">
-              Construímos a<br/>
-              <em>plataforma</em><br/>
-              que o seguro<br/>
-              <em>nunca teve.</em>
-            </h1>
-          </div>
-          <div className="abhero__portrait">
-            <div className="abhero__photo abhero__photo--image abhero__photo--small"
-              role="img" aria-label="Nicholas Weiser, CEO · Co-Founder">
-              <img src="assets/team/nicholas.jpg" alt="Nicholas Weiser" className="abhero__photo-img"/>
-              <span className="abhero__photo-overlay"/>
-              <span className="abhero__photo-caption">
-                <b>Nicholas Weiser</b>
-                <em>CEO · Co-Founder</em>
-              </span>
-            </div>
-          </div>
-        </div>
+        <div className="eyebrow">· WIR significa "Nós"</div>
+        <h1 className="display abhero__title abhero__title--solo">
+          Construímos a <em>plataforma</em> que proporciona mais <em>eficiência</em> e permite <em>escalar operações em seguros.</em>
+        </h1>
         <p className="abhero__lede">
           Não somos apenas uma empresa de tecnologia. Somos uma empresa nativa em IA aplicada a negócios — fundada por sócios apaixonados por entregar resultados transformacionais ao mercado de seguros e saúde.
         </p>
@@ -52,6 +34,9 @@ function AboutEssay() {
         <div className="abessay__grid">
           <div className="abessay__side">
             <div className="eyebrow">· O ensaio</div>
+            <div className="abessay__photo"
+              style={{backgroundImage:"url(assets/team/nicholas.jpg)"}}
+              role="img" aria-label="Nicholas Weiser, CEO · Co-Founder"/>
             <div className="abessay__pullquote display">
               "Não se resolve o seguro com <em>mais software</em>. Resolve-se com a <em>plataforma</em> certa."
             </div>

@@ -3,7 +3,7 @@
 function App() {
   const [route, setRoute] = useState(() => {
     const h = (location.hash || "#home").replace("#","");
-    return ["home","solutions","about","blog","contact"].includes(h) ? h : "home";
+    return ["home","solutions","about","blog","contact","protection"].includes(h) ? h : "home";
   });
 
   const go = (id) => {
@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const onHash = () => {
       const h = (location.hash || "#home").replace("#","");
-      if (["home","solutions","about","blog","contact"].includes(h)) setRoute(h);
+      if (["home","solutions","about","blog","contact","protection"].includes(h)) setRoute(h);
     };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
@@ -34,6 +34,7 @@ function App() {
   if (route === "about") Page = <AboutPage go={go}/>;
   if (route === "blog") Page = <BlogPage go={go}/>;
   if (route === "contact") Page = <ContactPage go={go}/>;
+  if (route === "protection") Page = <DataProtectionPage go={go}/>;
 
   return (
     <>

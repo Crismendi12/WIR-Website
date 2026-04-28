@@ -1,4 +1,4 @@
-/* ───────── Ideias · publicação digital ───────── */
+/* ───────── Insights & News · publicação digital ───────── */
 
 const POSTS = [
   { id:1, cat:"Ensaio", hero:true, title:"O underwriter não morre. O modelo operacional dele, sim.", sub:"Por que a próxima década do seguro vai ser definida pela divisão entre quem tem infra de decisão e quem ainda mora em planilha.",
@@ -36,12 +36,12 @@ function BlogHero() {
     <section className="blhero">
       <div className="wrap">
         <div className="blhero__meta">
-          <span>· Insights de IA · Edição 14</span>
+          <span>· Insights & News · Edição 14</span>
           <span>· Publicado quinzenalmente</span>
           <span>· Atualizado Abr · 2026</span>
         </div>
         <div className="blhero__top">
-          <div className="eyebrow">· Insights de IA</div>
+          <div className="eyebrow">· Insights & News</div>
           <h1 className="display blhero__mast">
             Insights sobre<br/>
             <em>IA, seguro</em><br/>
@@ -158,7 +158,7 @@ function BlogGrid({ posts }) {
             </div>
             <div className="blside__news">
               <div className="eyebrow eyebrow--onDark" style={{marginBottom: 20}}>· Newsletter</div>
-              <h3 className="display blside__news-title">Insights de IA,<br/><em>quinzenalmente.</em></h3>
+              <h3 className="display blside__news-title">Insights & News,<br/><em>quinzenalmente.</em></h3>
               <p className="blside__news-sub">Ensaios curtos, 1 caso prático e leituras recomendadas. Sem marketing.</p>
               <form className="blside__news-form" onSubmit={async (e)=>{
                 e.preventDefault();
@@ -187,10 +187,10 @@ function BlogGrid({ posts }) {
                 }
                 if (ok) {
                   e.target.elements[0].value = "";
-                  alert("Inscrição recebida! Você receberá os próximos Insights de IA no e-mail informado.");
+                  alert("Inscrição recebida! Você receberá os próximos Insights & News no e-mail informado.");
                 } else {
                   // Fallback mailto
-                  const subject = "Inscrição newsletter Insights de IA";
+                  const subject = "Inscrição newsletter Insights & News";
                   const body = `Quero me inscrever na newsletter da WIR Innovation.%0A%0AE-mail: ${encodeURIComponent(email)}`;
                   window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${body}`;
                 }

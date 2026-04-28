@@ -133,11 +133,11 @@ p{ text-wrap: pretty; }
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3);
   border-left: 1px solid var(--paper-3); padding-left: 14px;
 }
-.nav__links{ display: flex; gap: 4px; }
+.nav__links{ display: flex; gap: 2px; flex-wrap: nowrap; }
 .nav__link{
-  padding: 8px 14px; border-radius: 999px;
-  font-size: 14px; font-weight: 500; color: var(--ink-2);
-  transition: background .2s;
+  padding: 8px 12px; border-radius: 999px;
+  font-size: 13px; font-weight: 500; color: var(--ink-2);
+  transition: background .2s; white-space: nowrap;
 }
 .nav__link:hover{ background: var(--paper-2); }
 .nav__link--active{

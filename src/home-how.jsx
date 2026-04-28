@@ -122,12 +122,6 @@ function Trust() {
 }
 
 function Closing({ go }) {
-  const dimensions = [
-    { k:"Volume",      l:"Cotações por mês",        d:"Quantos pedidos chegam pelos canais." },
-    { k:"Custo",       l:"Estrutura operacional",   d:"Headcount, ferramentas e tempo gasto em tarefas administrativas." },
-    { k:"Conversão",   l:"Apetite × resposta",      d:"Quanto da carteira fecha por velocidade de retorno." },
-    { k:"Compliance",  l:"Auditoria e SLA",         d:"Trilha de decisão, conformidade regulatória, governança interna." },
-  ];
   return (
     <section className="closing" data-reveal>
       <div className="wrap">
@@ -137,9 +131,6 @@ function Closing({ go }) {
             Sua equipe tem o <em>conhecimento.</em><br/>
             A WIR dá a <em>plataforma de IA para escalar.</em>
           </h2>
-          <p className="closing__lede">
-            Subscrição é ofício. A WIR não substitui quem decide — entrega os trilhos para que sua equipe escale decisão, capacidade e margem, sem tocar no seu core.
-          </p>
           <div className="closing__actions">
             <button className="btn btn--solid" onClick={()=>go("contact")}>
               Agendar conversa com nossos sócios <span className="btn__arrow">→</span>
@@ -147,45 +138,6 @@ function Closing({ go }) {
             <button className="btn btn--ghost" onClick={()=>go("solutions")}>
               Explorar soluções <span className="btn__arrow">→</span>
             </button>
-          </div>
-        </div>
-
-        <div className="closing__calc-wrap">
-          <div className="calc">
-            <div className="calc__head">
-              <div>
-                <div className="calc__eyebrow">· Simulação personalizada</div>
-                <div className="calc__title">Cada seguradora<br/><em>opera diferente.</em></div>
-              </div>
-              <div className="calc__pulse" aria-hidden>
-                <span className="calc__pulse-dot"/>
-                sob medida
-              </div>
-            </div>
-
-            <p className="calc__intro">
-              Não acreditamos em prometer números no site — acreditamos em <b>simular junto com você</b>. Em uma conversa de 30 min com nossos sócios, calibramos o modelo de impacto da WIR usando os seus dados reais: volume de cotações, custo por submissão, taxa de conversão e estrutura atual.
-            </p>
-
-            <div className="calc__dims">
-              {dimensions.map((d,i) => (
-                <div key={i} className="calc__dim">
-                  <div className="calc__dim-k">/0{i+1}</div>
-                  <div className="calc__dim-t">{d.k}</div>
-                  <div className="calc__dim-l">{d.l}</div>
-                  <div className="calc__dim-d">{d.d}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="calc__cta-row">
-              <div className="calc__cta-l">
-                <b>Resultado:</b> uma projeção honesta de payback, capacidade ampliada e ganho de margem — calibrada à sua realidade.
-              </div>
-              <button className="btn btn--solid btn--onDark" onClick={()=>go("contact")}>
-                Quero simular com meus dados <span className="btn__arrow">→</span>
-              </button>
-            </div>
           </div>
         </div>
       </div>
