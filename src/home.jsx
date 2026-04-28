@@ -8,14 +8,14 @@ function TrustBar() {
     {
       top: [
         { src: "assets/logos/bain-capital.png", alt: "Bain Capital" },
-        { wm: "Notredame Intermédica" },
+        { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
       ],
       bot: [{ src: "assets/logos/aon.png", alt: "Aon" }],
     },
     {
       top: [
         { src: "assets/logos/patria.png", alt: "Pátria Investimentos" },
-        { wm: "Athena Saúde" },
+        { src: "assets/logos/athena-saude.svg", alt: "Athena Saúde" },
       ],
       bot: [{ src: "assets/logos/gallagher.png", alt: "Gallagher" }],
     },
@@ -87,6 +87,7 @@ function HomePage({ go }) {
       <TrustBar/>
       <Trust/>
       <ProductTabs go={go}/>
+      <ArchFlow/>
       <Proof/>
       <Closing go={go}/>
     </>

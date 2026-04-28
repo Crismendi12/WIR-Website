@@ -539,6 +539,72 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em;
   color: var(--ink-4);
 }
+/* ─────────────────────────────────────────
+   05.5 · ARCHFLOW — animated architecture (bolinhas andando, ex-AXA)
+   ───────────────────────────────────────── */
+.archflow {
+  padding: 120px 0; background: var(--paper);
+  border-top: 1px solid rgba(11,10,8,.08);
+  border-bottom: 1px solid rgba(11,10,8,.08);
+  position: relative; overflow: hidden;
+}
+.archflow::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(800px 500px at 80% 30%, rgba(117,64,172,.04), transparent 60%),
+    radial-gradient(600px 400px at 20% 70%, rgba(248,173,57,.03), transparent 60%);
+}
+.archflow > .wrap { position: relative; z-index: 1; }
+.archflow__head { max-width: 880px; margin-bottom: 56px; }
+.archflow__title {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 64px); line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--ink); margin: 16px 0 16px;
+}
+.archflow__title em {
+  font-style: italic;
+  background: linear-gradient(90deg, var(--wir-purple) 0%, var(--wir-coral) 60%, var(--wir-amber) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.archflow__sub {
+  display: block; font-size: clamp(20px, 2.4vw, 32px);
+  color: var(--ink-3); margin-top: 8px;
+}
+.archflow__lede {
+  font-size: 17px; line-height: 1.55; color: var(--ink-2);
+  max-width: 720px; text-wrap: pretty;
+}
+.archflow__canvas {
+  width: 100%; padding: 32px 24px;
+  background: var(--paper-2);
+  border: 1px solid rgba(11,10,8,.08);
+  border-radius: 16px;
+  position: relative;
+}
+.archflow__svg {
+  width: 100%; height: auto; display: block;
+}
+.archflow__legend {
+  margin-top: 20px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--f-mono); font-size: 12px;
+  letter-spacing: .08em; color: var(--ink-3);
+}
+.archflow__pulse {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16,185,129,.6);
+  animation: archflowPulse 1.8s ease-in-out infinite;
+}
+@keyframes archflowPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,.6); }
+  50%     { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+}
+@media (max-width: 800px) {
+  .archflow { padding: 72px 0; }
+  .archflow__canvas { padding: 16px 8px; }
+}
+
 .proof__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
 .proof__grid--6 { grid-template-columns: repeat(3, 1fr); }
 @media (min-width: 1100px) { .proof__grid--6 { grid-template-columns: repeat(6, 1fr); } }

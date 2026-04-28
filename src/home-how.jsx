@@ -1,5 +1,156 @@
 /* ───────── Movement 05 · Workflow + 06 · Trust + 07 · Closing ───────── */
 
+// ArchFlow — replica do diagrama de arquitetura AXA (zonas + bolinhas animadas)
+// adaptado ao design system WIR (paper, brand gradient).
+function ArchFlow() {
+  const dotsRef = React.useRef([]);
+  const frameRef = React.useRef(null);
+
+  // 4 zone-based path waypoints (generic, no AXA branding)
+  const paths = [
+    [{x:80,y:80},{x:80,y:170},{x:300,y:170},{x:300,y:220},{x:480,y:175},{x:660,y:130},{x:660,y:220},{x:880,y:170},{x:1040,y:170},{x:1040,y:80}],
+    [{x:80,y:80},{x:80,y:170},{x:300,y:115},{x:300,y:170},{x:480,y:210},{x:660,y:130},{x:740,y:220},{x:880,y:185},{x:1040,y:170},{x:1040,y:260}],
+    [{x:80,y:80},{x:80,y:170},{x:300,y:170},{x:300,y:220},{x:480,y:240},{x:660,y:130},{x:660,y:260},{x:740,y:300},{x:880,y:170},{x:1040,y:170}],
+  ];
+
+  React.useEffect(() => {
+    const start = performance.now();
+    const duration = 6000;
+    const tick = (now) => {
+      const elapsed = now - start;
+      for (let d = 0; d < paths.length; d++) {
+        const dot = dotsRef.current[d];
+        if (!dot) continue;
+        const path = paths[d];
+        const offset = d * 1200;
+        const t = ((elapsed + offset) % duration) / duration;
+        const segCount = path.length - 1;
+        const seg = Math.min(Math.floor(t * segCount), segCount - 1);
+        const segT = (t * segCount) - seg;
+        const cx = path[seg].x + (path[seg+1].x - path[seg].x) * segT;
+        const cy = path[seg].y + (path[seg+1].y - path[seg].y) * segT;
+        dot.setAttribute("cx", cx);
+        dot.setAttribute("cy", cy);
+      }
+      frameRef.current = requestAnimationFrame(tick);
+    };
+    frameRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameRef.current);
+  }, []);
+
+  const zoneLabel = (x, label, color) => (
+    <text x={x} y="22" fill={color} fontSize="9" fontWeight="800"
+      fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".14em">{label}</text>
+  );
+
+  const node = (x, y, w, h, fill, stroke, label, sub, labelColor) => (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx="10" fill={fill} stroke={stroke} strokeWidth="1.5"/>
+      <text x={x + w/2} y={y + h/2 - 2} fill={labelColor} fontSize="11" fontWeight="700"
+        fontFamily="Inter, sans-serif" textAnchor="middle">{label}</text>
+      <text x={x + w/2} y={y + h/2 + 14} fill="#6A6458" fontSize="8"
+        fontFamily="JetBrains Mono, monospace" textAnchor="middle">{sub}</text>
+    </g>
+  );
+
+  return (
+    <section className="archflow" data-reveal>
+      <div className="wrap">
+        <div className="archflow__head">
+          <div className="eyebrow">· Arquitetura WIR</div>
+          <h2 className="archflow__title display">
+            Do <em>e-mail da corretora</em> à decisão no dashboard.<br/>
+            <span className="archflow__sub">Ponta a ponta — em minutos, auditável.</span>
+          </h2>
+          <p className="archflow__lede">
+            Fluxo end-to-end: a submissão chega → a WIR processa → a IA prioriza → o output volta ao seu sistema. Tudo dentro da sua infraestrutura, sem trocar o core.
+          </p>
+        </div>
+
+        <div className="archflow__canvas">
+          <svg viewBox="0 0 1100 380" className="archflow__svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="archIntake" x1="0" x2="1"><stop offset="0%" stopColor="#1C17FF"/><stop offset="100%" stopColor="#5237BB"/></linearGradient>
+              <linearGradient id="archPlatform" x1="0" x2="1"><stop offset="0%" stopColor="#5237BB"/><stop offset="100%" stopColor="#A44F98"/></linearGradient>
+              <linearGradient id="archAI" x1="0" x2="1"><stop offset="0%" stopColor="#A44F98"/><stop offset="100%" stopColor="#EE7D48"/></linearGradient>
+              <linearGradient id="archOutput" x1="0" x2="1"><stop offset="0%" stopColor="#EE7D48"/><stop offset="100%" stopColor="#10B981"/></linearGradient>
+              <filter id="archGlow"><feGaussianBlur stdDeviation="3"/></filter>
+            </defs>
+
+            {/* Zone separators */}
+            {[230, 540, 800].map((x, i) => (
+              <line key={i} x1={x} y1="34" x2={x} y2="350" stroke="rgba(11,10,8,.08)" strokeWidth="1" strokeDasharray="4 4"/>
+            ))}
+
+            {/* Zone labels */}
+            {zoneLabel(120, "INTAKE", "#1C17FF")}
+            {zoneLabel(385, "WIR PLATFORM", "#5237BB")}
+            {zoneLabel(670, "AI ENGINE", "#A44F98")}
+            {zoneLabel(960, "OUTPUT", "#10B981")}
+
+            {/* INTAKE column */}
+            {node(20, 60, 120, 40, "rgba(28,23,255,.04)", "rgba(28,23,255,.3)", "E-mail · Portal", "Submissão chega", "#1C17FF")}
+            {node(20, 145, 120, 50, "rgba(28,23,255,.06)", "rgba(28,23,255,.4)", "API Intake", "3 endpoints · SSO", "#1C17FF")}
+
+            {/* WIR PLATFORM column */}
+            {node(245, 60, 110, 38, "rgba(82,55,187,.04)", "rgba(82,55,187,.3)", "Load Balancer", "Nginx · 2+ inst", "#5237BB")}
+            {node(245, 110, 110, 50, "rgba(82,55,187,.06)", "rgba(82,55,187,.4)", "Database", "PostgreSQL Primary", "#5237BB")}
+            {node(245, 175, 110, 36, "rgba(239,68,68,.04)", "rgba(239,68,68,.25)", "Redis", "Celery + Cache", "#EF4444")}
+            {node(265, 220, 70, 24, "rgba(82,55,187,.03)", "rgba(82,55,187,.2)", "Replica", "", "#5237BB")}
+
+            {/* WORKER POOL */}
+            <rect x="395" y="100" width="120" height="115" rx="12" fill="rgba(82,55,187,.03)" stroke="rgba(82,55,187,.15)" strokeWidth="1" strokeDasharray="3 3"/>
+            <text x="455" y="115" fill="rgba(82,55,187,.5)" fontSize="7" fontWeight="700" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".1em">WORKER POOL</text>
+            {node(405, 122, 100, 24, "rgba(82,55,187,.06)", "rgba(82,55,187,.3)", "Worker 1", "", "#5237BB")}
+            {node(405, 152, 100, 24, "rgba(82,55,187,.05)", "rgba(82,55,187,.25)", "Worker 2", "", "#5237BB")}
+            {node(405, 182, 100, 24, "rgba(82,55,187,.04)", "rgba(82,55,187,.2)", "Worker N", "", "#5237BB")}
+
+            {/* AI ENGINE column */}
+            {node(560, 80, 110, 50, "rgba(124,92,252,.05)", "rgba(124,92,252,.3)", "Business Rules", "Política de risco", "#A44F98")}
+            <rect x="555" y="145" width="170" height="160" rx="14" fill="none" stroke="rgba(218,114,90,.18)" strokeWidth="1" strokeDasharray="4 4"/>
+            <text x="640" y="160" fill="rgba(218,114,90,.5)" fontSize="7" fontWeight="800" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".1em">AI LAYER</text>
+            {node(563, 168, 78, 28, "rgba(218,114,90,.05)", "rgba(218,114,90,.3)", "NLP Parser", "", "#EE7D48")}
+            {node(645, 168, 76, 28, "rgba(218,114,90,.07)", "rgba(218,114,90,.4)", "WIR LLM", "", "#EE7D48")}
+            {node(563, 202, 78, 28, "rgba(218,114,90,.05)", "rgba(218,114,90,.3)", "Risk Routing", "", "#EE7D48")}
+            {node(645, 202, 76, 28, "rgba(218,114,90,.05)", "rgba(218,114,90,.3)", "Fraud Det", "", "#EE7D48")}
+            {node(563, 240, 156, 28, "rgba(218,114,90,.04)", "rgba(218,114,90,.2)", "ML Model API", "POST /predict", "#EE7D48")}
+
+            {/* OUTPUT column */}
+            {node(820, 75, 110, 80, "rgba(249,179,54,.05)", "rgba(249,179,54,.3)", "Score", "Risk + Price", "#F8AD39")}
+            {node(828, 110, 94, 32, "rgba(16,185,129,.06)", "rgba(16,185,129,.15)", "~65% auto", "25% review · 10% esc", "#10B981")}
+            {node(960, 90, 80, 60, "rgba(16,185,129,.05)", "rgba(16,185,129,.3)", "QC", "Quality Check", "#10B981")}
+            {node(960, 170, 80, 36, "rgba(16,185,129,.06)", "rgba(16,185,129,.4)", "Dashboard", "Output painel", "#10B981")}
+            {node(960, 215, 80, 36, "rgba(16,185,129,.04)", "rgba(16,185,129,.25)", "Webhook", "Core de apólice", "#10B981")}
+
+            {/* Connection lines (subtle) */}
+            <path d="M140 80 Q190 80 245 80" stroke="url(#archIntake)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M140 170 Q190 170 245 135" stroke="url(#archIntake)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M355 135 Q380 135 395 145" stroke="url(#archPlatform)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M515 165 Q540 130 560 105" stroke="url(#archAI)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M725 105 Q760 130 820 115" stroke="url(#archAI)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M725 220 Q760 200 820 130" stroke="url(#archAI)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M930 115 Q945 115 960 120" stroke="url(#archOutput)" strokeWidth="1.5" fill="none" opacity=".4"/>
+            <path d="M930 130 Q945 165 960 188" stroke="url(#archOutput)" strokeWidth="1.5" fill="none" opacity=".3"/>
+
+            {/* Animated dots — "bolinhas andando" */}
+            {[0, 1, 2].map(i => (
+              <circle key={i} ref={el => dotsRef.current[i] = el}
+                cx="80" cy="80" r="5"
+                fill={i === 0 ? "#F8AD39" : i === 1 ? "#A44F98" : "#10B981"}
+                filter="url(#archGlow)" opacity="1"/>
+            ))}
+          </svg>
+        </div>
+
+        <div className="archflow__legend">
+          <span className="archflow__pulse"/>
+          Fluxo ao vivo · 3 submissões em processamento simultâneo
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WorkflowSVG() {
   const ref = React.useRef(null);
   const [progress, setProgress] = React.useState(0);
@@ -145,4 +296,4 @@ function Closing({ go }) {
   );
 }
 
-Object.assign(window, { WorkflowSVG, Trust, Closing });
+Object.assign(window, { WorkflowSVG, ArchFlow, Trust, Closing });
