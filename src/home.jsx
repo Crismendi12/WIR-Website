@@ -2,47 +2,21 @@
 
 // Sócios & Conselheiros + Experiência no setor
 function TrustBar() {
-  // Logo cells: each cell can hold one or two logos stacked.
-  // Layout follows Nicholas-Weiser spec: 5 columns × 2 rows, with composite top cells in cols 1-2.
-  const cols = [
-    {
-      top: [
-        { src: "assets/logos/bain-capital.png", alt: "Bain Capital" },
-        { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
-      ],
-      bot: [{ src: "assets/logos/aon.png", alt: "Aon" }],
-    },
-    {
-      top: [
-        { src: "assets/logos/patria.png", alt: "Pátria Investimentos" },
-        { src: "assets/logos/athena-saude.svg", alt: "Athena Saúde" },
-      ],
-      bot: [{ src: "assets/logos/gallagher.png", alt: "Gallagher" }],
-    },
-    {
-      top: [{ src: "assets/logos/ezze.png", alt: "EZZE" }],
-      bot: [{ src: "assets/logos/jlt.png", alt: "JLT" }],
-    },
-    {
-      top: [{ src: "assets/logos/santander.png", alt: "Santander Seguros", sub: "seguros" }],
-      bot: [{ src: "assets/logos/lockton.png", alt: "Lockton", size: "lg" }],
-    },
-    {
-      top: [{ src: "assets/logos/hapvida-notredame.png", alt: "Hapvida · NotreDame Intermédica" }],
-      bot: [{ src: "assets/logos/vis.png", alt: "VIS" }],
-    },
+  // 6×2 grid — each logo gets its own cell (no compositing).
+  const logos = [
+    { src: "assets/logos/bain-capital.png",          alt: "Bain Capital" },
+    { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
+    { src: "assets/logos/patria.png",                alt: "Pátria Investimentos" },
+    { src: "assets/logos/athena-saude.svg",          alt: "Athena Saúde" },
+    { src: "assets/logos/santander.png",             alt: "Santander Seguros", sub: "seguros" },
+    { src: "assets/logos/hapvida-notredame.png",     alt: "Hapvida · NotreDame Intermédica" },
+    { src: "assets/logos/aon.png",                   alt: "Aon" },
+    { src: "assets/logos/gallagher.png",             alt: "Gallagher" },
+    { src: "assets/logos/ezze.png",                  alt: "EZZE" },
+    { src: "assets/logos/jlt.png",                   alt: "JLT" },
+    { src: "assets/logos/lockton.png",               alt: "Lockton" },
+    { src: "assets/logos/vis.png",                   alt: "VIS" },
   ];
-
-  const renderItem = (it, key) => {
-    if (it.wm) return <span key={key} className="trustbar__wordmark">{it.wm}</span>;
-    return (
-      <span key={key} className={"trustbar__logo-img" + (it.size === "lg" ? " trustbar__logo-img--lg" : "")}>
-        <img src={it.src} alt={it.alt} title={it.alt}/>
-        {it.sub && <span className="trustbar__logo-sub">{it.sub}</span>}
-      </span>
-    );
-  };
-
   return (
     <section className="trustbar" data-reveal>
       <div className="wrap">
@@ -62,14 +36,12 @@ function TrustBar() {
         <div className="trustbar__experience">
           <div className="eyebrow trustbar__experience-kicker">· Experiência no setor</div>
           <div className="trustbar__grid">
-            {cols.map((col, i) => (
-              <div key={i} className="trustbar__col">
-                <div className="trustbar__cell">
-                  {col.top.map((it, j) => renderItem(it, `t${j}`))}
-                </div>
-                <div className="trustbar__cell">
-                  {col.bot.map((it, j) => renderItem(it, `b${j}`))}
-                </div>
+            {logos.map((l, i) => (
+              <div key={i} className="trustbar__cell">
+                <span className="trustbar__logo-img">
+                  <img src={l.src} alt={l.alt} title={l.alt}/>
+                  {l.sub && <span className="trustbar__logo-sub">{l.sub}</span>}
+                </span>
               </div>
             ))}
           </div>

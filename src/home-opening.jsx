@@ -125,18 +125,6 @@ function DecisionFlow() {
 }
 
 function Opening({ go }) {
-  const index = [
-    { n:"01", k:"O DESAFIO",       stat:<>Estrutura das seguradoras <b>não acompanha</b> o crescimento</>,
-      cap:"40% do tempo do executivo envolvido em tarefas administrativas.", goHash:"desafios" },
-    { n:"02", k:"OS PRODUTOS",     stat:<><b>SSA</b> · <b>UI</b> em operação · <b>XBA</b> · <b>SNB</b> em desenvolvimento</>,
-      cap:"Camada única de IA conectando todo o ciclo do seu negócio.", go:"solutions" },
-    { n:"03", k:"A EVIDÊNCIA",     stat:<>Mais volume · <b>menos</b> custo manual</>,
-      cap:"Mesma equipe, capacidade ampliada — sem trocar o core.", go:"solutions" },
-    { n:"04", k:"A CLASSIFICAÇÃO", stat:<>Automático · assistido · <b>sênior</b></>,
-      cap:"Foco humano onde realmente importa: analisar e subscrever risco.", go:"solutions" },
-    { n:"05", k:"O IMPACTO",       stat:<>Plataforma de IA para <b>ESCALAR</b></>,
-      cap:"Sua equipe tem o conhecimento. A WIR entrega a plataforma.", go:"about" },
-  ];
   return (
     <section className="opening">
       <div className="wrap">
@@ -179,31 +167,6 @@ function Opening({ go }) {
           <div className="opening__hero-R">
             <div className="opening__caption">· Como a WIR transforma dados em decisões</div>
             <DecisionFlow/>
-          </div>
-        </div>
-
-        {/* Editorial index */}
-        <div className="opening__index">
-          <div className="opening__index-grid">
-            {index.map((item) => (
-              <button key={item.n} className="opening__index-item"
-                onClick={()=>{
-                  if (item.goHash) {
-                    const el = document.getElementById(item.goHash);
-                    if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
-                  } else if (item.go) {
-                    go(item.go);
-                  }
-                }}>
-                <span className="opening__index-num">/{item.n}</span>
-                <div className="opening__index-body">
-                  <div className="opening__index-title">{item.k}</div>
-                  <div className="opening__index-stat">{item.stat}</div>
-                  <div className="opening__index-caption">{item.cap}</div>
-                </div>
-                <span className="opening__index-arrow" aria-hidden>↓</span>
-              </button>
-            ))}
           </div>
         </div>
 
@@ -250,4 +213,4 @@ function Proof() {
   );
 }
 
-Object.assign(window, { LiveTerminal, Opening, Proof });
+Object.assign(window, { Opening, Proof });

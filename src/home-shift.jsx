@@ -5,10 +5,10 @@ function Shift() {
   const rows = [
     { dor:"E-mails de cotações desorganizados",       sol:"Estruturação e leitura automática de submissões",  prod:"SSA",       status:"prod" },
     { dor:"Falta de priorização comercial",            sol:"Classificação por apetite e rentabilidade",         prod:"SSA",       status:"prod" },
-    { dor:"Underwriter fazendo operação manual",       sol:"Eliminação completa das tarefas manuais",           prod:"UCP",       status:"prod" },
-    { dor:"Pipeline invisível para gestão",            sol:"Dashboard estratégico em tempo real",               prod:"UCP",       status:"prod" },
-    { dor:"Riscos fora do apetite processados",        sol:"Recusa automática inteligente",                     prod:"SSA / UCP", status:"prod" },
-    { dor:"TI sobrecarregada e sem orçamento",         sol:"Plataforma 100% externa — sem TI",                  prod:"SSA / UCP", status:"prod" },
+    { dor:"Underwriter fazendo operação manual",       sol:"Eliminação completa das tarefas manuais",           prod:"UI",       status:"prod" },
+    { dor:"Pipeline invisível para gestão",            sol:"Dashboard estratégico em tempo real",               prod:"UI",       status:"prod" },
+    { dor:"Riscos fora do apetite processados",        sol:"Recusa automática inteligente",                     prod:"SSA / UI", status:"prod" },
+    { dor:"TI sobrecarregada e sem orçamento",         sol:"Plataforma 100% externa — sem TI",                  prod:"SSA / UI", status:"prod" },
   ];
   return (
     <section className="shift" data-reveal>
