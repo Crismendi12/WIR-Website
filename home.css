@@ -454,31 +454,31 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 }
 .trustbar__cell {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 8px; padding: 32px 20px;
+  gap: 10px; padding: 44px 22px;
   border-right: 1px solid rgba(11,10,8,.08);
   border-bottom: 1px solid rgba(11,10,8,.08);
-  position: relative; min-height: 140px;
+  position: relative; min-height: 200px;
   transition: background .3s ease;
 }
 .trustbar__cell:hover { background: color-mix(in srgb, var(--wir-purple) 3%, var(--paper)); }
 .trustbar__logo-img {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; height: 56px; width: 100%;
+  gap: 6px; height: 100px; width: 100%;
 }
 /* Uniform "logo well" — every logo fits inside the same fixed-aspect box,
    so visual size is consistent regardless of source PNG aspect ratio. */
 .trustbar__logo-img img {
-  max-width: 130px; max-height: 36px;
+  max-width: 180px; max-height: 64px;
   width: auto; height: auto;
   filter: grayscale(1) brightness(0.4) contrast(1.5);
   opacity: 0.85;
   transition: filter .3s ease, opacity .3s ease, transform .3s ease;
   object-fit: contain;
 }
-/* Featured variant — Pátria slightly larger to emphasize portfolio anchor */
-.trustbar__cell--featured .trustbar__logo-img { height: 68px; }
+/* Featured variant — Pátria larger to emphasize portfolio anchor */
+.trustbar__cell--featured .trustbar__logo-img { height: 124px; }
 .trustbar__cell--featured .trustbar__logo-img img {
-  max-width: 160px; max-height: 48px;
+  max-width: 220px; max-height: 84px;
 }
 .trustbar__cell:hover .trustbar__logo-img img {
   filter: grayscale(0) brightness(1) contrast(1);
