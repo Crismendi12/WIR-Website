@@ -7,9 +7,8 @@ function ContactClocks() {
     return () => clearInterval(id);
   }, []);
   const offices = [
-    { city:"São Paulo",   tz:"America/Sao_Paulo",  addr:"Av. Faria Lima, 3500 · 18º" },
-    { city:"New York",    tz:"America/New_York",   addr:"345 Park Avenue · 32nd Fl" },
-    { city:"Silicon Valley", tz:"America/Los_Angeles", addr:"California · EUA"       },
+    { city:"São Paulo",      tz:"America/Sao_Paulo",     addr:"Av. Faria Lima, 3500 · 18º" },
+    { city:"Silicon Valley", tz:"America/Los_Angeles",   addr:"California · EUA"           },
   ];
   const fmt = (tz) => {
     try {
@@ -114,6 +113,8 @@ function ContactForm() {
   const [submitted, setSubmitted] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState(null);
+  const [submitMode, setSubmitMode] = React.useState(null); // "supabase" | "mailto" | "error"
+  const [submitRef, setSubmitRef]   = React.useState(null);
 
   // Submit pipeline (in order):
   //   1) POST to Supabase REST API (durable storage, queryable later)
@@ -176,6 +177,7 @@ function ContactForm() {
     }
 
     // Step 3 · mailto fallback if Supabase didn't accept the insert
+    let mailtoTriggered = false;
     if (!supabaseOk) {
       const subject = `[WIR · novo contato] ${data.name} · ${data.company}`;
       const body =
@@ -194,29 +196,76 @@ ${data.notes || "(sem contexto adicional)"}
 
 —
 Enviado pelo formulário do site wirinnovation.ai`;
-      window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      try {
+        window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        mailtoTriggered = true;
+      } catch (e) {
+        console.warn("mailto fallback failed", e);
+      }
     }
 
+    // Generate stable ref number (one per submission)
+    const ref = (typeof crypto !== "undefined" && crypto.randomUUID
+      ? crypto.randomUUID().replace(/-/g, "").slice(0, 8)
+      : Math.random().toString(36).slice(2, 10)
+    ).toUpperCase();
+
+    setSubmitRef(ref);
+    setSubmitMode(supabaseOk ? "supabase" : (mailtoTriggered ? "mailto" : "error"));
     setSubmitting(false);
     setSubmitted(true);
   };
 
   if (submitted) {
+    const firstName = data.name.split(" ")[0] || "pessoal";
+    let eyebrow, title, body;
+
+    if (submitMode === "supabase") {
+      eyebrow = "· Recebido";
+      title   = <>Obrigado, <em>{firstName}.</em></>;
+      body    = (
+        <>
+          <p className="ctform__done-lede">
+            Recebemos sua mensagem. Nossa equipe responde em até <b>24h úteis</b> com 2 ou 3 horários para conversar com nossos sócios.
+          </p>
+          <p className="ctform__done-lede" style={{marginTop: 16}}>
+            Se precisar adiantar algo, escreva para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a> citando a Ref abaixo.
+          </p>
+        </>
+      );
+    } else if (submitMode === "mailto") {
+      eyebrow = "· Confirme o envio";
+      title   = <>Quase lá, <em>{firstName}.</em></>;
+      body    = (
+        <>
+          <p className="ctform__done-lede">
+            Seu cliente de e-mail abriu uma mensagem pré-preenchida para <b>contato@wirinnovation.ai</b>. <b>Confirme o envio</b> e respondemos em até 24h úteis com 2 ou 3 horários.
+          </p>
+          <p className="ctform__done-lede" style={{marginTop: 16}}>
+            Caso o e-mail não tenha aberto, escreva direto para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a>.
+          </p>
+        </>
+      );
+    } else {
+      eyebrow = "· Ops, falha no envio";
+      title   = <>Não conseguimos enviar.</>;
+      body    = (
+        <>
+          <p className="ctform__done-lede">
+            O envio automático falhou. Por favor escreva direto para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a> citando a Ref abaixo — respondemos em até 24h úteis.
+          </p>
+        </>
+      );
+    }
+
     return (
       <section className="ctform" data-reveal>
         <div className="wrap">
           <div className="ctform__done">
-            <div className="eyebrow">· Recebido</div>
-            <h2 className="display ctform__done-title">
-              Obrigado, <em>{data.name.split(" ")[0] || "pessoal"}.</em>
-            </h2>
-            <p className="ctform__done-lede">
-              Seu cliente de e-mail abriu uma mensagem pré-preenchida para <b>contato@wirinnovation.ai</b>. Confirme o envio e respondemos em até 24h úteis com 2 ou 3 horários para conversar com nossos sócios.
-            </p>
-            <p className="ctform__done-lede" style={{marginTop: 16}}>
-              Caso o e-mail não tenha aberto automaticamente, escreva para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a>.
-            </p>
-            <div className="ctform__done-ref num">· Ref #{Math.random().toString(36).slice(2,8).toUpperCase()}</div>
+            <div className="eyebrow">{eyebrow}</div>
+            <h2 className="display ctform__done-title">{title}</h2>
+            {body}
+            <div className="ctform__done-ref num">· Ref #{submitRef}</div>
           </div>
         </div>
       </section>
@@ -299,7 +348,7 @@ Enviado pelo formulário do site wirinnovation.ai`;
               </label>
               <label className="ctform__field">
                 <span>Telefone · opcional</span>
-                <input type="tel" value={data.phone} onChange={(e)=>update("phone", e.target.value)} placeholder="+55 11 ---- ----"/>
+                <input type="tel" value={data.phone} onChange={(e)=>update("phone", e.target.value)} placeholder="(11) 99999-9999"/>
               </label>
               <label className="ctform__field ctform__field--full">
                 <span>O que está acontecendo aí? · opcional</span>
@@ -332,89 +381,12 @@ Enviado pelo formulário do site wirinnovation.ai`;
   );
 }
 
-function ContactChannels() {
-  return (
-    <section className="ctchan" data-reveal>
-      <div className="wrap">
-        <div className="ctchan__head">
-          <div className="eyebrow">· Outros canais</div>
-          <h2 className="display ctchan__title">Prefere <em>direto?</em></h2>
-        </div>
-        <div className="ctchan__grid">
-          <div className="ctchan__card">
-            <div className="ctchan__k">· Comercial</div>
-            <div className="ctchan__v display">vendas@wir.innovation</div>
-            <p>Para propostas, pilotos e conversas executivas. Resposta em até 6h úteis.</p>
-          </div>
-          <div className="ctchan__card">
-            <div className="ctchan__k">· Engenharia</div>
-            <div className="ctchan__v display">eng@wir.innovation</div>
-            <p>Para dúvidas técnicas, integrações, SDKs e questões de arquitetura.</p>
-          </div>
-          <div className="ctchan__card">
-            <div className="ctchan__k">· Imprensa</div>
-            <div className="ctchan__v display">press@wir.innovation</div>
-            <p>Solicitações de entrevista, comentários de mercado e materiais institucionais.</p>
-          </div>
-          <div className="ctchan__card">
-            <div className="ctchan__k">· Carreiras</div>
-            <div className="ctchan__v display">jobs@wir.innovation</div>
-            <p>Currículos, aplicações espontâneas e dúvidas sobre processo seletivo.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ContactDemo() {
-  return (
-    <section className="ctdemo" data-reveal>
-      <div className="wrap">
-        <div className="ctdemo__grid">
-          <div className="ctdemo__l">
-            <div className="eyebrow eyebrow--onDark">· Preferência rápida</div>
-            <h2 className="display ctdemo__title">
-              Marcar 30 min<br/>
-              com <em>Nicholas.</em>
-            </h2>
-            <p>Agenda direta do CEO — sem intermediários, sem SDR. Se preferir ir direto ao ponto, este é o caminho mais rápido.</p>
-          </div>
-          <div className="ctdemo__r">
-            <div className="ctdemo__cal">
-              <div className="ctdemo__cal-head">
-                <span>· Semana de 22 · Abr</span>
-                <span>→</span>
-              </div>
-              <div className="ctdemo__cal-grid">
-                {["Seg","Ter","Qua","Qui","Sex"].map((d,i) => (
-                  <div key={i} className="ctdemo__cal-day">
-                    <div className="ctdemo__cal-dayk">{d}</div>
-                    <div className="ctdemo__cal-dayn">{22+i}</div>
-                    <div className="ctdemo__cal-slots">
-                      {["10:00","14:30","16:00"].slice(0, 2 + (i%2)).map((t,j) => (
-                        <button key={j} className="ctdemo__cal-slot">{t}</button>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="ctdemo__cal-foot">
-                · Horário de Brasília · 30 min · Google Meet
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ContactSocial() {
   const channels = [
-    { k:"LinkedIn",  v:"@wir-innovation",  href:"https://www.linkedin.com/company/wir-innovation/" },
-    { k:"Instagram", v:"@wirinnovation",   href:"https://www.instagram.com/wirinnovation" },
-    { k:"X",         v:"@wirinnovationai", href:"https://x.com/wirinnovationai" },
+    { k:"LinkedIn",  v:"@wir-innovation",          href:"https://www.linkedin.com/company/wir-innovation/" },
+    { k:"Instagram", v:"@wirinnovation",           href:"https://www.instagram.com/wirinnovation" },
+    { k:"X",         v:"@wirinnovationai",         href:"https://x.com/wirinnovationai" },
+    { k:"Facebook",  v:"@wirinnovation",           href:"#" },
     { k:"E-mail",    v:"contato@wirinnovation.ai", href:"mailto:contato@wirinnovation.ai" },
   ];
   return (
