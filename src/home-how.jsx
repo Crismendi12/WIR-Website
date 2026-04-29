@@ -1,37 +1,30 @@
 /* ───────── Movement 05 · Workflow + 06 · Trust + 07 · Closing ───────── */
 
-// ArchFlow — diagrama de arquitetura completo com sub-nodos, branches paralelos
-// e múltiplos dots animados via SMIL (<animateMotion>) para evitar conflito
-// com re-renders do React. Adaptado ao design system WIR (paper).
+// ArchFlow — 3 pipelines + 1 feedback loop visíveis. Cada dot percorre exatamente
+// a mesma curva renderizada no diagrama (via <mpath href="#pipe-X"/>).
 function ArchFlow() {
-  // 5 motion paths em sintaxe SVG (M, C cubic bezier) — todas left-to-right
-  // (exceto a 4ª que é o feedback loop right-to-left embaixo).
-  // Estrutura: INTAKE (x=130) → PLATFORM (x=360) → AI (x=620) → OUTPUT (x=900) → CORE (x=1130)
-  // Curvas suaves para evitar movimento "errático" — cada path mantém uma "lane" vertical.
-  const motionPaths = [
-    // Lane 1 (top): ondulação suave acima da linha central, dot dourado
-    "M 130,170 C 280,150 360,140 500,160 S 720,180 900,160 S 1050,150 1130,170",
-    // Lane 2 (centro): linha praticamente reta com leve onda, dot roxo
-    "M 130,200 C 300,200 460,205 620,200 S 920,195 1130,200",
-    // Lane 3 (bottom): ondulação suave abaixo da linha central, dot verde
-    "M 130,230 C 280,250 360,260 500,240 S 720,220 900,240 S 1050,250 1130,230",
-    // Lane 4 (feedback loop): arco amplo CORE → INTAKE, embaixo do diagrama
-    "M 1130,300 C 900,340 600,355 300,335 C 180,325 110,290 130,200",
-    // Lane 5 (top alt): outra onda suave no topo, dot azul, oposta à lane 1
-    "M 130,160 C 300,180 460,170 620,180 S 920,165 1130,150",
-  ];
+  // Coordenadas das zonas (centro vertical de cada lane)
+  // 5 zonas: INTAKE / WIR PLATFORM / AI ENGINE / OUTPUT / CORE
+  // 3 lanes: TOP (y=130) / MID (y=210) / BOT (y=290)
 
-  const dotColors = ["#F8AD39", "#A44F98", "#10B981", "#FE8B77", "#1C17FF"];
-  // Durações maiores → movimento mais calmo e legível
-  const dotDurations = ["9s", "8s", "9.5s", "12s", "10s"];
-  // Negative begin = animation already running by that amount (creates initial stagger)
-  const dotBegins = ["0s", "-1.6s", "-3.2s", "-4.8s", "-6.4s"];
+  // 4 paths visíveis e idênticos aos dos dots:
+  // pipe-top: E-mail → Load Balancer → Business Rules → Score → Webhook
+  // pipe-mid: Portal → Postgres → WIR LLM → QC → Core de apólice
+  // pipe-bot: API → Worker Pool → ML Model → Dashboard → Audit Log
+  // pipe-feedback: Audit Log → curve down → INTAKE (continuous learning)
+  const pipes = {
+    top: "M 130,130 C 220,140 270,140 330,130 C 460,115 540,115 625,130 C 750,145 805,145 865,130 C 1000,115 1075,115 1130,130",
+    mid: "M 130,210 C 220,210 280,210 330,210 C 480,210 545,210 625,210 C 760,210 815,210 865,210 C 985,210 1080,210 1130,210",
+    bot: "M 130,290 C 220,280 270,280 330,290 C 460,305 540,305 625,290 C 750,275 805,275 865,290 C 1000,305 1075,305 1130,290",
+    feedback: "M 1130,310 C 1000,355 600,375 300,360 C 150,348 80,295 130,210",
+  };
 
   // Sub-node helper
-  const SubNode = ({ x, y, w, h, label, sub, color, fill }) => (
+  const SubNode = ({ x, y, w, h, label, sub, color, fill, opaque }) => (
     <g>
       <rect x={x} y={y} width={w} height={h} rx="8"
-        fill={fill || `${color}10`} stroke={color} strokeWidth="1.4" strokeOpacity="0.45"/>
+        fill={opaque ? "#FAF6EE" : (fill || `${color}10`)}
+        stroke={color} strokeWidth="1.4" strokeOpacity="0.55"/>
       <text x={x + w/2} y={y + (sub ? h/2 - 2 : h/2 + 4)} fill={color}
         fontSize="10.5" fontWeight="700" fontFamily="Inter, sans-serif" textAnchor="middle">
         {label}
@@ -55,12 +48,12 @@ function ArchFlow() {
             <span className="archflow__sub">Ponta a ponta — em minutos, auditável.</span>
           </h2>
           <p className="archflow__lede">
-            Fluxo end-to-end com processamento paralelo: múltiplas submissões correm em paralelo pelos workers, atravessam o engine de IA (NLP · LLM · Risk · Fraud · ML) e voltam ao seu core como decisão auditável. O loop inferior é o <em>continuous learning</em> — cada decisão alimenta o modelo de volta.
+            Três pipelines paralelos atravessam a arquitetura — top track (e-mail/LB/regras/score/webhook), mid track (portal/db/LLM/QC/core) e bottom track (API/workers/ML/dashboard/audit) — e um loop inferior de <em>continuous learning</em> realimenta o modelo a cada decisão auditada.
           </p>
         </div>
 
         <div className="archflow__canvas">
-          <svg viewBox="0 0 1240 380" className="archflow__svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 1240 400" className="archflow__svg" preserveAspectRatio="xMidYMid meet">
             <defs>
               <linearGradient id="archGrad" x1="0" x2="1">
                 <stop offset="0%" stopColor="#1C17FF"/>
@@ -69,13 +62,19 @@ function ArchFlow() {
                 <stop offset="80%" stopColor="#EE7D48"/>
                 <stop offset="100%" stopColor="#10B981"/>
               </linearGradient>
-              <filter id="archGlow"><feGaussianBlur stdDeviation="8"/></filter>
-              <filter id="archDotShadow"><feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/></filter>
+              <filter id="archGlow"><feGaussianBlur stdDeviation="6"/></filter>
+              <filter id="archDotShadow"><feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.3"/></filter>
+
+              {/* Os mesmos paths usados pelo render visível e pelos animateMotion */}
+              <path id="pipe-top"      d={pipes.top}/>
+              <path id="pipe-mid"      d={pipes.mid}/>
+              <path id="pipe-bot"      d={pipes.bot}/>
+              <path id="pipe-feedback" d={pipes.feedback}/>
             </defs>
 
-            {/* Zone separators (vertical dashed) */}
+            {/* Zone separators */}
             {[230, 490, 770, 1030].map((x, i) => (
-              <line key={i} x1={x} y1="20" x2={x} y2="370" stroke="rgba(11,10,8,.07)" strokeWidth="1" strokeDasharray="4 5"/>
+              <line key={i} x1={x} y1="20" x2={x} y2="395" stroke="rgba(11,10,8,.06)" strokeWidth="1" strokeDasharray="4 5"/>
             ))}
 
             {/* Zone labels (top) */}
@@ -86,111 +85,112 @@ function ArchFlow() {
               {x:900, l:"OUTPUT",       c:"#EE7D48"},
               {x:1130,l:"CORE",         c:"#10B981"},
             ].map((z, i) => (
-              <text key={i} x={z.x} y="18" fill={z.c} fontSize="11" fontWeight="800"
+              <text key={i} x={z.x} y="16" fill={z.c} fontSize="11" fontWeight="800"
                 fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".18em">
                 {z.l}
               </text>
             ))}
 
-            {/* INTAKE column */}
-            <SubNode x={75} y={108}  w={110} h={44} label="E-mail"   sub="anexos · PDF"   color="#1C17FF"/>
-            <SubNode x={75} y={178}  w={110} h={44} label="Portal"   sub="formulários"    color="#1C17FF"/>
-            <SubNode x={75} y={248}  w={110} h={44} label="API"      sub="3 endpoints"    color="#1C17FF"/>
-
-            {/* WIR PLATFORM column — Load balancer + DB cluster + Worker pool */}
-            <SubNode x={260} y={108} w={140} h={36} label="Load Balancer" sub="Nginx · 2× inst" color="#7540AC"/>
-            <SubNode x={260} y={158} w={140} h={48} label="Postgres" sub="Primary · Replica" color="#7540AC"/>
-            <SubNode x={260} y={218} w={140} h={36} label="Redis"    sub="Celery · Cache"   color="#EF4444"/>
-
-            {/* Worker pool (dashed cluster) */}
-            <rect x="260" y="262" width="140" height="84" rx="10" fill="rgba(117,64,172,.04)"
-              stroke="rgba(117,64,172,.25)" strokeWidth="1" strokeDasharray="4 4"/>
-            <text x="330" y="278" fill="rgba(117,64,172,.55)" fontSize="8" fontWeight="800"
-              fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".14em">WORKER POOL</text>
-            <SubNode x={268} y={284} w={62} h={22} label="W-1" color="#7540AC"/>
-            <SubNode x={336} y={284} w={62} h={22} label="W-2" color="#7540AC"/>
-            <SubNode x={268} y={310} w={62} h={22} label="W-3" color="#7540AC"/>
-            <SubNode x={336} y={310} w={62} h={22} label="W-N" color="#7540AC"/>
-
-            {/* AI ENGINE column — Business rules + AI Layer */}
-            <SubNode x={510} y={108} w={120} h={42} label="Business Rules" sub="política risco" color="#A44F98"/>
-            <rect x="500" y={170} width="220" height="170" rx="12" fill="rgba(238,125,72,.04)"
-              stroke="rgba(238,125,72,.3)" strokeWidth="1" strokeDasharray="4 4"/>
-            <text x="610" y="186" fill="rgba(238,125,72,.6)" fontSize="9" fontWeight="800"
-              fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".18em">AI LAYER</text>
-            <SubNode x={508} y={196} w={100} h={32} label="NLP Parser"   color="#EE7D48"/>
-            <SubNode x={612} y={196} w={100} h={32} label="WIR LLM"      color="#EE7D48" fill="rgba(238,125,72,.15)"/>
-            <SubNode x={508} y={234} w={100} h={32} label="Risk Routing" color="#EE7D48"/>
-            <SubNode x={612} y={234} w={100} h={32} label="Fraud Det."   color="#EE7D48"/>
-            <SubNode x={508} y={272} w={204} h={28} label="ML Model API · POST /predict" color="#EE7D48"/>
-            <SubNode x={508} y={306} w={204} h={26} label="Model Registry · v3.2.1"     color="#A44F98"/>
-
-            {/* OUTPUT column */}
-            <SubNode x={800} y={108} w={130} h={56} label="Score Engine" sub="risk + price"   color="#F8AD39"/>
-            <SubNode x={800} y={172} w={130} h={32} label="~65% auto"    sub="25% rev · 10% esc" color="#10B981"/>
-            <SubNode x={800} y={212} w={130} h={36} label="QC"           sub="quality check"   color="#10B981"/>
-            <SubNode x={800} y={256} w={130} h={36} label="Dashboard"    sub="painel real time" color="#10B981"/>
-
-            {/* CORE column */}
-            <SubNode x={1060} y={108} w={130} h={44} label="Webhook"  sub="signed payload" color="#10B981"/>
-            <SubNode x={1060} y={162} w={130} h={48} label="Core de apólice" sub="policy admin" color="#10B981"/>
-            <SubNode x={1060} y={220} w={130} h={36} label="Audit Log" sub="LGPD · imutável" color="#7540AC"/>
-            <SubNode x={1060} y={266} w={130} h={36} label="DataDog"   sub="observability"   color="#1C17FF"/>
-
-            {/* Connection lines (subtle) — INTAKE → PLATFORM */}
-            {[130, 200, 270].map((y, i) => (
-              <path key={"c1-"+i} d={`M 185 ${y} Q 230 ${y} 260 ${130 + i*55}`}
-                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".35"/>
-            ))}
-            {/* PLATFORM → AI */}
-            {[126, 182, 236, 304].map((y, i) => (
-              <path key={"c2-"+i} d={`M 400 ${y} Q 450 ${y} 500 ${130 + i*40}`}
-                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".3"/>
-            ))}
-            {/* AI → OUTPUT */}
-            {[130, 212, 250, 286].map((y, i) => (
-              <path key={"c3-"+i} d={`M 720 ${y} Q 760 ${y} 800 ${130 + i*45}`}
-                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".3"/>
-            ))}
-            {/* OUTPUT → CORE */}
-            {[136, 188, 230, 274].map((y, i) => (
-              <path key={"c4-"+i} d={`M 930 ${y} Q 990 ${y} 1060 ${130 + i*45}`}
-                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".4"/>
-            ))}
-
-            {/* Continuous learning feedback loop (bottom curved) */}
-            <path d="M 1130 360 Q 700 380 130 360"
-              stroke="#FE8B77" strokeWidth="1.5" fill="none" opacity=".45" strokeDasharray="6 5"/>
-            <text x="630" y="378" fill="#FE8B77" fontSize="9" fontWeight="700"
-              fontFamily="JetBrains Mono, monospace" textAnchor="middle" letterSpacing=".15em" opacity=".75">
-              · CONTINUOUS LEARNING · MODEL FEEDBACK ·
+            {/* Pipes visibles — render BEFORE nodes so nodes mask them */}
+            <use href="#pipe-top"      stroke="url(#archGrad)" strokeWidth="2.5" fill="none"
+              strokeDasharray="2 6" opacity="0.55"/>
+            <use href="#pipe-mid"      stroke="url(#archGrad)" strokeWidth="2.5" fill="none"
+              strokeDasharray="2 6" opacity="0.55"/>
+            <use href="#pipe-bot"      stroke="url(#archGrad)" strokeWidth="2.5" fill="none"
+              strokeDasharray="2 6" opacity="0.55"/>
+            <use href="#pipe-feedback" stroke="#FE8B77" strokeWidth="2" fill="none"
+              strokeDasharray="5 5" opacity="0.5"/>
+            <text fill="#FE8B77" fontSize="9.5" fontWeight="700"
+              fontFamily="JetBrains Mono, monospace" letterSpacing=".15em" opacity=".75">
+              <textPath href="#pipe-feedback" startOffset="50%" textAnchor="middle">
+                · CONTINUOUS LEARNING · MODEL FEEDBACK ·
+              </textPath>
             </text>
 
-            {/* Master gradient pipe (visual cohesion across the canvas) */}
-            <path d="M 130 200 C 250 200, 380 200, 480 200 S 700 200, 830 200 S 1000 200, 1130 200"
-              stroke="url(#archGrad)" strokeWidth="2" fill="none" opacity=".22"/>
+            {/* INTAKE column — 3 nodes (centered on each lane) */}
+            <SubNode x={75}  y={111} w={110} h={38} label="E-mail" sub="anexos · PDF"  color="#1C17FF" opaque/>
+            <SubNode x={75}  y={191} w={110} h={38} label="Portal" sub="formulários"   color="#1C17FF" opaque/>
+            <SubNode x={75}  y={271} w={110} h={38} label="API"    sub="3 endpoints"   color="#1C17FF" opaque/>
 
-            {/* Animated dots via SMIL — halos first (behind), then dots */}
-            {dotColors.map((c, i) => (
-              <circle key={`halo-${i}`} cx="0" cy="0" r="20"
-                fill={c} opacity="0.22" filter="url(#archGlow)">
-                <animateMotion dur={dotDurations[i]} repeatCount="indefinite"
-                  begin={dotBegins[i]} path={motionPaths[i]} rotate="0"/>
-              </circle>
-            ))}
-            {dotColors.map((c, i) => (
-              <circle key={`dot-${i}`} cx="0" cy="0" r="8"
-                fill={c} stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)">
-                <animateMotion dur={dotDurations[i]} repeatCount="indefinite"
-                  begin={dotBegins[i]} path={motionPaths[i]} rotate="0"/>
-              </circle>
-            ))}
+            {/* WIR PLATFORM column */}
+            <SubNode x={275} y={111} w={110} h={38} label="Load Balancer" sub="Nginx · 2× inst"   color="#7540AC" opaque/>
+            <SubNode x={275} y={191} w={110} h={38} label="Postgres"      sub="Primary · Replica" color="#7540AC" opaque/>
+
+            {/* Worker Pool (cluster, replaces single bottom node — dots ride through center) */}
+            <rect x="275" y="262" width="110" height="58" rx="10" fill="#FAF6EE"
+              stroke="rgba(117,64,172,.5)" strokeWidth="1.4" strokeDasharray="4 4"/>
+            <text x="330" y="276" fill="rgba(117,64,172,.7)" fontSize="8" fontWeight="800"
+              fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".14em">WORKER POOL</text>
+            <SubNode x={279} y={282} w={48} h={16} label="W-1" color="#7540AC"/>
+            <SubNode x={333} y={282} w={48} h={16} label="W-2" color="#7540AC"/>
+            <SubNode x={279} y={302} w={48} h={16} label="W-3" color="#7540AC"/>
+            <SubNode x={333} y={302} w={48} h={16} label="W-N" color="#7540AC"/>
+
+            {/* AI ENGINE column */}
+            <SubNode x={565} y={111} w={120} h={38} label="Business Rules" sub="política risco" color="#A44F98" opaque/>
+            <SubNode x={565} y={191} w={120} h={38} label="WIR LLM"        sub="NLP · Fraud · Risk"  color="#EE7D48" opaque/>
+            <SubNode x={565} y={271} w={120} h={38} label="ML Model"       sub="POST /predict"       color="#EE7D48" opaque/>
+
+            {/* OUTPUT column */}
+            <SubNode x={845} y={111} w={110} h={38} label="Score"     sub="risk + price"      color="#F8AD39" opaque/>
+            <SubNode x={845} y={191} w={110} h={38} label="QC"        sub="quality check"     color="#10B981" opaque/>
+            <SubNode x={845} y={271} w={110} h={38} label="Dashboard" sub="real time"         color="#10B981" opaque/>
+
+            {/* CORE column */}
+            <SubNode x={1075} y={111} w={110} h={38} label="Webhook"      sub="signed payload"    color="#10B981" opaque/>
+            <SubNode x={1075} y={191} w={110} h={38} label="Core apólice" sub="policy admin"      color="#10B981" opaque/>
+            <SubNode x={1075} y={271} w={110} h={38} label="Audit Log"    sub="LGPD · imutável"   color="#7540AC" opaque/>
+
+            {/* Animated dots — RIDE THE EXACT VISIBLE PIPES via mpath */}
+            {/* Halos behind */}
+            <circle r="18" fill="#F8AD39" opacity="0.22" filter="url(#archGlow)">
+              <animateMotion dur="9s" repeatCount="indefinite" begin="0s">
+                <mpath href="#pipe-top"/>
+              </animateMotion>
+            </circle>
+            <circle r="18" fill="#A44F98" opacity="0.22" filter="url(#archGlow)">
+              <animateMotion dur="8s" repeatCount="indefinite" begin="-2s">
+                <mpath href="#pipe-mid"/>
+              </animateMotion>
+            </circle>
+            <circle r="18" fill="#10B981" opacity="0.22" filter="url(#archGlow)">
+              <animateMotion dur="9.5s" repeatCount="indefinite" begin="-4s">
+                <mpath href="#pipe-bot"/>
+              </animateMotion>
+            </circle>
+            <circle r="18" fill="#FE8B77" opacity="0.22" filter="url(#archGlow)">
+              <animateMotion dur="11s" repeatCount="indefinite" begin="-5s">
+                <mpath href="#pipe-feedback"/>
+              </animateMotion>
+            </circle>
+
+            {/* Solid dots front */}
+            <circle r="8" fill="#F8AD39" stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)">
+              <animateMotion dur="9s" repeatCount="indefinite" begin="0s">
+                <mpath href="#pipe-top"/>
+              </animateMotion>
+            </circle>
+            <circle r="8" fill="#A44F98" stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)">
+              <animateMotion dur="8s" repeatCount="indefinite" begin="-2s">
+                <mpath href="#pipe-mid"/>
+              </animateMotion>
+            </circle>
+            <circle r="8" fill="#10B981" stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)">
+              <animateMotion dur="9.5s" repeatCount="indefinite" begin="-4s">
+                <mpath href="#pipe-bot"/>
+              </animateMotion>
+            </circle>
+            <circle r="8" fill="#FE8B77" stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)">
+              <animateMotion dur="11s" repeatCount="indefinite" begin="-5s">
+                <mpath href="#pipe-feedback"/>
+              </animateMotion>
+            </circle>
           </svg>
         </div>
 
         <div className="archflow__legend">
           <span className="archflow__pulse"/>
-          <b>Fluxo ao vivo</b> · 5 submissões em processamento paralelo · loop de aprendizado contínuo
+          <b>Fluxo ao vivo</b> · 3 pipelines paralelos + loop de aprendizado contínuo
         </div>
       </div>
     </section>
