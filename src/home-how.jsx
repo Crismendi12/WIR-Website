@@ -1,22 +1,30 @@
 /* ───────── Movement 05 · Workflow + 06 · Trust + 07 · Closing ───────── */
 
-// ArchFlow — diagrama de arquitetura simplificado (4 zonas) com bolinhas animadas
-// Adaptado ao design system WIR (paper). Zonas mais espaçadas, dots bem visíveis.
+// ArchFlow — diagrama de arquitetura completo com sub-nodos, branches paralelos
+// e múltiplos dots animados. Adaptado ao design system WIR (paper).
 function ArchFlow() {
   const dotsRef = React.useRef([]);
   const haloRef = React.useRef([]);
   const frameRef = React.useRef(null);
 
-  // 3 paths, cada um percorre 4 zonas: INTAKE → PLATFORM → AI → OUTPUT
+  // 5 paths, cada um percorrendo a arquitetura por rotas distintas (parallel processing)
+  // Estrutura: INTAKE (x=80-180) → PLATFORM (x=260-440) → AI (x=520-720) → OUTPUT (x=820-980) → CORE (x=1060-1180)
   const paths = [
-    [{x:140,y:200},{x:380,y:140},{x:620,y:200},{x:860,y:140},{x:1100,y:200}],
-    [{x:140,y:200},{x:380,y:200},{x:620,y:200},{x:860,y:200},{x:1100,y:200}],
-    [{x:140,y:200},{x:380,y:260},{x:620,y:200},{x:860,y:260},{x:1100,y:200}],
+    // Path 1: e-mail → API → Worker 1 → NLP → LLM → Score → QC → Dashboard
+    [{x:130,y:130},{x:130,y:240},{x:330,y:170},{x:430,y:200},{x:540,y:230},{x:620,y:200},{x:720,y:170},{x:870,y:200},{x:1010,y:170},{x:1130,y:200}],
+    // Path 2: portal → API → Worker 2 → Risk Routing → Score → QC → Webhook → CORE
+    [{x:130,y:200},{x:130,y:280},{x:330,y:230},{x:430,y:200},{x:540,y:200},{x:620,y:200},{x:720,y:230},{x:870,y:240},{x:1010,y:240},{x:1130,y:240}],
+    // Path 3: anexos → API → Worker N → Fraud → ML → Score → Dashboard
+    [{x:130,y:280},{x:130,y:200},{x:330,y:280},{x:430,y:260},{x:540,y:170},{x:620,y:200},{x:720,y:280},{x:870,y:280},{x:1010,y:200},{x:1130,y:170}],
+    // Path 4: shorter loop — feedback into ML (continuous learning)
+    [{x:1130,y:300},{x:870,y:320},{x:620,y:320},{x:540,y:280},{x:430,y:300},{x:330,y:300},{x:130,y:330},{x:130,y:130}],
+    // Path 5: monitoring/observability path
+    [{x:130,y:170},{x:330,y:130},{x:430,y:140},{x:540,y:130},{x:620,y:140},{x:720,y:130},{x:870,y:140},{x:1010,y:130},{x:1130,y:140}],
   ];
 
   React.useEffect(() => {
     const start = performance.now();
-    const duration = 5000;
+    const dotDurations = [6500, 7000, 6000, 9000, 5500]; // varied speed per dot
     const tick = (now) => {
       const elapsed = now - start;
       for (let d = 0; d < paths.length; d++) {
@@ -24,21 +32,18 @@ function ArchFlow() {
         const halo = haloRef.current[d];
         if (!dot) continue;
         const path = paths[d];
-        const offset = d * 1200;
+        const duration = dotDurations[d];
+        const offset = d * 900;
         const t = ((elapsed + offset) % duration) / duration;
         const segCount = path.length - 1;
         const seg = Math.min(Math.floor(t * segCount), segCount - 1);
         const segT = (t * segCount) - seg;
-        // Smooth easing per segment
         const ease = segT < 0.5 ? 2*segT*segT : 1 - Math.pow(-2*segT+2, 2)/2;
         const cx = path[seg].x + (path[seg+1].x - path[seg].x) * ease;
         const cy = path[seg].y + (path[seg+1].y - path[seg].y) * ease;
         dot.setAttribute("cx", cx);
         dot.setAttribute("cy", cy);
-        if (halo) {
-          halo.setAttribute("cx", cx);
-          halo.setAttribute("cy", cy);
-        }
+        if (halo) { halo.setAttribute("cx", cx); halo.setAttribute("cy", cy); }
       }
       frameRef.current = requestAnimationFrame(tick);
     };
@@ -46,15 +51,25 @@ function ArchFlow() {
     return () => cancelAnimationFrame(frameRef.current);
   }, []);
 
-  const zones = [
-    { x: 140, label: "INTAKE",       sub: "submissão chega",     color: "#1C17FF" },
-    { x: 380, label: "WIR PLATFORM", sub: "processamento",        color: "#7540AC" },
-    { x: 620, label: "AI ENGINE",    sub: "scoring + decisão",    color: "#A44F98" },
-    { x: 860, label: "OUTPUT",       sub: "dashboard + webhook",  color: "#EE7D48" },
-    { x:1100, label: "CORE",         sub: "apólice gravada",      color: "#10B981" },
-  ];
+  const dotColors = ["#F8AD39", "#A44F98", "#10B981", "#FE8B77", "#1C17FF"];
 
-  const dotColors = ["#F8AD39", "#A44F98", "#10B981"];
+  // Sub-node helper
+  const SubNode = ({ x, y, w, h, label, sub, color, fill }) => (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx="8"
+        fill={fill || `${color}10`} stroke={color} strokeWidth="1.4" strokeOpacity="0.45"/>
+      <text x={x + w/2} y={y + (sub ? h/2 - 2 : h/2 + 4)} fill={color}
+        fontSize="10.5" fontWeight="700" fontFamily="Inter, sans-serif" textAnchor="middle">
+        {label}
+      </text>
+      {sub && (
+        <text x={x + w/2} y={y + h/2 + 12} fill="#6A6458"
+          fontSize="8" fontFamily="JetBrains Mono, monospace" textAnchor="middle">
+          {sub}
+        </text>
+      )}
+    </g>
+  );
 
   return (
     <section className="archflow" data-reveal>
@@ -66,70 +81,137 @@ function ArchFlow() {
             <span className="archflow__sub">Ponta a ponta — em minutos, auditável.</span>
           </h2>
           <p className="archflow__lede">
-            Fluxo end-to-end: a submissão chega → a WIR processa → a IA prioriza → o output volta ao seu sistema. Tudo dentro da sua infraestrutura, sem trocar o core.
+            Fluxo end-to-end com processamento paralelo: múltiplas submissões correm em paralelo pelos workers, atravessam o engine de IA (NLP · LLM · Risk · Fraud · ML) e voltam ao seu core como decisão auditável. O loop inferior é o <em>continuous learning</em> — cada decisão alimenta o modelo de volta.
           </p>
         </div>
 
         <div className="archflow__canvas">
-          <svg viewBox="0 0 1240 400" className="archflow__svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 1240 380" className="archflow__svg" preserveAspectRatio="xMidYMid meet">
             <defs>
               <linearGradient id="archGrad" x1="0" x2="1">
                 <stop offset="0%" stopColor="#1C17FF"/>
-                <stop offset="30%" stopColor="#7540AC"/>
-                <stop offset="60%" stopColor="#EE7D48"/>
+                <stop offset="25%" stopColor="#7540AC"/>
+                <stop offset="55%" stopColor="#A44F98"/>
+                <stop offset="80%" stopColor="#EE7D48"/>
                 <stop offset="100%" stopColor="#10B981"/>
               </linearGradient>
-              <radialGradient id="archDotGlow" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0%" stopColor="#F8AD39" stopOpacity="0.6"/>
-                <stop offset="100%" stopColor="#F8AD39" stopOpacity="0"/>
-              </radialGradient>
-              <filter id="archGlow"><feGaussianBlur stdDeviation="6"/></filter>
+              <filter id="archGlow"><feGaussianBlur stdDeviation="8"/></filter>
+              <filter id="archDotShadow"><feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/></filter>
             </defs>
 
-            {/* 3 horizontal flow paths (visible rails) */}
-            {paths.map((path, i) => {
-              const d = path.map((p, j) => `${j === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
-              return <path key={i} d={d} stroke="rgba(117,64,172,.18)" strokeWidth="2" fill="none" strokeDasharray="6 6"/>;
-            })}
-
-            {/* Master gradient line on middle rail */}
-            <path d="M 140 200 L 1100 200" stroke="url(#archGrad)" strokeWidth="3" fill="none" opacity=".55"/>
-
-            {/* Zone nodes (5 stations) */}
-            {zones.map((z, i) => (
-              <g key={i}>
-                <circle cx={z.x} cy="200" r="22"
-                  fill="#FAF6EE" stroke={z.color} strokeWidth="2.5"/>
-                <circle cx={z.x} cy="200" r="6" fill={z.color} opacity=".25"/>
-                <text x={z.x} y="160" fill={z.color} fontSize="11" fontWeight="800"
-                  fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".14em">
-                  {z.label}
-                </text>
-                <text x={z.x} y="248" fill="#6A6458" fontSize="11"
-                  fontFamily="JetBrains Mono, monospace" textAnchor="middle">
-                  {z.sub}
-                </text>
-              </g>
+            {/* Zone separators (vertical dashed) */}
+            {[230, 490, 770, 1030].map((x, i) => (
+              <line key={i} x1={x} y1="20" x2={x} y2="370" stroke="rgba(11,10,8,.07)" strokeWidth="1" strokeDasharray="4 5"/>
             ))}
 
-            {/* Animated dots — halos first (behind), then dots (front) */}
-            {[0, 1, 2].map(i => (
+            {/* Zone labels (top) */}
+            {[
+              {x:130, l:"INTAKE",       c:"#1C17FF"},
+              {x:360, l:"WIR PLATFORM", c:"#7540AC"},
+              {x:620, l:"AI ENGINE",    c:"#A44F98"},
+              {x:900, l:"OUTPUT",       c:"#EE7D48"},
+              {x:1130,l:"CORE",         c:"#10B981"},
+            ].map((z, i) => (
+              <text key={i} x={z.x} y="18" fill={z.c} fontSize="11" fontWeight="800"
+                fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".18em">
+                {z.l}
+              </text>
+            ))}
+
+            {/* INTAKE column */}
+            <SubNode x={75} y={108}  w={110} h={44} label="E-mail"   sub="anexos · PDF"   color="#1C17FF"/>
+            <SubNode x={75} y={178}  w={110} h={44} label="Portal"   sub="formulários"    color="#1C17FF"/>
+            <SubNode x={75} y={248}  w={110} h={44} label="API"      sub="3 endpoints"    color="#1C17FF"/>
+
+            {/* WIR PLATFORM column — Load balancer + DB cluster + Worker pool */}
+            <SubNode x={260} y={108} w={140} h={36} label="Load Balancer" sub="Nginx · 2× inst" color="#7540AC"/>
+            <SubNode x={260} y={158} w={140} h={48} label="Postgres" sub="Primary · Replica" color="#7540AC"/>
+            <SubNode x={260} y={218} w={140} h={36} label="Redis"    sub="Celery · Cache"   color="#EF4444"/>
+
+            {/* Worker pool (dashed cluster) */}
+            <rect x="260" y="262" width="140" height="84" rx="10" fill="rgba(117,64,172,.04)"
+              stroke="rgba(117,64,172,.25)" strokeWidth="1" strokeDasharray="4 4"/>
+            <text x="330" y="278" fill="rgba(117,64,172,.55)" fontSize="8" fontWeight="800"
+              fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".14em">WORKER POOL</text>
+            <SubNode x={268} y={284} w={62} h={22} label="W-1" color="#7540AC"/>
+            <SubNode x={336} y={284} w={62} h={22} label="W-2" color="#7540AC"/>
+            <SubNode x={268} y={310} w={62} h={22} label="W-3" color="#7540AC"/>
+            <SubNode x={336} y={310} w={62} h={22} label="W-N" color="#7540AC"/>
+
+            {/* AI ENGINE column — Business rules + AI Layer */}
+            <SubNode x={510} y={108} w={120} h={42} label="Business Rules" sub="política risco" color="#A44F98"/>
+            <rect x="500" y={170} width="220" height="170" rx="12" fill="rgba(238,125,72,.04)"
+              stroke="rgba(238,125,72,.3)" strokeWidth="1" strokeDasharray="4 4"/>
+            <text x="610" y="186" fill="rgba(238,125,72,.6)" fontSize="9" fontWeight="800"
+              fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing=".18em">AI LAYER</text>
+            <SubNode x={508} y={196} w={100} h={32} label="NLP Parser"   color="#EE7D48"/>
+            <SubNode x={612} y={196} w={100} h={32} label="WIR LLM"      color="#EE7D48" fill="rgba(238,125,72,.15)"/>
+            <SubNode x={508} y={234} w={100} h={32} label="Risk Routing" color="#EE7D48"/>
+            <SubNode x={612} y={234} w={100} h={32} label="Fraud Det."   color="#EE7D48"/>
+            <SubNode x={508} y={272} w={204} h={28} label="ML Model API · POST /predict" color="#EE7D48"/>
+            <SubNode x={508} y={306} w={204} h={26} label="Model Registry · v3.2.1"     color="#A44F98"/>
+
+            {/* OUTPUT column */}
+            <SubNode x={800} y={108} w={130} h={56} label="Score Engine" sub="risk + price"   color="#F8AD39"/>
+            <SubNode x={800} y={172} w={130} h={32} label="~65% auto"    sub="25% rev · 10% esc" color="#10B981"/>
+            <SubNode x={800} y={212} w={130} h={36} label="QC"           sub="quality check"   color="#10B981"/>
+            <SubNode x={800} y={256} w={130} h={36} label="Dashboard"    sub="painel real time" color="#10B981"/>
+
+            {/* CORE column */}
+            <SubNode x={1060} y={108} w={130} h={44} label="Webhook"  sub="signed payload" color="#10B981"/>
+            <SubNode x={1060} y={162} w={130} h={48} label="Core de apólice" sub="policy admin" color="#10B981"/>
+            <SubNode x={1060} y={220} w={130} h={36} label="Audit Log" sub="LGPD · imutável" color="#7540AC"/>
+            <SubNode x={1060} y={266} w={130} h={36} label="DataDog"   sub="observability"   color="#1C17FF"/>
+
+            {/* Connection lines (subtle) — INTAKE → PLATFORM */}
+            {[130, 200, 270].map((y, i) => (
+              <path key={"c1-"+i} d={`M 185 ${y} Q 230 ${y} 260 ${130 + i*55}`}
+                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".35"/>
+            ))}
+            {/* PLATFORM → AI */}
+            {[126, 182, 236, 304].map((y, i) => (
+              <path key={"c2-"+i} d={`M 400 ${y} Q 450 ${y} 500 ${130 + i*40}`}
+                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".3"/>
+            ))}
+            {/* AI → OUTPUT */}
+            {[130, 212, 250, 286].map((y, i) => (
+              <path key={"c3-"+i} d={`M 720 ${y} Q 760 ${y} 800 ${130 + i*45}`}
+                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".3"/>
+            ))}
+            {/* OUTPUT → CORE */}
+            {[136, 188, 230, 274].map((y, i) => (
+              <path key={"c4-"+i} d={`M 930 ${y} Q 990 ${y} 1060 ${130 + i*45}`}
+                stroke="url(#archGrad)" strokeWidth="1.3" fill="none" opacity=".4"/>
+            ))}
+
+            {/* Continuous learning feedback loop (bottom curved) */}
+            <path d="M 1130 360 Q 700 380 130 360"
+              stroke="#FE8B77" strokeWidth="1.5" fill="none" opacity=".45" strokeDasharray="6 5"/>
+            <text x="630" y="378" fill="#FE8B77" fontSize="9" fontWeight="700"
+              fontFamily="JetBrains Mono, monospace" textAnchor="middle" letterSpacing=".15em" opacity=".75">
+              · CONTINUOUS LEARNING · MODEL FEEDBACK ·
+            </text>
+
+            {/* Master gradient pipe (visual cohesion across the canvas) */}
+            <path d="M 130 200 C 250 200, 380 200, 480 200 S 700 200, 830 200 S 1000 200, 1130 200"
+              stroke="url(#archGrad)" strokeWidth="2" fill="none" opacity=".22"/>
+
+            {/* Animated dots — halos first (behind), then dots */}
+            {dotColors.map((c, i) => (
               <circle key={`halo-${i}`} ref={el => haloRef.current[i] = el}
-                cx="140" cy="200" r="22"
-                fill={dotColors[i]} opacity="0.18" filter="url(#archGlow)"/>
+                cx="130" cy="200" r="20" fill={c} opacity="0.22" filter="url(#archGlow)"/>
             ))}
-            {[0, 1, 2].map(i => (
+            {dotColors.map((c, i) => (
               <circle key={`dot-${i}`} ref={el => dotsRef.current[i] = el}
-                cx="140" cy="200" r="11"
-                fill={dotColors[i]}
-                stroke="#FAF6EE" strokeWidth="2.5"/>
+                cx="130" cy="200" r="8" fill={c}
+                stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)"/>
             ))}
           </svg>
         </div>
 
         <div className="archflow__legend">
           <span className="archflow__pulse"/>
-          <b>Fluxo ao vivo</b> · 3 submissões em processamento simultâneo
+          <b>Fluxo ao vivo</b> · 5 submissões em processamento paralelo · loop de aprendizado contínuo
         </div>
       </div>
     </section>
