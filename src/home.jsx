@@ -2,17 +2,21 @@
 
 // Sócios & Conselheiros + Experiência no setor
 function TrustBar() {
-  // 6×2 grid — each logo gets its own cell (no compositing).
+  // 6×2 grid — each logo gets its own cell, uniform size.
+  // Column 3: Pátria (top, featured larger) directly above Athena Saúde (bottom)
+  // — visually communicates the parent-investor / portfolio relationship.
   const logos = [
-    { src: "assets/logos/bain-capital.png",          alt: "Bain Capital" },
-    { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
-    { src: "assets/logos/patria.png",                alt: "Pátria Investimentos" },
-    { src: "assets/logos/athena-saude.svg",          alt: "Athena Saúde" },
-    { src: "assets/logos/santander.png",             alt: "Santander Seguros", sub: "seguros" },
+    // Row 1
     { src: "assets/logos/hapvida-notredame.png",     alt: "Hapvida · NotreDame Intermédica" },
+    { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
+    { src: "assets/logos/patria.png",                alt: "Pátria Investimentos", featured: true },
+    { src: "assets/logos/ezze.png",                  alt: "EZZE" },
+    { src: "assets/logos/santander.png",             alt: "Santander Seguros", sub: "seguros" },
+    { src: "assets/logos/bain-capital.png",          alt: "Bain Capital" },
+    // Row 2
     { src: "assets/logos/aon.png",                   alt: "Aon" },
     { src: "assets/logos/gallagher.png",             alt: "Gallagher" },
-    { src: "assets/logos/ezze.png",                  alt: "EZZE" },
+    { src: "assets/logos/athena-saude.svg",          alt: "Athena Saúde" },
     { src: "assets/logos/jlt.png",                   alt: "JLT" },
     { src: "assets/logos/lockton.png",               alt: "Lockton" },
     { src: "assets/logos/vis.png",                   alt: "VIS" },
@@ -37,7 +41,7 @@ function TrustBar() {
           <div className="eyebrow trustbar__experience-kicker">· Experiência no setor</div>
           <div className="trustbar__grid">
             {logos.map((l, i) => (
-              <div key={i} className="trustbar__cell">
+              <div key={i} className={"trustbar__cell" + (l.featured ? " trustbar__cell--featured" : "")}>
                 <span className="trustbar__logo-img">
                   <img src={l.src} alt={l.alt} title={l.alt}/>
                   {l.sub && <span className="trustbar__logo-sub">{l.sub}</span>}
