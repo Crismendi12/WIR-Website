@@ -25,7 +25,7 @@ function DecisionFlow() {
         </div>
         <div className="dflow__status">
           <span className="dflow__dot"/>
-          ao vivo · aprendendo
+          ao vivo
         </div>
       </div>
 

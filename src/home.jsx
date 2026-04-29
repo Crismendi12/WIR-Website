@@ -2,25 +2,38 @@
 
 // Sócios & Conselheiros + Experiência no setor
 function TrustBar() {
-  // 6×2 grid — each logo gets its own cell, uniform size.
-  // Column 3: Pátria (top, featured larger) directly above Athena Saúde (bottom)
-  // — visually communicates the parent-investor / portfolio relationship.
-  const logos = [
+  // 5×2 grid with composite top-cells in cols 1 & 2:
+  //   Col 1 top: Bain Capital + Notredame Intermédica (both in same cell)
+  //   Col 2 top: Pátria + Athena Saúde (both in same cell)
+  //   Col 5 top: Hapvida · NotreDame combined logo
+  // Bottom row: Aon, Gallagher, JLT, Lockton, VIS — all single logos.
+  const cells = [
     // Row 1
-    { src: "assets/logos/hapvida-notredame.png",     alt: "Hapvida · NotreDame Intermédica" },
-    { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
-    { src: "assets/logos/patria.png",                alt: "Pátria Investimentos", featured: true },
-    { src: "assets/logos/ezze.png",                  alt: "EZZE" },
-    { src: "assets/logos/santander.png",             alt: "Santander Seguros", sub: "seguros" },
-    { src: "assets/logos/bain-capital.png",          alt: "Bain Capital" },
+    { composite: [
+        { src: "assets/logos/bain-capital.png",          alt: "Bain Capital" },
+        { src: "assets/logos/notredame-intermedica.png", alt: "Notredame Intermédica" },
+      ] },
+    { composite: [
+        { src: "assets/logos/patria.png",       alt: "Pátria Investimentos" },
+        { src: "assets/logos/athena-saude.svg", alt: "Athena Saúde" },
+      ] },
+    { src: "assets/logos/ezze.png",      alt: "EZZE" },
+    { src: "assets/logos/santander.png", alt: "Santander Seguros", sub: "seguros" },
+    { src: "assets/logos/hapvida-notredame.png", alt: "Hapvida · NotreDame Intermédica" },
     // Row 2
-    { src: "assets/logos/aon.png",                   alt: "Aon" },
-    { src: "assets/logos/gallagher.png",             alt: "Gallagher" },
-    { src: "assets/logos/athena-saude.svg",          alt: "Athena Saúde" },
-    { src: "assets/logos/jlt.png",                   alt: "JLT" },
-    { src: "assets/logos/lockton.png",               alt: "Lockton" },
-    { src: "assets/logos/vis.png",                   alt: "VIS" },
+    { src: "assets/logos/aon.png",       alt: "Aon" },
+    { src: "assets/logos/gallagher.png", alt: "Gallagher" },
+    { src: "assets/logos/jlt.png",       alt: "JLT" },
+    { src: "assets/logos/lockton.png",   alt: "Lockton" },
+    { src: "assets/logos/vis.png",       alt: "VIS" },
   ];
+
+  const renderItem = (it, key) => (
+    <span key={key} className="trustbar__logo-img">
+      <img src={it.src} alt={it.alt} title={it.alt}/>
+      {it.sub && <span className="trustbar__logo-sub">{it.sub}</span>}
+    </span>
+  );
   return (
     <section className="trustbar" data-reveal>
       <div className="wrap">
@@ -40,12 +53,11 @@ function TrustBar() {
         <div className="trustbar__experience">
           <div className="eyebrow trustbar__experience-kicker">· Experiência no setor</div>
           <div className="trustbar__grid">
-            {logos.map((l, i) => (
-              <div key={i} className={"trustbar__cell" + (l.featured ? " trustbar__cell--featured" : "")}>
-                <span className="trustbar__logo-img">
-                  <img src={l.src} alt={l.alt} title={l.alt}/>
-                  {l.sub && <span className="trustbar__logo-sub">{l.sub}</span>}
-                </span>
+            {cells.map((c, i) => (
+              <div key={i} className={"trustbar__cell" + (c.composite ? " trustbar__cell--composite" : "")}>
+                {c.composite
+                  ? c.composite.map((it, j) => renderItem(it, j))
+                  : renderItem(c, 0)}
               </div>
             ))}
           </div>

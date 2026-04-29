@@ -15,7 +15,7 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
    ───────────────────────────────────────── */
 .opening {
   position: relative;
-  padding: 48px 0 120px; border-bottom: 1px solid rgba(11,10,8,.08);
+  padding: 48px 0 56px; border-bottom: 1px solid rgba(11,10,8,.08);
   background: var(--paper);
   overflow: hidden;
 }
@@ -409,7 +409,7 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
    01.5 · TRUST BAR (real partners + founders background)
    ───────────────────────────────────────── */
 .trustbar {
-  padding: 96px 0 104px; background: var(--paper-2);
+  padding: 56px 0 80px; background: var(--paper-2);
   border-top: 1px solid rgba(11,10,8,.08);
   border-bottom: 1px solid rgba(11,10,8,.08);
   position: relative; overflow: hidden;
@@ -446,39 +446,42 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
 .trustbar__experience { margin-top: 8px; }
 .trustbar__experience-kicker { margin-bottom: 24px; display: block; }
 .trustbar__grid {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
   border-left: 1px solid rgba(11,10,8,.08);
   border-top: 1px solid rgba(11,10,8,.08);
   border-radius: 10px; overflow: hidden;
   background: var(--paper);
 }
 .trustbar__cell {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; padding: 44px 22px;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 18px; padding: 36px 24px;
   border-right: 1px solid rgba(11,10,8,.08);
   border-bottom: 1px solid rgba(11,10,8,.08);
-  position: relative; min-height: 200px;
+  position: relative; min-height: 180px;
   transition: background .3s ease;
 }
 .trustbar__cell:hover { background: color-mix(in srgb, var(--wir-purple) 3%, var(--paper)); }
+/* Composite cells (Bain+Notredame, Pátria+Athena) — two logos side-by-side */
+.trustbar__cell--composite { gap: 24px; padding: 36px 18px; }
+.trustbar__cell--composite .trustbar__logo-img { width: auto; }
+.trustbar__cell--composite .trustbar__logo-img img {
+  max-width: 110px; max-height: 56px;
+}
+
 .trustbar__logo-img {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 6px; height: 100px; width: 100%;
+  gap: 6px; flex: 0 1 auto;
 }
-/* Uniform "logo well" — every logo fits inside the same fixed-aspect box,
-   so visual size is consistent regardless of source PNG aspect ratio. */
+/* Uniform "logo well" — every logo fits inside the same fixed-height box,
+   so visual size is consistent regardless of source PNG aspect ratio.
+   Bigger max-height ensures logos with extra padding (Lockton, JLT) fill out. */
 .trustbar__logo-img img {
-  max-width: 180px; max-height: 64px;
+  max-width: 200px; max-height: 90px;
   width: auto; height: auto;
   filter: grayscale(1) brightness(0.4) contrast(1.5);
   opacity: 0.85;
   transition: filter .3s ease, opacity .3s ease, transform .3s ease;
   object-fit: contain;
-}
-/* Featured variant — Pátria larger to emphasize portfolio anchor */
-.trustbar__cell--featured .trustbar__logo-img { height: 124px; }
-.trustbar__cell--featured .trustbar__logo-img img {
-  max-width: 220px; max-height: 84px;
 }
 .trustbar__cell:hover .trustbar__logo-img img {
   filter: grayscale(0) brightness(1) contrast(1);
@@ -489,10 +492,11 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   text-transform: uppercase; color: var(--ink-4);
 }
 @media (max-width: 900px) {
-  .trustbar__grid { grid-template-columns: repeat(3, 1fr); }
+  .trustbar__grid { grid-template-columns: repeat(2, 1fr); }
+  .trustbar__cell--composite { flex-direction: column; }
 }
 @media (max-width: 540px) {
-  .trustbar__grid { grid-template-columns: repeat(2, 1fr); }
+  .trustbar__grid { grid-template-columns: 1fr; }
 }
 
 /* ─────────────────────────────────────────

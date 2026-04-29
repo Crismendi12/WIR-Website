@@ -1,14 +1,14 @@
 /* ───────── Movement 03 · The Shift + 04 · The Stack ───────── */
 
 function Shift() {
-  // Dores vs Soluções — slide institucional, mapeado a SSA/UCP/em-dev
+  // Dores vs Soluções — slide institucional, mapeado a SS/UI/em-dev
   const rows = [
-    { dor:"E-mails de cotações desorganizados",       sol:"Estruturação e leitura automática de submissões",  prod:"SSA",       status:"prod" },
-    { dor:"Falta de priorização comercial",            sol:"Classificação por apetite e rentabilidade",         prod:"SSA",       status:"prod" },
+    { dor:"E-mails de cotações desorganizados",       sol:"Estruturação e leitura automática de submissões",  prod:"SS",       status:"prod" },
+    { dor:"Falta de priorização comercial",            sol:"Classificação por apetite e rentabilidade",         prod:"SS",       status:"prod" },
     { dor:"Underwriter fazendo operação manual",       sol:"Eliminação completa das tarefas manuais",           prod:"UI",       status:"prod" },
     { dor:"Pipeline invisível para gestão",            sol:"Dashboard estratégico em tempo real",               prod:"UI",       status:"prod" },
-    { dor:"Riscos fora do apetite processados",        sol:"Recusa automática inteligente",                     prod:"SSA / UI", status:"prod" },
-    { dor:"TI sobrecarregada e sem orçamento",         sol:"Plataforma 100% externa — sem TI",                  prod:"SSA / UI", status:"prod" },
+    { dor:"Riscos fora do apetite processados",        sol:"Recusa automática inteligente",                     prod:"SS / UI", status:"prod" },
+    { dor:"TI sobrecarregada e sem orçamento",         sol:"Plataforma 100% externa — sem TI",                  prod:"SS / UI", status:"prod" },
   ];
   return (
     <section className="shift" data-reveal>
@@ -54,7 +54,7 @@ function Shift() {
 
 function ProductTabs({ go }) {
   const prods = [
-    { k:"SSA", c:"#1C17FF", status:"prod", title:"Smart Sales", tag:"Inteligência de distribuição",
+    { k:"SS", c:"#1C17FF", status:"prod", title:"Smart Sales", tag:"Inteligência de distribuição",
       lede:"Uma camada de IA com inteligência de distribuição, workflow, priorização, Dashboards, analytics e insights de negócio.",
       bullets:["Scoring em tempo real com Machine Learning calibrado ao apetite","Roteamento automático por apetite × exposure","Análise preditiva de conversão por produto × risco × corretor"],
       m:[{v:"Real-time", l:"Scoring"},{v:"Calibrado", l:"Ao apetite"},{v:"Always-on", l:"Pipeline"}] },

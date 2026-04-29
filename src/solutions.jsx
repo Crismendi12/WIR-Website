@@ -1,12 +1,12 @@
 /* ───────── Soluções · catalog editorial ───────── */
 
-// Workflow Inteligente de Subscrição (SSA + UCP) — institutional flow
+// Workflow Inteligente de Subscrição (SS + UI) — institutional flow
 function SolWorkflow() {
   const stages = [
     { k:"01", t:"Application Intake",      d:"Entrada multicanal e validação automática · API · Portal · Upload · validação em tempo real.", c:"#3B82F6" },
     { k:"02", t:"AI Document Extraction",  d:"Leitura inteligente de documentos · extração automática de campos com alta precisão.",        c:"#7540AC" },
     { k:"03", t:"Business Intelligence",   d:"Enriquecimento e contexto do corretor · score · histórico de conversão · priorização.",       c:"#A44F98" },
-    { k:"04", t:"Risk Assessment",         d:"Motor de risco e fraude · score de risco · probabilidade · decisão automatizada.",             c:"#EE7D48", tag:"SSA" },
+    { k:"04", t:"Risk Assessment",         d:"Motor de risco e fraude · score de risco · probabilidade · decisão automatizada.",             c:"#EE7D48", tag:"SS" },
     { k:"05", t:"Pricing Engine",          d:"Precificação dinâmica · ajuste de risco · cálculo automático de prêmio · output instantâneo.", c:"#F8AD39", tag:"UI" },
     { k:"06", t:"Decision & Prioritization", d:"Orquestração final e fila do underwriter · SLA visível · review ou bind.",                  c:"#10B981" },
   ];
@@ -16,7 +16,7 @@ function SolWorkflow() {
         <div className="solflow__head">
           <div className="eyebrow">· Workflow Inteligente de Subscrição</div>
           <h2 className="display solflow__title">
-            <em>SSA + UI</em> em operação.<br/>
+            <em>SS + UI</em> em operação.<br/>
             Seis estágios. Um único core.
           </h2>
           <p className="solflow__sub">A camada de IA que opera entre o portal de cotações e o seu core de apólice — sem substituir nenhum dos dois.</p>
@@ -36,7 +36,7 @@ function SolWorkflow() {
         </div>
         <div className="solflow__legend">
           <span className="solflow__legend-dot" style={{background:"#10B981"}}/>
-          Workflow ativo · SSA + UI cobrem do intake à decisão · XBA e SNB em desenvolvimento
+          Workflow ativo · SS + UI cobrem do intake à decisão · XBA e SNB em desenvolvimento
         </div>
       </div>
     </section>

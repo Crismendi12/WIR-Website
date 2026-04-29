@@ -343,7 +343,7 @@ function AboutFAQ() {
     { q:"Como é estruturado o pricing?",
       a:"Duas fases. Implementação: projeto com escopo fechado, 3 a 12 meses, preço único acordado antes de começar. SaaS pós go-live: cobrança calibrada ao volume de decisões processadas, sem taxa fixa, sem surprise billing. Cada simulação é feita sobre os dados reais do cliente — não promemos números genéricos." },
     { q:"Quais ramos de seguro vocês cobrem?",
-      a:"SSA e UCP estão em produção para subscrição comercial — começamos por ramos onde a fricção operacional do underwriter é maior (Transportes, Riscos de Engenharia, P&C corporativo). XBA (cross-sell) e SNB (new business) estão em desenvolvimento. Não trabalhamos com seguro residencial massificado." },
+      a:"SS e UI estão em produção para subscrição comercial — começamos por ramos onde a fricção operacional do underwriter é maior (Transportes, Riscos de Engenharia, P&C corporativo). XBA (cross-sell) e SNB (new business) estão em desenvolvimento. Não trabalhamos com seguro residencial massificado." },
   ];
   const [open, setOpen] = React.useState(0);
   return (

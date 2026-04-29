@@ -82,7 +82,7 @@ function ContactForm() {
   const update = (k, v) => setData(d => ({ ...d, [k]: v }));
 
   const interests = [
-    { k:"SSA", t:"Smart Sales",          d:"Distribuição + lead scoring",   c:"#1C17FF" },
+    { k:"SS", t:"Smart Sales",          d:"Distribuição + lead scoring",   c:"#1C17FF" },
     { k:"UI",  t:"Underwriter Intelligence", d:"Subscrição inteligente",       c:"#A44F98" },
   ];
   const roles = [

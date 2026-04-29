@@ -18,7 +18,7 @@ function Ticker() {
     { d: "a", t: "Decisão em minutos · auditável · explicável" },
     { d: "p", t: "Straight-through processing como padrão" },
     { d: "b", t: "Plataforma de IA para seguros" },
-    { d: "o", t: "Em conformidade com LGPD · arquitetura pronta para SOC 2" },
+    { d: "o", t: "Em conformidade com LGPD" },
   ];
   const dotClass = (d) => "ticker__dot" + (d === "b" ? " ticker__dot--b" : d === "p" ? " ticker__dot--p" : d === "o" ? " ticker__dot--o" : "");
   return (
@@ -42,7 +42,6 @@ function Nav({ route, go }) {
     { id: "solutions", label: "Produtos & IA" },
     { id: "protection", label: "Proteção de Dados" },
     { id: "blog", label: "Insights & News" },
-    { id: "contact", label: "Contato" },
   ];
   return (
     <>
@@ -63,7 +62,7 @@ function Nav({ route, go }) {
           </div>
           <a href="#contact" onClick={(e)=>{e.preventDefault();go("contact")}} className="nav__cta">
             <span className="dot"/>
-            Agendar demo
+            Contato
             <span aria-hidden>→</span>
           </a>
         </div>
