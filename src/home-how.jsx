@@ -4,25 +4,28 @@
 // e múltiplos dots animados via SMIL (<animateMotion>) para evitar conflito
 // com re-renders do React. Adaptado ao design system WIR (paper).
 function ArchFlow() {
-  // 5 paths em sintaxe SVG path (M = moveto, L = lineto)
-  // Estrutura: INTAKE (x=130) → PLATFORM (x=330-430) → AI (x=540-720) → OUTPUT (x=870-1010) → CORE (x=1130)
+  // 5 motion paths em sintaxe SVG (M, C cubic bezier) — todas left-to-right
+  // (exceto a 4ª que é o feedback loop right-to-left embaixo).
+  // Estrutura: INTAKE (x=130) → PLATFORM (x=360) → AI (x=620) → OUTPUT (x=900) → CORE (x=1130)
+  // Curvas suaves para evitar movimento "errático" — cada path mantém uma "lane" vertical.
   const motionPaths = [
-    // Path 1: e-mail → API → Worker → NLP → LLM → Score → QC → Dashboard
-    "M 130,130 L 130,240 L 330,170 L 430,200 L 540,230 L 620,200 L 720,170 L 870,200 L 1010,170 L 1130,200",
-    // Path 2: portal → API → Worker → Risk Routing → Score → Webhook → CORE
-    "M 130,200 L 130,280 L 330,230 L 430,200 L 540,200 L 620,200 L 720,230 L 870,240 L 1010,240 L 1130,240",
-    // Path 3: anexos → API → Worker → Fraud → ML → Score → Dashboard
-    "M 130,280 L 130,200 L 330,280 L 430,260 L 540,170 L 620,200 L 720,280 L 870,280 L 1010,200 L 1130,170",
-    // Path 4: feedback loop — continuous learning (CORE → INTAKE)
-    "M 1130,300 L 870,320 L 620,320 L 540,280 L 430,300 L 330,300 L 130,330 L 130,130",
-    // Path 5: monitoring/observability
-    "M 130,170 L 330,130 L 430,140 L 540,130 L 620,140 L 720,130 L 870,140 L 1010,130 L 1130,140",
+    // Lane 1 (top): ondulação suave acima da linha central, dot dourado
+    "M 130,170 C 280,150 360,140 500,160 S 720,180 900,160 S 1050,150 1130,170",
+    // Lane 2 (centro): linha praticamente reta com leve onda, dot roxo
+    "M 130,200 C 300,200 460,205 620,200 S 920,195 1130,200",
+    // Lane 3 (bottom): ondulação suave abaixo da linha central, dot verde
+    "M 130,230 C 280,250 360,260 500,240 S 720,220 900,240 S 1050,250 1130,230",
+    // Lane 4 (feedback loop): arco amplo CORE → INTAKE, embaixo do diagrama
+    "M 1130,300 C 900,340 600,355 300,335 C 180,325 110,290 130,200",
+    // Lane 5 (top alt): outra onda suave no topo, dot azul, oposta à lane 1
+    "M 130,160 C 300,180 460,170 620,180 S 920,165 1130,150",
   ];
 
   const dotColors = ["#F8AD39", "#A44F98", "#10B981", "#FE8B77", "#1C17FF"];
-  const dotDurations = ["6.5s", "7s", "6s", "9s", "5.5s"];
+  // Durações maiores → movimento mais calmo e legível
+  const dotDurations = ["9s", "8s", "9.5s", "12s", "10s"];
   // Negative begin = animation already running by that amount (creates initial stagger)
-  const dotBegins = ["0s", "-0.9s", "-1.8s", "-2.7s", "-3.6s"];
+  const dotBegins = ["0s", "-1.6s", "-3.2s", "-4.8s", "-6.4s"];
 
   // Sub-node helper
   const SubNode = ({ x, y, w, h, label, sub, color, fill }) => (
