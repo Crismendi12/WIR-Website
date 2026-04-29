@@ -160,6 +160,10 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   color: var(--ink); font-weight: 400;
   text-wrap: balance;
 }
+.opening__title--long {
+  font-size: clamp(48px, 6.4vw, 92px);
+  line-height: 1.0;
+}
 .opening__title em {
   font-style: italic; color: var(--ink);
   background: linear-gradient(90deg, var(--wir-blue) 0%, var(--wir-purple) 40%, var(--wir-orange) 70%, var(--wir-amber) 100%);

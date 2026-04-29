@@ -147,13 +147,13 @@ function Opening({ go }) {
               <span className="opening__kicker-dot"/>
               <span>Plataforma em produção · decisão 24/7</span>
             </div>
-            <h1 className="display opening__title">
-              A camada de<br/>
-              <em>inteligência</em><br/>
-              do seguro.
+            <h1 className="display opening__title opening__title--long">
+              A nova era do seguro é<br/>
+              <em>inteligência de dados</em>,<br/>
+              velocidade e escala.
             </h1>
             <p className="opening__lede">
-              A nova era do seguro é <b>inteligência de dados, velocidade e escala</b>. A WIR entrega uma camada de IA com analytics e dashboards real time, sem substituir os sistemas atuais.
+              A WIR entrega uma camada de IA com analytics e dashboards real time, sem substituir os sistemas atuais.
             </p>
             <div className="opening__actions">
               <button className="btn btn--solid" onClick={()=>go("contact")}>
