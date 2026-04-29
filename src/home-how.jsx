@@ -1,57 +1,28 @@
 /* ───────── Movement 05 · Workflow + 06 · Trust + 07 · Closing ───────── */
 
 // ArchFlow — diagrama de arquitetura completo com sub-nodos, branches paralelos
-// e múltiplos dots animados. Adaptado ao design system WIR (paper).
+// e múltiplos dots animados via SMIL (<animateMotion>) para evitar conflito
+// com re-renders do React. Adaptado ao design system WIR (paper).
 function ArchFlow() {
-  const dotsRef = React.useRef([]);
-  const haloRef = React.useRef([]);
-  const frameRef = React.useRef(null);
-
-  // 5 paths, cada um percorrendo a arquitetura por rotas distintas (parallel processing)
-  // Estrutura: INTAKE (x=80-180) → PLATFORM (x=260-440) → AI (x=520-720) → OUTPUT (x=820-980) → CORE (x=1060-1180)
-  const paths = [
-    // Path 1: e-mail → API → Worker 1 → NLP → LLM → Score → QC → Dashboard
-    [{x:130,y:130},{x:130,y:240},{x:330,y:170},{x:430,y:200},{x:540,y:230},{x:620,y:200},{x:720,y:170},{x:870,y:200},{x:1010,y:170},{x:1130,y:200}],
-    // Path 2: portal → API → Worker 2 → Risk Routing → Score → QC → Webhook → CORE
-    [{x:130,y:200},{x:130,y:280},{x:330,y:230},{x:430,y:200},{x:540,y:200},{x:620,y:200},{x:720,y:230},{x:870,y:240},{x:1010,y:240},{x:1130,y:240}],
-    // Path 3: anexos → API → Worker N → Fraud → ML → Score → Dashboard
-    [{x:130,y:280},{x:130,y:200},{x:330,y:280},{x:430,y:260},{x:540,y:170},{x:620,y:200},{x:720,y:280},{x:870,y:280},{x:1010,y:200},{x:1130,y:170}],
-    // Path 4: shorter loop — feedback into ML (continuous learning)
-    [{x:1130,y:300},{x:870,y:320},{x:620,y:320},{x:540,y:280},{x:430,y:300},{x:330,y:300},{x:130,y:330},{x:130,y:130}],
-    // Path 5: monitoring/observability path
-    [{x:130,y:170},{x:330,y:130},{x:430,y:140},{x:540,y:130},{x:620,y:140},{x:720,y:130},{x:870,y:140},{x:1010,y:130},{x:1130,y:140}],
+  // 5 paths em sintaxe SVG path (M = moveto, L = lineto)
+  // Estrutura: INTAKE (x=130) → PLATFORM (x=330-430) → AI (x=540-720) → OUTPUT (x=870-1010) → CORE (x=1130)
+  const motionPaths = [
+    // Path 1: e-mail → API → Worker → NLP → LLM → Score → QC → Dashboard
+    "M 130,130 L 130,240 L 330,170 L 430,200 L 540,230 L 620,200 L 720,170 L 870,200 L 1010,170 L 1130,200",
+    // Path 2: portal → API → Worker → Risk Routing → Score → Webhook → CORE
+    "M 130,200 L 130,280 L 330,230 L 430,200 L 540,200 L 620,200 L 720,230 L 870,240 L 1010,240 L 1130,240",
+    // Path 3: anexos → API → Worker → Fraud → ML → Score → Dashboard
+    "M 130,280 L 130,200 L 330,280 L 430,260 L 540,170 L 620,200 L 720,280 L 870,280 L 1010,200 L 1130,170",
+    // Path 4: feedback loop — continuous learning (CORE → INTAKE)
+    "M 1130,300 L 870,320 L 620,320 L 540,280 L 430,300 L 330,300 L 130,330 L 130,130",
+    // Path 5: monitoring/observability
+    "M 130,170 L 330,130 L 430,140 L 540,130 L 620,140 L 720,130 L 870,140 L 1010,130 L 1130,140",
   ];
 
-  React.useEffect(() => {
-    const start = performance.now();
-    const dotDurations = [6500, 7000, 6000, 9000, 5500]; // varied speed per dot
-    const tick = (now) => {
-      const elapsed = now - start;
-      for (let d = 0; d < paths.length; d++) {
-        const dot = dotsRef.current[d];
-        const halo = haloRef.current[d];
-        if (!dot) continue;
-        const path = paths[d];
-        const duration = dotDurations[d];
-        const offset = d * 900;
-        const t = ((elapsed + offset) % duration) / duration;
-        const segCount = path.length - 1;
-        const seg = Math.min(Math.floor(t * segCount), segCount - 1);
-        const segT = (t * segCount) - seg;
-        const ease = segT < 0.5 ? 2*segT*segT : 1 - Math.pow(-2*segT+2, 2)/2;
-        const cx = path[seg].x + (path[seg+1].x - path[seg].x) * ease;
-        const cy = path[seg].y + (path[seg+1].y - path[seg].y) * ease;
-        dot.setAttribute("cx", cx);
-        dot.setAttribute("cy", cy);
-        if (halo) { halo.setAttribute("cx", cx); halo.setAttribute("cy", cy); }
-      }
-      frameRef.current = requestAnimationFrame(tick);
-    };
-    frameRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameRef.current);
-  }, []);
-
   const dotColors = ["#F8AD39", "#A44F98", "#10B981", "#FE8B77", "#1C17FF"];
+  const dotDurations = ["6.5s", "7s", "6s", "9s", "5.5s"];
+  // Negative begin = animation already running by that amount (creates initial stagger)
+  const dotBegins = ["0s", "-0.9s", "-1.8s", "-2.7s", "-3.6s"];
 
   // Sub-node helper
   const SubNode = ({ x, y, w, h, label, sub, color, fill }) => (
@@ -196,15 +167,20 @@ function ArchFlow() {
             <path d="M 130 200 C 250 200, 380 200, 480 200 S 700 200, 830 200 S 1000 200, 1130 200"
               stroke="url(#archGrad)" strokeWidth="2" fill="none" opacity=".22"/>
 
-            {/* Animated dots — halos first (behind), then dots */}
+            {/* Animated dots via SMIL — halos first (behind), then dots */}
             {dotColors.map((c, i) => (
-              <circle key={`halo-${i}`} ref={el => haloRef.current[i] = el}
-                cx="130" cy="200" r="20" fill={c} opacity="0.22" filter="url(#archGlow)"/>
+              <circle key={`halo-${i}`} cx="0" cy="0" r="20"
+                fill={c} opacity="0.22" filter="url(#archGlow)">
+                <animateMotion dur={dotDurations[i]} repeatCount="indefinite"
+                  begin={dotBegins[i]} path={motionPaths[i]} rotate="0"/>
+              </circle>
             ))}
             {dotColors.map((c, i) => (
-              <circle key={`dot-${i}`} ref={el => dotsRef.current[i] = el}
-                cx="130" cy="200" r="8" fill={c}
-                stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)"/>
+              <circle key={`dot-${i}`} cx="0" cy="0" r="8"
+                fill={c} stroke="#FAF6EE" strokeWidth="2" filter="url(#archDotShadow)">
+                <animateMotion dur={dotDurations[i]} repeatCount="indefinite"
+                  begin={dotBegins[i]} path={motionPaths[i]} rotate="0"/>
+              </circle>
             ))}
           </svg>
         </div>
