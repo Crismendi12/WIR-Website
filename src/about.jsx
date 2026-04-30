@@ -335,7 +335,7 @@ function AboutFAQ() {
     { q:"Quanto tempo até a primeira operação em produção?",
       a:"O projeto de implementação leva de 3 a 12 meses dependendo de escopo, integração com seu core e maturidade do manual de subscrição. Trabalhamos com escopo, prazo e preço fechados antes de começar — sem free pilot, sem surprise billing." },
     { q:"Como funciona a supervisão humana e a trilha de auditoria?",
-      a:"Toda decisão produzida pela WIR carrega: modelo usado, versão do modelo, score de confiança, inputs, output, timestamp. Quando configurado, casos fora do apetite ou de baixa confiança vão automaticamente para revisão humana. O log é imutável e exportável — LGPD-ready desde a concepção, com arquitetura preparada para SOC 2 e ISO 27001." },
+      a:"Toda decisão produzida pela WIR carrega: modelo usado, versão do modelo, score de confiança, inputs, output, timestamp. Quando configurado, casos fora do apetite ou de baixa confiança vão automaticamente para revisão humana. O log é imutável e exportável — LGPD-ready desde a concepção, com arquitetura preparada para ISO 27001 e padrões internacionais." },
     { q:"Vocês podem hospedar em private cloud ou on-premise?",
       a:"Sim. Operamos em SaaS multi-tenant (padrão), private cloud (AWS / Azure / GCP no ambiente do cliente) ou on-premise atrás do seu firewall. Deploy, observabilidade e secrets management ficam sob o seu controle quando necessário pelo regulatório." },
     { q:"Como vocês garantem qualidade técnica e capacidade de evolução?",

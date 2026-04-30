@@ -330,7 +330,7 @@ function Closing({ go }) {
           </h2>
           <div className="closing__actions">
             <button className="btn btn--solid" onClick={()=>go("contact")}>
-              Agendar conversa com nossos sócios <span className="btn__arrow">→</span>
+              Falar com nossos sócios <span className="btn__arrow">→</span>
             </button>
             <button className="btn btn--ghost" onClick={()=>go("solutions")}>
               Explorar soluções <span className="btn__arrow">→</span>

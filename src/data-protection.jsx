@@ -129,7 +129,7 @@ function DPApproach() {
     { k: "Soberania de dados",
       text: "Dados pessoais brasileiros ficam em território nacional (AWS São Paulo / GCP São Paulo). O cliente decide sobre criptografia, retenção e direito ao esquecimento. Sem cross-border data flows. Sem terceiros no caminho." },
     { k: "Pronto para evoluir",
-      text: "LGPD em conformidade hoje. SOC 2 Type II e ISO 27001 com arquitetura pronta — auditoria externa em curso. Frameworks adicionais (HIPAA, SOC 2 Type I) alinhados conforme cliente. Não é um SaaS genérico que se adapta — é uma plataforma desenhada para o regulado desde a fundação." },
+      text: "LGPD em conformidade hoje. ISO 27001 com arquitetura pronta — gap analysis concluído, evolução contínua. Frameworks adicionais (HIPAA, padrões internacionais) alinhados conforme cliente. Não é um SaaS genérico que se adapta — é uma plataforma desenhada para o regulado desde a fundação." },
   ];
   return (
     <section className="dpessay" data-reveal>
@@ -235,7 +235,6 @@ function DPPillars() {
 function DPCompliance() {
   const items = [
     { k: "LGPD",    v: "Conforme",          d: "Proteção de dados pessoais (BR) — DPO, ROPA, direitos do titular implementados.", color: "#1C17FF", state: "ok" },
-    { k: "SOC 2",   v: "Em processo",       d: "Type II — auditoria externa em curso, expectativa de conclusão Q3 2026.",          color: "#7540AC", state: "wip" },
     { k: "ISO 27001", v: "Em processo",     d: "Sistema de Gestão de Segurança da Informação — gap analysis concluído Q1.",          color: "#A44F98", state: "wip" },
     { k: "HIPAA",   v: "Alinhado",          d: "Privacidade em saúde (US) — controles equivalentes aplicáveis ao ramo saúde.",       color: "#EE7D48", state: "ok" },
   ];
@@ -327,7 +326,7 @@ function DPClose({ go }) {
             <p>Reunião técnica de 60–90 min com nossa engenharia de plataforma. Walk-through da arquitetura, controles, modelo de ameaças e roadmap de certificações. Whitepaper enviado antes da call.</p>
             <div className="dpclose__actions">
               <button className="btn btn--solid btn--onDark" onClick={() => go("contact")}>
-                Agendar revisão técnica <span className="btn__arrow">→</span>
+                Falar com a equipe técnica <span className="btn__arrow">→</span>
               </button>
               <a className="btn btn--ghost btn--onDark" href="mailto:contato@wirinnovation.ai?subject=Whitepaper%20WIR%20-%20Arquitetura%20de%20Seguran%C3%A7a">
                 Solicitar whitepaper <span className="btn__arrow">→</span>
