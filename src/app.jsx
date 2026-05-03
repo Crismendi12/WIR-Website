@@ -53,6 +53,7 @@ function App() {
       <Nav route={route} go={go}/>
       <main key={route}>{Page}</main>
       <Footer go={go}/>
+      <WhatsappFab/>
     </>
   );
 }
