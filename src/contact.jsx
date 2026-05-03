@@ -131,6 +131,7 @@ function ContactForm() {
   const [submitError, setSubmitError] = React.useState(null);
   const [submitMode, setSubmitMode] = React.useState(null); // "supabase" | "mailto" | "error"
   const [submitRef, setSubmitRef]   = React.useState(null);
+  const [honey, setHoney] = React.useState(""); // anti-bot honeypot — humans never fill this
 
   // Submit pipeline (in order):
   //   1) POST to Supabase REST API (durable storage, queryable later)
@@ -139,6 +140,13 @@ function ContactForm() {
   // This guarantees zero lost leads in any failure mode.
   const handleSubmit = async () => {
     if (submitting) return;
+    // Honeypot trip: bot detected, silently fake-success without sending anything
+    if (honey) {
+      setSubmitMode("supabase");
+      setSubmitRef("FILTERED");
+      setSubmitted(true);
+      return;
+    }
     setSubmitting(true);
     setSubmitError(null);
 
@@ -291,6 +299,11 @@ Enviado pelo formulário do site wirinnovation.ai`;
   return (
     <section className="ctform" data-reveal>
       <div className="wrap">
+        {/* Honeypot — humans never see/fill this; bots auto-fill all inputs */}
+        <input type="text" name="company_url" tabIndex="-1" autoComplete="off"
+          value={honey} onChange={(e) => setHoney(e.target.value)}
+          aria-hidden="true"
+          style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0, pointerEvents: "none" }}/>
         <div className="ctform__head">
           <div className="eyebrow">· Preencha em 2 minutos</div>
           <div className="ctform__steps">
@@ -399,6 +412,7 @@ Enviado pelo formulário do site wirinnovation.ai`;
 
 function ContactQuickChannels() {
   const [email, setEmail] = React.useState("");
+  const [honey, setHoney] = React.useState(""); // anti-bot honeypot
   const waNumber = "5511981757505"; // Nicholas Weiser · BR
   const waText = encodeURIComponent("Olá Nicholas, vim pelo site da WIR Innovation. Gostaria de conversar sobre…");
   const waHref = `https://wa.me/${waNumber}?text=${waText}`;
@@ -421,8 +435,13 @@ function ContactQuickChannels() {
           <form className="ctquick__card ctquick__card--news"
             onSubmit={(e) => {
               e.preventDefault();
+              if (honey) return; // bot trap
               if (newsHref) window.location.href = newsHref;
             }}>
+            <input type="text" name="company_url" tabIndex="-1" autoComplete="off"
+              value={honey} onChange={(e) => setHoney(e.target.value)}
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0, pointerEvents: "none" }}/>
             <div className="ctquick__k">· Newsletter</div>
             <div className="ctquick__t display">Receba o que <em>publicamos.</em></div>
             <div className="ctquick__d">Análises sobre IA aplicada ao setor segurador. Sem spam, sem agenda comercial — só o que produzimos de conteúdo.</div>
