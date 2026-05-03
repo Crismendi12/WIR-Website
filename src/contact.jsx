@@ -409,7 +409,7 @@ function ContactQuickChannels() {
     : null;
 
   return (
-    <section className="ctquick" data-reveal>
+    <section className="ctquick">
       <div className="wrap">
         <div className="ctquick__grid">
           <a className="ctquick__card ctquick__card--wa" href={waHref} target="_blank" rel="noopener noreferrer">
