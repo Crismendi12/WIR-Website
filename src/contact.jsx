@@ -213,7 +213,7 @@ ${data.notes || "(sem contexto adicional)"}
 —
 Enviado pelo formulário do site wirinnovation.ai`;
       try {
-        window.location.href = `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:nicholas@wirinnovation.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         mailtoTriggered = true;
       } catch (e) {
         console.warn("mailto fallback failed", e);
@@ -245,7 +245,7 @@ Enviado pelo formulário do site wirinnovation.ai`;
             Recebemos sua mensagem. Nossa equipe responde em até <b>24h úteis</b> com 2 ou 3 horários para conversar com nossos sócios.
           </p>
           <p className="ctform__done-lede" style={{marginTop: 16}}>
-            Se precisar adiantar algo, escreva para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a> citando a Ref abaixo.
+            Se precisar adiantar algo, escreva para <a href="mailto:nicholas@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>nicholas@wirinnovation.ai</a> citando a Ref abaixo.
           </p>
         </>
       );
@@ -255,10 +255,10 @@ Enviado pelo formulário do site wirinnovation.ai`;
       body    = (
         <>
           <p className="ctform__done-lede">
-            Seu cliente de e-mail abriu uma mensagem pré-preenchida para <b>contato@wirinnovation.ai</b>. <b>Confirme o envio</b> e respondemos em até 24h úteis com 2 ou 3 horários.
+            Seu cliente de e-mail abriu uma mensagem pré-preenchida para <b>nicholas@wirinnovation.ai</b>. <b>Confirme o envio</b> e respondemos em até 24h úteis com 2 ou 3 horários.
           </p>
           <p className="ctform__done-lede" style={{marginTop: 16}}>
-            Caso o e-mail não tenha aberto, escreva direto para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a>.
+            Caso o e-mail não tenha aberto, escreva direto para <a href="mailto:nicholas@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>nicholas@wirinnovation.ai</a>.
           </p>
         </>
       );
@@ -268,7 +268,7 @@ Enviado pelo formulário do site wirinnovation.ai`;
       body    = (
         <>
           <p className="ctform__done-lede">
-            O envio automático falhou. Por favor escreva direto para <a href="mailto:contato@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>contato@wirinnovation.ai</a> citando a Ref abaixo — respondemos em até 24h úteis.
+            O envio automático falhou. Por favor escreva direto para <a href="mailto:nicholas@wirinnovation.ai" style={{color: "var(--wir-purple)", textDecoration: "underline"}}>nicholas@wirinnovation.ai</a> citando a Ref abaixo — respondemos em até 24h úteis.
           </p>
         </>
       );
@@ -405,7 +405,7 @@ function ContactQuickChannels() {
 
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const newsHref = validEmail
-    ? `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent("Newsletter signup")}&body=${encodeURIComponent("Inscreva-me na newsletter da WIR Innovation.\n\nE-mail: " + email)}`
+    ? `mailto:nicholas@wirinnovation.ai?subject=${encodeURIComponent("Newsletter signup")}&body=${encodeURIComponent("Inscreva-me na newsletter da WIR Innovation.\n\nE-mail: " + email)}`
     : null;
 
   return (
@@ -446,7 +446,7 @@ function ContactSocial() {
     { k:"LinkedIn",  v:"@wir-innovation",          href:"https://www.linkedin.com/company/wir-innovation/" },
     { k:"Instagram", v:"@wirinnovation",           href:"https://www.instagram.com/wirinnovation" },
     { k:"X",         v:"@wirinnovationai",         href:"https://x.com/wirinnovationai" },
-    { k:"E-mail",    v:"contato@wirinnovation.ai", href:"mailto:contato@wirinnovation.ai" },
+    { k:"E-mail",    v:"nicholas@wirinnovation.ai", href:"mailto:nicholas@wirinnovation.ai" },
   ];
   return (
     <section className="ctsocial" data-reveal>
