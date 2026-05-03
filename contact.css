@@ -68,6 +68,21 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   border: 2px solid var(--paper); box-shadow: 0 4px 12px rgba(11,10,8,.12);
   flex-shrink: 0;
 }
+.cthero__founder-name { display: flex; align-items: center; gap: 8px; }
+.cthero__founder-name b {
+  font-family: var(--f-display); font-size: 15px;
+  font-weight: 400; color: var(--ink); letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+.cthero__founder-li {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 5px;
+  color: var(--wir-purple); background: rgba(117,64,172,.08);
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+.cthero__founder-li:hover {
+  background: var(--wir-purple); color: #fff; transform: translateY(-1px);
+}
 .cthero__founder-body b {
   display: block; font-family: var(--f-display); font-size: 15px;
   font-weight: 400; color: var(--ink); letter-spacing: -0.005em;
@@ -278,4 +293,72 @@ html.js-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
   .ctform__fields { grid-template-columns: 1fr; }
   .ctform__steps { gap: 12px; flex-wrap: wrap; }
   .ctform__head { flex-direction: column; align-items: flex-start; }
+}
+
+/* ───────── Quick channels: WhatsApp + Newsletter ───────── */
+.ctquick { padding: 56px 0 32px; background: var(--paper); }
+.ctquick__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.ctquick__card {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 28px; border-radius: 14px;
+  background: var(--paper-2); border: 1px solid rgba(11,10,8,.08);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  text-decoration: none; color: inherit;
+}
+.ctquick__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(11,10,8,.08);
+  border-color: rgba(11,10,8,.16);
+}
+.ctquick__card--wa { border-left: 3px solid #25D366; }
+.ctquick__card--news { border-left: 3px solid var(--wir-purple); }
+.ctquick__k {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
+.ctquick__t {
+  font-size: 28px; line-height: 1.15; color: var(--ink); letter-spacing: -0.01em;
+}
+.ctquick__t em { font-style: italic; color: var(--wir-purple); }
+.ctquick__card--wa .ctquick__t em { color: #1F8F4B; }
+.ctquick__d {
+  font-size: 14px; line-height: 1.5; color: var(--ink-2);
+}
+.ctquick__cta {
+  margin-top: auto; font-family: var(--f-mono); font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: #1F8F4B; display: inline-flex; align-items: center; gap: 8px;
+}
+.ctquick__form {
+  margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap;
+}
+.ctquick__form input[type="email"] {
+  flex: 1 1 200px; min-width: 0;
+  padding: 12px 14px; border-radius: 8px;
+  background: var(--paper); border: 1px solid rgba(11,10,8,.16);
+  font-family: var(--f-mono); font-size: 13px; color: var(--ink);
+}
+.ctquick__form input[type="email"]:focus {
+  outline: none; border-color: var(--wir-purple);
+  box-shadow: 0 0 0 3px rgba(117,64,172,.15);
+}
+.ctquick__news-btn {
+  padding: 12px 18px; border-radius: 8px; border: 0;
+  background: var(--wir-purple); color: #fff;
+  font-family: var(--f-mono); font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  transition: background .18s ease, transform .18s ease;
+}
+.ctquick__news-btn:hover:not(:disabled) {
+  background: #5e3490; transform: translateY(-1px);
+}
+.ctquick__news-btn:disabled {
+  background: rgba(11,10,8,.16); color: var(--ink-3); cursor: not-allowed;
+}
+
+@media (max-width: 920px) {
+  .ctquick__grid { grid-template-columns: 1fr; }
 }

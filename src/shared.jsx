@@ -76,7 +76,6 @@ function Footer({ go }) {
     { k:"LinkedIn",  href:"https://www.linkedin.com/company/wir-innovation/" },
     { k:"Instagram", href:"https://www.instagram.com/wirinnovation" },
     { k:"X",         href:"https://x.com/wirinnovationai" },
-    { k:"Facebook",  href:"#" },
   ];
   return (
     <footer className="footer">
@@ -114,10 +113,10 @@ function Footer({ go }) {
           <div>
             <h4>Sócios & Holding</h4>
             <ul>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Mahway · California</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Avante · Brasil</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Conselheiros estratégicos</a></li>
-              <li><a href="#" onClick={(e)=>{e.preventDefault();go("about")}}>Princípios</a></li>
+              <li><a href="#about#mahway-team"  onClick={(e)=>{e.preventDefault();go("about", "mahway-team")}}>Mahway · California</a></li>
+              <li><a href="#about#avante-team"  onClick={(e)=>{e.preventDefault();go("about", "avante-team")}}>Avante · Brasil</a></li>
+              <li><a href="#about#conselheiros" onClick={(e)=>{e.preventDefault();go("about", "conselheiros")}}>Conselheiros estratégicos</a></li>
+              <li><a href="#about#principios"   onClick={(e)=>{e.preventDefault();go("about", "principios")}}>Princípios</a></li>
             </ul>
           </div>
         </div>

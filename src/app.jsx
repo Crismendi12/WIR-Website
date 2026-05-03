@@ -6,10 +6,22 @@ function App() {
     return ["home","solutions","about","blog","contact","protection"].includes(h) ? h : "home";
   });
 
-  const go = (id) => {
+  const go = (id, anchor) => {
     setRoute(id);
-    history.replaceState(null, "", "#"+id);
-    window.scrollTo({top:0, behavior:"instant"});
+    history.replaceState(null, "", "#" + id + (anchor ? "#" + anchor : ""));
+    if (anchor) {
+      // Wait for React to mount the new route, then scroll to the anchor.
+      // Double RAF guarantees the new <main> is painted before getElementById.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const el = document.getElementById(anchor);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          else window.scrollTo({ top: 0, behavior: "instant" });
+        });
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   };
 
   useEffect(() => {

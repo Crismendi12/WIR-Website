@@ -179,26 +179,32 @@ function AboutTeam() {
         </div>
 
         {/* Sócios & Conselheiros estratégicos */}
-        <div className="abteam__partners">
+        <div className="abteam__partners" id="conselheiros">
           <div className="abteam__partners-head">
             <span className="eyebrow">· Sócios & Conselheiros Estratégicos</span>
             <span className="abteam__partners-note">Mahway (California, EUA) · Avante (Brasil)</span>
           </div>
           <div className="abteam__partners-grid">
-            {partners.map((p,i) => (
-              <div key={i} className={"abteam__partner abteam__partner--" + p.group.toLowerCase()}>
-                <div className="abteam__partner-photo"
-                  style={{ backgroundImage: `url(${p.photo})`, backgroundSize: "cover", backgroundPosition: "center top" }}/>
-                <div className="abteam__partner-body">
-                  <div className="abteam__partner-group">{p.group}</div>
-                  <div className="abteam__partner-name display">{p.name}</div>
-                  <div className="abteam__partner-role">{p.role}</div>
-                  <ul className="abteam__partner-bullets">
-                    {p.bullets.map((b,j) => <li key={j}>{b}</li>)}
-                  </ul>
+            {partners.map((p,i) => {
+              const groupKey = p.group.toLowerCase();
+              const isFirstOfGroup = partners.findIndex(x => x.group === p.group) === i;
+              return (
+                <div key={i}
+                  id={isFirstOfGroup ? `${groupKey}-team` : undefined}
+                  className={"abteam__partner abteam__partner--" + groupKey}>
+                  <div className="abteam__partner-photo"
+                    style={{ backgroundImage: `url(${p.photo})`, backgroundSize: "cover", backgroundPosition: "center top" }}/>
+                  <div className="abteam__partner-body">
+                    <div className="abteam__partner-group">{p.group}</div>
+                    <div className="abteam__partner-name display">{p.name}</div>
+                    <div className="abteam__partner-role">{p.role}</div>
+                    <ul className="abteam__partner-bullets">
+                      {p.bullets.map((b,j) => <li key={j}>{b}</li>)}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -308,7 +314,7 @@ function AboutValues() {
       d:"Construímos com a infraestrutura global de IA da Mahway, governança financeira da Avante e expertise C-Level em seguros. O cliente recebe nível enterprise desde o dia um.", c:"#C25F7E" },
   ];
   return (
-    <section className="abvals" data-reveal>
+    <section className="abvals" id="principios" data-reveal>
       <div className="wrap">
         <div className="abvals__head">
           <div className="eyebrow">· Princípios</div>

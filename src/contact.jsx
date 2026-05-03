@@ -52,14 +52,30 @@ function ContactHero() {
               <div className="cthero__founder">
                 <div className="cthero__founder-photo" style={{backgroundImage:"url(assets/team/nicholas.jpg)"}}/>
                 <div className="cthero__founder-body">
-                  <b>Nicholas Weiser</b>
+                  <div className="cthero__founder-name">
+                    <b>Nicholas Weiser</b>
+                    <a href="https://www.linkedin.com/in/nicholas-weiser/" target="_blank" rel="noopener noreferrer"
+                       className="cthero__founder-li" aria-label="Nicholas Weiser no LinkedIn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+                      </svg>
+                    </a>
+                  </div>
                   <span>CEO · Co-Founder</span>
                 </div>
               </div>
               <div className="cthero__founder">
                 <div className="cthero__founder-photo" style={{backgroundImage:"url(assets/team/jose-carlos.jpg)"}}/>
                 <div className="cthero__founder-body">
-                  <b>José Carlos de Paula</b>
+                  <div className="cthero__founder-name">
+                    <b>José Carlos de Paula</b>
+                    <a href="https://www.linkedin.com/in/jose-carlos-de-paula-14407b7a/" target="_blank" rel="noopener noreferrer"
+                       className="cthero__founder-li" aria-label="José Carlos de Paula no LinkedIn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+                      </svg>
+                    </a>
+                  </div>
                   <span>CSO · Co-Founder</span>
                 </div>
               </div>
@@ -381,12 +397,55 @@ Enviado pelo formulário do site wirinnovation.ai`;
   );
 }
 
+function ContactQuickChannels() {
+  const [email, setEmail] = React.useState("");
+  const waNumber = "5511981757505"; // Nicholas Weiser · BR
+  const waText = encodeURIComponent("Olá Nicholas, vim pelo site da WIR Innovation. Gostaria de conversar sobre…");
+  const waHref = `https://wa.me/${waNumber}?text=${waText}`;
+
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const newsHref = validEmail
+    ? `mailto:contato@wirinnovation.ai?subject=${encodeURIComponent("Newsletter signup")}&body=${encodeURIComponent("Inscreva-me na newsletter da WIR Innovation.\n\nE-mail: " + email)}`
+    : null;
+
+  return (
+    <section className="ctquick" data-reveal>
+      <div className="wrap">
+        <div className="ctquick__grid">
+          <a className="ctquick__card ctquick__card--wa" href={waHref} target="_blank" rel="noopener noreferrer">
+            <div className="ctquick__k">· WhatsApp direto</div>
+            <div className="ctquick__t display">Falar agora<br/><em>com Nicholas.</em></div>
+            <div className="ctquick__d">Resposta rápida pelo celular do nosso CEO. Para quem prefere conversa imediata em vez de formulário.</div>
+            <span className="ctquick__cta">Abrir conversa <span className="btn__arrow">→</span></span>
+          </a>
+          <form className="ctquick__card ctquick__card--news"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (newsHref) window.location.href = newsHref;
+            }}>
+            <div className="ctquick__k">· Newsletter</div>
+            <div className="ctquick__t display">Receba o que <em>publicamos.</em></div>
+            <div className="ctquick__d">Análises sobre IA aplicada ao setor segurador. Sem spam, sem agenda comercial — só o que produzimos de conteúdo.</div>
+            <div className="ctquick__form">
+              <input type="email" required value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="seu@email.com" aria-label="Seu e-mail"/>
+              <button type="submit" className="ctquick__news-btn" disabled={!validEmail}>
+                Inscrever <span className="btn__arrow">→</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactSocial() {
   const channels = [
     { k:"LinkedIn",  v:"@wir-innovation",          href:"https://www.linkedin.com/company/wir-innovation/" },
     { k:"Instagram", v:"@wirinnovation",           href:"https://www.instagram.com/wirinnovation" },
     { k:"X",         v:"@wirinnovationai",         href:"https://x.com/wirinnovationai" },
-    { k:"Facebook",  v:"@wirinnovation",           href:"#" },
     { k:"E-mail",    v:"contato@wirinnovation.ai", href:"mailto:contato@wirinnovation.ai" },
   ];
   return (
@@ -415,6 +474,7 @@ function ContactPage() {
   return (
     <>
       <ContactHero/>
+      <ContactQuickChannels/>
       <ContactForm/>
       <ContactSocial/>
     </>

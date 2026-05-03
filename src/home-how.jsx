@@ -44,8 +44,8 @@ function ArchFlow() {
         <div className="archflow__head">
           <div className="eyebrow">· Arquitetura WIR · Fluxo ao vivo</div>
           <h2 className="archflow__title display">
-            Do <em>e-mail da corretora</em> à decisão no dashboard.<br/>
-            <span className="archflow__sub">Ponta a ponta — em minutos, auditável.</span>
+            Podemos <em>automatizar toda a jornada</em> de negócio<br/>
+            com uma camada de <em>Inteligência Artificial.</em>
           </h2>
           <p className="archflow__lede">
             Três pipelines paralelos atravessam a arquitetura — top track (e-mail/LB/regras/score/webhook), mid track (portal/db/LLM/QC/core) e bottom track (API/workers/ML/dashboard/audit) — e um loop inferior de <em>continuous learning</em> realimenta o modelo a cada decisão auditada.
